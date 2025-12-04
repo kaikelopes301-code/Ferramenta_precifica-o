@@ -1,0 +1,94 @@
+﻿name: 🏆 Enterprise Quality Gates - Next.js 15.x
+
+on:
+  pull_request:
+    branches: [main, develop]
+  push:
+    branches: [main]
+
+jobs:
+  quality-gates:
+    name: 🎯 Zero Tolerance Quality Control
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📂 Checkout Code
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+        
+    - name: 📦 Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install requests
+        
+    
+        
+    
+    - name: 🖼️ Check Image Optimization
+      run: |
+        echo "🔍 Checking for unoptimized <img> tags..."
+        
+        if grep -r '<img[^>]*src=' "frontend/app" "frontend/components" --include="*.tsx" --include="*.jsx" 2>/dev/null; then
+          echo "❌ FOUND UNOPTIMIZED <img> TAGS"
+          echo "Replace with next/image component"
+          exit 1
+        else
+          echo "✅ No unoptimized <img> tags found"
+        fi
+
+  bundle-analysis:
+    name: 📦 Bundle Size & Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📂 Checkout Code
+      uses: actions/checkout@v4
+      
+    - name: 📱 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: 'frontend/package-lock.json'  # ✅ CORRIGIDO
+        
+    - name: 📦 Install Dependencies
+      working-directory: ./frontend  # ✅ CORRIGIDO
+      run: npm ci
+      
+    - name: 🏗️ Build with Bundle Analysis
+      working-directory: ./frontend  # ✅ CORRIGIDO
+      run: |
+        ANALYZE=true npm run build
+      env:
+        NODE_ENV: production
+        
+    - name: 📊 Check Bundle Size Budget
+      working-directory: ./frontend  # ✅ CORRIGIDO
+      run: |
+        echo "🔍 Checking bundle size budget..."
+        
+        if [ ! -d ".next/static" ]; then
+          echo "❌ Build artifacts not found"
+          exit 1
+        fi
+        
+        bundle_size=$(du -sb .next/static | cut -f1)
+        bundle_size_kb=$((bundle_size / 1024))
+        budget_kb=2500
+
+        
+        echo "Bundle size: ${bundle_size_kb}KB"
+        echo "Budget: ${budget_kb}KB"
+        
+        if [ $bundle_size_kb -gt $budget_kb ]; then
+          echo "❌ BUNDLE SIZE EXCEEDED"
+          exit 1
+        else
+          echo "✅ Bundle size OK"
+        fi

@@ -297,33 +297,14 @@ Design moderno e profissional com:
 
 # Docker 
 
-## Backend - FastAPI
-
-**Compila a imagem**
-```bash
-docker build -t afm-prec-equip-be .
-```
 
 
-**Roda o container**
-```bash
-docker run -d --name afm-prec-equip-api -p 8000:8000 afm-prec-equip-be
-```
 
 
 ## Frontend - NEXT.JS
 
 **Compila a imagem**
-```bash
-docker build -f client.Dockerfile -t afm-prec-equip-fe .
-```
-
-
-**Roda o container**
-```bash
-docker run -d --name afm-prec-equip-front -p 3000:3000 afm-prec-equip-fe
-```
-
+`
 
 **Atlas Inovações** • 2025 • Powered by IA ✨
 

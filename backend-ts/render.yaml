@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: afm-ts-backend
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PYTHON_API_BASE_URL
+        sync: false
+      - key: RUNTIME_PROFILE
+        value: free_tier
+      - key: LOG_LEVEL
+        value: info
+      - key: SEARCH_ENGINE_MODE
+        value: ts
+      - key: TS_FALLBACK_ENABLED
+        value: 1
+      - key: TS_FALLBACK_TIMEOUT_MS
+        value: 3000
+      - key: EMBEDDINGS_PROVIDER_MODE
+        value: mock
+      - key: CROSS_ENCODER_PROVIDER_MODE
+        value: mock
+      - key: ENABLE_DEBUG_INFO
+        value: false
+      - key: DATASET_PATH
+        value: data/dataset_ts.json
+

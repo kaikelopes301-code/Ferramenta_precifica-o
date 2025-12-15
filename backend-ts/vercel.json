@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "dist/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/index.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "RUNTIME_PROFILE": "free_tier",
+    "SEARCH_ENGINE_MODE": "ts",
+    "TS_FALLBACK_TIMEOUT_MS": "5000",
+    "EMBEDDINGS_PROVIDER_MODE": "mock",
+    "CROSS_ENCODER_PROVIDER_MODE": "mock",
+    "ENABLE_DEBUG_INFO": "false",
+    "DATASET_PATH": "data/dataset_ts.json"
+  }
+}

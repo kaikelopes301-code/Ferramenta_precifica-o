@@ -1,0 +1,286 @@
+{
+  "sourcePath": "C:\\afm-precificacao-equipamentos-production\\data\\abbrev_audit.json",
+  "outputPath": "C:\\afm-precificacao-equipamentos-production\\backend-ts\\data\\abbrev.compiled.json",
+  "reportPath": "C:\\afm-precificacao-equipamentos-production\\backend-ts\\data\\abbrev_compile_report.json",
+  "compiledAt": "2025-12-13T01:53:00.756Z",
+  "metrics": {
+    "rawEntries": 51817,
+    "totalVariantsAfterSplit": 137878,
+    "uniqueNormalizedKeys": 45502,
+    "exactMapCount": 44755,
+    "tokenMapCount": 535,
+    "expandMapCount": 18,
+    "ambiguousDiscardedCount": 25,
+    "buildTimeMs": 1753,
+    "compiledFileSizeBytes": 2797347
+  },
+  "totals": {
+    "rawPairs": 51817,
+    "rawKeyVariants": 137878,
+    "skippedEmpty": 3,
+    "skippedRules": 9169,
+    "ambiguousKeys": 25,
+    "exactMap": 44755,
+    "tokenMap": 535,
+    "expandMap": 18
+  },
+  "topTokensMostUsed": [
+    {
+      "token": "nexti",
+      "count": 355
+    },
+    {
+      "token": "lapela",
+      "count": 353
+    },
+    {
+      "token": "mesa",
+      "count": 228
+    },
+    {
+      "token": "etc",
+      "count": 116
+    },
+    {
+      "token": "imop",
+      "count": 37
+    },
+    {
+      "token": "5mts",
+      "count": 2
+    },
+    {
+      "token": "cabo1",
+      "count": 2
+    },
+    {
+      "token": "doador",
+      "count": 2
+    },
+    {
+      "token": "dosado",
+      "count": 2
+    },
+    {
+      "token": "dosadr",
+      "count": 2
+    },
+    {
+      "token": "dosaor",
+      "count": 2
+    },
+    {
+      "token": "dosdor",
+      "count": 2
+    },
+    {
+      "token": "dsador",
+      "count": 2
+    },
+    {
+      "token": "osador",
+      "count": 2
+    },
+    {
+      "token": "mts",
+      "count": 1
+    },
+    {
+      "token": "aciper",
+      "count": 1
+    },
+    {
+      "token": "acpe",
+      "count": 1
+    },
+    {
+      "token": "alc",
+      "count": 1
+    },
+    {
+      "token": "alc70",
+      "count": 1
+    },
+    {
+      "token": "alcgel",
+      "count": 1
+    }
+  ],
+  "ambiguousCases": [
+    {
+      "key": "armario roupeiro 0 vaos",
+      "variants": [
+        "SINGLE:armario roupeiro de aco com 8 portas vaos",
+        "SINGLE:armario roupeiro de aco com 20 portas vaos"
+      ]
+    },
+    {
+      "key": "armario roupeiro de aco com 2 portas vaos",
+      "variants": [
+        "SINGLE:armario roupeiro de aco com 2 portas vaos",
+        "SINGLE:armario roupeiro de aco com 12 portas vaos"
+      ]
+    },
+    {
+      "key": "aspirador",
+      "variants": [
+        "SINGLE:aspirador de po",
+        "SINGLE:aspirador"
+      ]
+    },
+    {
+      "key": "balde",
+      "variants": [
+        "SINGLE:balde",
+        "SINGLE:balde de 15 l"
+      ]
+    },
+    {
+      "key": "baldes",
+      "variants": [
+        "SINGLE:balde de 15 l",
+        "LIST:balde de 4 l|balde de 15 l|balde de 20 l|balde de 10 l|balde duplo|balde espremedor|balde espremedor duplo"
+      ]
+    },
+    {
+      "key": "carro cuba 40 l",
+      "variants": [
+        "SINGLE:carro cuba 400 l",
+        "SINGLE:carro cuba 440 l"
+      ]
+    },
+    {
+      "key": "carro cuba 4400 l",
+      "variants": [
+        "SINGLE:carro cuba 400 l",
+        "SINGLE:carro cuba 440 l"
+      ]
+    },
+    {
+      "key": "disco verde 50mm",
+      "variants": [
+        "SINGLE:disco verde 350 mm",
+        "SINGLE:disco verde 510 mm"
+      ]
+    },
+    {
+      "key": "enceradeira",
+      "variants": [
+        "SINGLE:enceradeira",
+        "SINGLE:enceradeira 350 mm"
+      ]
+    },
+    {
+      "key": "enceradeira 10 mm",
+      "variants": [
+        "SINGLE:enceradeira 410 mm",
+        "SINGLE:enceradeira 510 mm"
+      ]
+    },
+    {
+      "key": "enceradeira 50 mm",
+      "variants": [
+        "SINGLE:enceradeira 350 mm",
+        "SINGLE:enceradeira 510 mm"
+      ]
+    },
+    {
+      "key": "enceradeira 50mm 220v",
+      "variants": [
+        "SINGLE:enceradeira 350 mm",
+        "SINGLE:enceradeira 510 mm"
+      ]
+    },
+    {
+      "key": "enceradeiras",
+      "variants": [
+        "SINGLE:enceradeira 350 mm",
+        "LIST:enceradeira 350 mm|enceradeira 510 mm|enceradeira 410 mm"
+      ]
+    },
+    {
+      "key": "escada aluminio 0 dg",
+      "variants": [
+        "SINGLE:escada com 8 degraus",
+        "SINGLE:escada com 6 degraus"
+      ]
+    },
+    {
+      "key": "escada degraus",
+      "variants": [
+        "SINGLE:escada com 3 degraus",
+        "SINGLE:escada com 5 degraus"
+      ]
+    },
+    {
+      "key": "mangueira 0 metros 3 4 jardim",
+      "variants": [
+        "SINGLE:mangueira de jardim 3 4 20 m",
+        "SINGLE:mangueira de jardim 3 4 50 m"
+      ]
+    },
+    {
+      "key": "mesa com gavetas",
+      "variants": [
+        "SINGLE:mesa com 2 gavetas",
+        "SINGLE:mesa com 3 gavetas"
+      ]
+    },
+    {
+      "key": "mop",
+      "variants": [
+        "SINGLE:esfregao eletrico",
+        "SINGLE:mop"
+      ]
+    },
+    {
+      "key": "mopagua",
+      "variants": [
+        "SINGLE:mop agua",
+        "SINGLE:mop agua 60 cm"
+      ]
+    },
+    {
+      "key": "moppo",
+      "variants": [
+        "SINGLE:mop po 60 cm completo",
+        "SINGLE:mop po"
+      ]
+    },
+    {
+      "key": "rdo",
+      "variants": [
+        "SINGLE:rodo",
+        "SINGLE:rodo 40 cm"
+      ]
+    },
+    {
+      "key": "rod",
+      "variants": [
+        "SINGLE:rodo",
+        "SINGLE:rodo 40 cm"
+      ]
+    },
+    {
+      "key": "rodo",
+      "variants": [
+        "SINGLE:rodo 40 cm",
+        "SINGLE:rodo"
+      ]
+    },
+    {
+      "key": "rodo 0cm",
+      "variants": [
+        "SINGLE:rodo 60 cm",
+        "SINGLE:rodo 40 cm"
+      ]
+    },
+    {
+      "key": "smartphone",
+      "variants": [
+        "SINGLE:telefone celular",
+        "SINGLE:celular smartphone com plano de dados"
+      ]
+    }
+  ]
+}

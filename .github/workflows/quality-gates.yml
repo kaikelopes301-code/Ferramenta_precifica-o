@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality-gates:
-    name: 🎯 Zero Tolerance Quality Control
+    name:   Quality Control
     runs-on: ubuntu-latest
     
     steps:
@@ -30,7 +30,7 @@ jobs:
     
         
     
-    - name: 🖼️ Check Image Optimization
+    - name:  Check Image Optimization
       run: |
         echo "🔍 Checking for unoptimized <img> tags..."
         
@@ -55,21 +55,21 @@ jobs:
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: 'frontend/package-lock.json'  # ✅ CORRIGIDO
+        cache-dependency-path: 'frontend/package-lock.json' 
         
     - name: 📦 Install Dependencies
-      working-directory: ./frontend  # ✅ CORRIGIDO
+      working-directory: ./frontend 
       run: npm ci
       
     - name: 🏗️ Build with Bundle Analysis
-      working-directory: ./frontend  # ✅ CORRIGIDO
+      working-directory: ./frontend  
       run: |
         ANALYZE=true npm run build
       env:
         NODE_ENV: production
         
     - name: 📊 Check Bundle Size Budget
-      working-directory: ./frontend  # ✅ CORRIGIDO
+      working-directory: ./frontend  
       run: |
         echo "🔍 Checking bundle size budget..."
         

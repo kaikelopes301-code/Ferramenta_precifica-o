@@ -1,0 +1,1442 @@
+[
+  {
+    "id": "Q01",
+    "descricao": "lavadora de piso",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca genérica por lavadora de piso",
+    "result": {
+      "top1": {
+        "grupo": "lavadora de piso tripulada",
+        "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+        "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+        "score": 11.747276006981735,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 11.747276006981735,
+          "fuzzy": 0,
+          "synonym": 0.1
+        },
+        "valor_unitario": 80192.02,
+        "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+      },
+      "top3": [
+        {
+          "grupo": "lavadora de piso tripulada",
+          "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "score": 11.747276006981735,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 11.747276006981735,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 80192.02,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+        },
+        {
+          "grupo": "lavadora de piso de operação a pé",
+          "descricao": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "sugeridos": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "score": 11.650195612573093,
+          "score_normalized": 0.9917359229194117,
+          "score_breakdown": {
+            "bm25": 11.650195612573093,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 27700,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20de%20opera%C3%A7%C3%A3o%20a%20p%C3%A9"
+        },
+        {
+          "grupo": "secador de piso apito",
+          "descricao": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "sugeridos": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "score": 11.454101708836067,
+          "score_normalized": 0.9750432101900537,
+          "score_breakdown": {
+            "bm25": 11.454101708836067,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 4813.24,
+          "link_detalhes": "/detalhes?grupo=secador%20de%20piso%20apito"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 80192.02,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q02",
+    "descricao": "aspirador de pó industrial",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca genérica por aspirador industrial",
+    "result": {
+      "top1": {
+        "grupo": "máquina de lavar roupas",
+        "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "score": 8.743373585432535,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 8.743373585432535,
+          "fuzzy": 0,
+          "synonym": 0.1
+        },
+        "valor_unitario": 15000,
+        "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+      },
+      "top3": [
+        {
+          "grupo": "máquina de lavar roupas",
+          "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "score": 8.743373585432535,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 8.743373585432535,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 15000,
+          "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+        },
+        {
+          "grupo": "disco de escovas para enceradeira",
+          "descricao": "disco de escovas para enceradeira disco de escovas - enceradeira industrial Disco de Escovas - Enceradeira Industrial (/)",
+          "sugeridos": "disco de escovas para enceradeira disco de escovas - enceradeira industrial Disco de Escovas - Enceradeira Industrial (/)",
+          "score": 8.17413094893355,
+          "score_normalized": 0.9348943939159357,
+          "score_breakdown": {
+            "bm25": 8.17413094893355,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 24.49,
+          "link_detalhes": "/detalhes?grupo=disco%20de%20escovas%20para%20enceradeira"
+        },
+        {
+          "grupo": "aspirador de pó e água",
+          "descricao": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "sugeridos": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "score": 8.064113351139145,
+          "score_normalized": 0.9223114250287652,
+          "score_breakdown": {
+            "bm25": 8.064113351139145,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 2800,
+          "link_detalhes": "/detalhes?grupo=aspirador%20de%20p%C3%B3%20e%20%C3%A1gua"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 15000,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q03",
+    "descricao": "enceradeira profissional",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca genérica por enceradeira",
+    "result": {
+      "top1": {
+        "grupo": "polidora de piso alta rotação",
+        "descricao": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+        "sugeridos": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+        "score": 7.049741347533162,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 7.049741347533162,
+          "fuzzy": 0,
+          "synonym": 0.1
+        },
+        "valor_unitario": 16287.35,
+        "link_detalhes": "/detalhes?grupo=polidora%20de%20piso%20alta%20rota%C3%A7%C3%A3o"
+      },
+      "top3": [
+        {
+          "grupo": "polidora de piso alta rotação",
+          "descricao": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+          "sugeridos": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+          "score": 7.049741347533162,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 7.049741347533162,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 16287.35,
+          "link_detalhes": "/detalhes?grupo=polidora%20de%20piso%20alta%20rota%C3%A7%C3%A3o"
+        },
+        {
+          "grupo": "limpador de vidros e janelas",
+          "descricao": "limpador de vidros e janelas aspirador profissional wvp10 adv 1676030 ASPIRADOR PROFISSIONAL WVP10 ADV (1676030) (/)",
+          "sugeridos": "limpador de vidros e janelas aspirador profissional wvp10 adv 1676030 ASPIRADOR PROFISSIONAL WVP10 ADV (1676030) (/)",
+          "score": 6.475865766322437,
+          "score_normalized": 0.9185962217732236,
+          "score_breakdown": {
+            "bm25": 6.475865766322437,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 5000,
+          "link_detalhes": "/detalhes?grupo=limpador%20de%20vidros%20e%20janelas"
+        },
+        {
+          "grupo": "enceradeira 410 mm",
+          "descricao": "enceradeira 410 mm enceradeira c410 ENCERADEIRA C410 (/)",
+          "sugeridos": "enceradeira 410 mm enceradeira c410 ENCERADEIRA C410 (/)",
+          "score": 6.456901541563511,
+          "score_normalized": 0.9159061621208134,
+          "score_breakdown": {
+            "bm25": 6.456901541563511,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 3151,
+          "link_detalhes": "/detalhes?grupo=enceradeira%20410%20mm"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 16287.35,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q04",
+    "descricao": "mop água",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca por mop para limpeza úmida",
+    "result": {
+      "top1": {
+        "grupo": "mop água 60 cm",
+        "descricao": "mop água 60 cm mop agua MOP água (/)",
+        "sugeridos": "mop água 60 cm mop agua MOP água (/)",
+        "score": 10.725918628667863,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 10.725918628667863,
+          "fuzzy": 0.1,
+          "synonym": 0.1
+        },
+        "valor_unitario": 448,
+        "link_detalhes": "/detalhes?grupo=mop%20%C3%A1gua%2060%20cm"
+      },
+      "top3": [
+        {
+          "grupo": "mop água 60 cm",
+          "descricao": "mop água 60 cm mop agua MOP água (/)",
+          "sugeridos": "mop água 60 cm mop agua MOP água (/)",
+          "score": 10.725918628667863,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 10.725918628667863,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 448,
+          "link_detalhes": "/detalhes?grupo=mop%20%C3%A1gua%2060%20cm"
+        },
+        {
+          "grupo": "suporte para mop água",
+          "descricao": "suporte para mop água suporte de mop umido tts - encaixa hexagonal SUPORTE DE MOP UMIDO TTS - ENCAIXA HEXAGONAL (/) (/)",
+          "sugeridos": "suporte para mop água suporte de mop umido tts - encaixa hexagonal SUPORTE DE MOP UMIDO TTS - ENCAIXA HEXAGONAL (/) (/)",
+          "score": 6.596388719581484,
+          "score_normalized": 0.6149952230619097,
+          "score_breakdown": {
+            "bm25": 6.596388719581484,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 5.7,
+          "link_detalhes": "/detalhes?grupo=suporte%20para%20mop%20%C3%A1gua"
+        },
+        {
+          "grupo": "refil de mop água",
+          "descricao": "refil de mop água refil mop plano lite spray Refil mop plano lite spray (/)",
+          "sugeridos": "refil de mop água refil mop plano lite spray Refil mop plano lite spray (/)",
+          "score": 6.31251648958565,
+          "score_normalized": 0.5885292167622618,
+          "score_breakdown": {
+            "bm25": 6.31251648958565,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 27.5,
+          "link_detalhes": "/detalhes?grupo=refil%20de%20mop%20%C3%A1gua"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 448,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q05",
+    "descricao": "carrinho de limpeza",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca por carrinho funcional",
+    "result": {
+      "top1": {
+        "grupo": "balde de 15 l",
+        "descricao": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+        "sugeridos": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+        "score": 5.947882115544423,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 5.947882115544423,
+          "fuzzy": 0,
+          "synonym": 0
+        },
+        "valor_unitario": 55,
+        "link_detalhes": "/detalhes?grupo=balde%20de%2015%20l"
+      },
+      "top3": [
+        {
+          "grupo": "balde de 15 l",
+          "descricao": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+          "sugeridos": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+          "score": 5.947882115544423,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 5.947882115544423,
+            "fuzzy": 0,
+            "synonym": 0
+          },
+          "valor_unitario": 55,
+          "link_detalhes": "/detalhes?grupo=balde%20de%2015%20l"
+        },
+        {
+          "grupo": "cesto funcional multiuso",
+          "descricao": "cesto funcional multiuso cesto funcional de limpeza CESTO FUNCIONAL DE LIMPEZA (/)",
+          "sugeridos": "cesto funcional multiuso cesto funcional de limpeza CESTO FUNCIONAL DE LIMPEZA (/)",
+          "score": 5.4937333684793295,
+          "score_normalized": 0.9236453012614013,
+          "score_breakdown": {
+            "bm25": 5.4937333684793295,
+            "fuzzy": 0,
+            "synonym": 0
+          },
+          "valor_unitario": 27.01,
+          "link_detalhes": "/detalhes?grupo=cesto%20funcional%20multiuso"
+        },
+        {
+          "grupo": "carrinho coletor de lixo 120 l",
+          "descricao": "carrinho coletor de lixo 120 l carrinho coletor de lixo 120 litros Carrinho Coletor de Lixo 120 litros (/)",
+          "sugeridos": "carrinho coletor de lixo 120 l carrinho coletor de lixo 120 litros Carrinho Coletor de Lixo 120 litros (/)",
+          "score": 4.783130279207986,
+          "score_normalized": 0.8041736850680968,
+          "score_breakdown": {
+            "bm25": 4.783130279207986,
+            "fuzzy": 0,
+            "synonym": 0
+          },
+          "valor_unitario": 280,
+          "link_detalhes": "/detalhes?grupo=carrinho%20coletor%20de%20lixo%20120%20l"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 55,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q06",
+    "descricao": "lavadora de piso 50L 220V",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica com especificações de capacidade e tensão",
+    "result": {
+      "top1": {
+        "grupo": "conservadora de piso",
+        "descricao": "conservadora de piso conservadora piso gl350 220v CONSERVADORA PISO GL350 220V (/)",
+        "sugeridos": "conservadora de piso conservadora piso gl350 220v CONSERVADORA PISO GL350 220V (/)",
+        "score": 17.55365268306401,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 17.55365268306401,
+          "fuzzy": 0,
+          "synonym": 0.1
+        },
+        "valor_unitario": 1774.81,
+        "link_detalhes": "/detalhes?grupo=conservadora%20de%20piso"
+      },
+      "top3": [
+        {
+          "grupo": "conservadora de piso",
+          "descricao": "conservadora de piso conservadora piso gl350 220v CONSERVADORA PISO GL350 220V (/)",
+          "sugeridos": "conservadora de piso conservadora piso gl350 220v CONSERVADORA PISO GL350 220V (/)",
+          "score": 17.55365268306401,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 17.55365268306401,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 1774.81,
+          "link_detalhes": "/detalhes?grupo=conservadora%20de%20piso"
+        },
+        {
+          "grupo": "lavadora de piso tripulada",
+          "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "score": 11.747276006981735,
+          "score_normalized": 0.6692211711762794,
+          "score_breakdown": {
+            "bm25": 11.747276006981735,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 80192.02,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+        },
+        {
+          "grupo": "lavadora de piso de operação a pé",
+          "descricao": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "sugeridos": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "score": 11.650195612573093,
+          "score_normalized": 0.6636906758337171,
+          "score_breakdown": {
+            "bm25": 11.650195612573093,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 27700,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20de%20opera%C3%A7%C3%A3o%20a%20p%C3%A9"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 1774.81,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q07",
+    "descricao": "aspirador inox 1200w",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica com material e potência",
+    "result": {
+      "top1": {
+        "grupo": "aspirador de pó e água",
+        "descricao": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+        "sugeridos": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+        "score": 6.945269927642908,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 6.945269927642908,
+          "fuzzy": 0,
+          "synonym": 0.1
+        },
+        "valor_unitario": 2800,
+        "link_detalhes": "/detalhes?grupo=aspirador%20de%20p%C3%B3%20e%20%C3%A1gua"
+      },
+      "top3": [
+        {
+          "grupo": "aspirador de pó e água",
+          "descricao": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "sugeridos": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "score": 6.945269927642908,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 6.945269927642908,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 2800,
+          "link_detalhes": "/detalhes?grupo=aspirador%20de%20p%C3%B3%20e%20%C3%A1gua"
+        },
+        {
+          "grupo": "cesto aramado para 3 bombonas de 5 l",
+          "descricao": "cesto aramado para 3 bombonas de 5 l cesto de aco inox para 3 bombonas de 5 litros Cesto de Aço Inox para 3 Bombonas de 5 litros (/)",
+          "sugeridos": "cesto aramado para 3 bombonas de 5 l cesto de aco inox para 3 bombonas de 5 litros Cesto de Aço Inox para 3 Bombonas de 5 litros (/)",
+          "score": 6.177446483758885,
+          "score_normalized": 0.8894465655210888,
+          "score_breakdown": {
+            "bm25": 6.177446483758885,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 384,
+          "link_detalhes": "/detalhes?grupo=cesto%20aramado%20para%203%20bombonas%20de%205%20l"
+        },
+        {
+          "grupo": "limpador de vidros e janelas",
+          "descricao": "limpador de vidros e janelas aspirador profissional wvp10 adv 1676030 ASPIRADOR PROFISSIONAL WVP10 ADV (1676030) (/)",
+          "sugeridos": "limpador de vidros e janelas aspirador profissional wvp10 adv 1676030 ASPIRADOR PROFISSIONAL WVP10 ADV (1676030) (/)",
+          "score": 6.01479230147041,
+          "score_normalized": 0.8660271471279902,
+          "score_breakdown": {
+            "bm25": 6.01479230147041,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 5000,
+          "link_detalhes": "/detalhes?grupo=limpador%20de%20vidros%20e%20janelas"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 2800,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q08",
+    "descricao": "enceradeira 350mm bivolt",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica com diâmetro e tipo de tensão",
+    "result": {
+      "top1": {
+        "grupo": "enceradeira 350 mm",
+        "descricao": "enceradeira 350 mm enceradeira linha 200 rpm 350mm bivolt Enceradeira linha 200 rpm 350mm bivolt (/)",
+        "sugeridos": "enceradeira 350 mm enceradeira linha 200 rpm 350mm bivolt Enceradeira linha 200 rpm 350mm bivolt (/)",
+        "score": 16.60427056815098,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 16.60427056815098,
+          "fuzzy": 0,
+          "synonym": 0.1
+        },
+        "valor_unitario": 3200,
+        "link_detalhes": "/detalhes?grupo=enceradeira%20350%20mm"
+      },
+      "top3": [
+        {
+          "grupo": "enceradeira 350 mm",
+          "descricao": "enceradeira 350 mm enceradeira linha 200 rpm 350mm bivolt Enceradeira linha 200 rpm 350mm bivolt (/)",
+          "sugeridos": "enceradeira 350 mm enceradeira linha 200 rpm 350mm bivolt Enceradeira linha 200 rpm 350mm bivolt (/)",
+          "score": 16.60427056815098,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 16.60427056815098,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 3200,
+          "link_detalhes": "/detalhes?grupo=enceradeira%20350%20mm"
+        },
+        {
+          "grupo": "enceradeira 510 mm",
+          "descricao": "enceradeira 510 mm enceradeira linha 200 rpm 510mm bivolt Enceradeira linha 200 rpm 510mm bivolt (/)",
+          "sugeridos": "enceradeira 510 mm enceradeira linha 200 rpm 510mm bivolt Enceradeira linha 200 rpm 510mm bivolt (/)",
+          "score": 11.292745127849916,
+          "score_normalized": 0.6801108836127243,
+          "score_breakdown": {
+            "bm25": 11.292745127849916,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 4350,
+          "link_detalhes": "/detalhes?grupo=enceradeira%20510%20mm"
+        },
+        {
+          "grupo": "disco bonnet para enceradeira 350 mm",
+          "descricao": "disco bonnet para enceradeira 350 mm disco bonnet 350mm Disco Bonnet 350mm (/)",
+          "sugeridos": "disco bonnet para enceradeira 350 mm disco bonnet 350mm Disco Bonnet 350mm (/)",
+          "score": 9.284547280313884,
+          "score_normalized": 0.5591662242677965,
+          "score_breakdown": {
+            "bm25": 9.284547280313884,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 0.01,
+          "link_detalhes": "/detalhes?grupo=disco%20bonnet%20para%20enceradeira%20350%20mm"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 3200,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q09",
+    "descricao": "lavadora automática tripulada",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica por lavadora com operador",
+    "result": {
+      "top1": {
+        "grupo": "lavadora de piso tripulada",
+        "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+        "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+        "score": 9.733309665487074,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 9.733309665487074,
+          "fuzzy": 0.1,
+          "synonym": 0.1
+        },
+        "valor_unitario": 80192.02,
+        "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+      },
+      "top3": [
+        {
+          "grupo": "lavadora de piso tripulada",
+          "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "score": 9.733309665487074,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 9.733309665487074,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 80192.02,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+        },
+        {
+          "grupo": "máquina de lavar roupas",
+          "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "score": 8.058680348221795,
+          "score_normalized": 0.8279486243817686,
+          "score_breakdown": {
+            "bm25": 8.058680348221795,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 15000,
+          "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+        },
+        {
+          "grupo": "varredeira tripulada",
+          "descricao": "varredeira tripulada varredeira tripulada bateria Varredeira Tripulada (Bateria) (/)",
+          "sugeridos": "varredeira tripulada varredeira tripulada bateria Varredeira Tripulada (Bateria) (/)",
+          "score": 7.783077018475954,
+          "score_normalized": 0.7996331449387286,
+          "score_breakdown": {
+            "bm25": 7.783077018475954,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 4990,
+          "link_detalhes": "/detalhes?grupo=varredeira%20tripulada"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 80192.02,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q10",
+    "descricao": "aspirador pó e água 62 litros",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica por aspirador dupla função com capacidade",
+    "result": {
+      "top1": {
+        "grupo": "aspirador de pó e água",
+        "descricao": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+        "sugeridos": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+        "score": 18.017379555758417,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 18.017379555758417,
+          "fuzzy": 0.1,
+          "synonym": 0.1
+        },
+        "valor_unitario": 2800,
+        "link_detalhes": "/detalhes?grupo=aspirador%20de%20p%C3%B3%20e%20%C3%A1gua"
+      },
+      "top3": [
+        {
+          "grupo": "aspirador de pó e água",
+          "descricao": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "sugeridos": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "score": 18.017379555758417,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 18.017379555758417,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 2800,
+          "link_detalhes": "/detalhes?grupo=aspirador%20de%20p%C3%B3%20e%20%C3%A1gua"
+        },
+        {
+          "grupo": "tanque de água em gaiola",
+          "descricao": "tanque de água em gaiola tanque de agua gaiola TANQUE DE ÁGUA (/GAIOLA)",
+          "sugeridos": "tanque de água em gaiola tanque de agua gaiola TANQUE DE ÁGUA (/GAIOLA)",
+          "score": 6.972191112682066,
+          "score_normalized": 0.38697031891375844,
+          "score_breakdown": {
+            "bm25": 6.972191112682066,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 600,
+          "link_detalhes": "/detalhes?grupo=tanque%20de%20%C3%A1gua%20em%20gaiola"
+        },
+        {
+          "grupo": "mop água 60 cm",
+          "descricao": "mop água 60 cm mop agua MOP água (/)",
+          "sugeridos": "mop água 60 cm mop agua MOP água (/)",
+          "score": 6.322568209579611,
+          "score_normalized": 0.3509149701827143,
+          "score_breakdown": {
+            "bm25": 6.322568209579611,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 448,
+          "link_detalhes": "/detalhes?grupo=mop%20%C3%A1gua%2060%20cm"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 2800,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q11",
+    "descricao": "lavdora de piso",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: lavdora (faltando 'a')",
+    "result": {
+      "top1": {
+        "grupo": "lavadora de piso tripulada",
+        "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+        "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+        "score": 11.747276006981735,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 11.747276006981735,
+          "fuzzy": 0.1,
+          "synonym": 0.1
+        },
+        "valor_unitario": 80192.02,
+        "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+      },
+      "top3": [
+        {
+          "grupo": "lavadora de piso tripulada",
+          "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "score": 11.747276006981735,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 11.747276006981735,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 80192.02,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+        },
+        {
+          "grupo": "lavadora de piso de operação a pé",
+          "descricao": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "sugeridos": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "score": 11.650195612573093,
+          "score_normalized": 0.9917359229194117,
+          "score_breakdown": {
+            "bm25": 11.650195612573093,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 27700,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20de%20opera%C3%A7%C3%A3o%20a%20p%C3%A9"
+        },
+        {
+          "grupo": "secador de piso apito",
+          "descricao": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "sugeridos": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "score": 11.454101708836067,
+          "score_normalized": 0.9750432101900537,
+          "score_breakdown": {
+            "bm25": 11.454101708836067,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 4813.24,
+          "link_detalhes": "/detalhes?grupo=secador%20de%20piso%20apito"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 80192.02,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q12",
+    "descricao": "asprador industrial",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: asprador (faltando 'i')",
+    "result": {
+      "top1": {
+        "grupo": "máquina de lavar roupas",
+        "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "score": 7.474108310946753,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 7.474108310946753,
+          "fuzzy": 0.1,
+          "synonym": 0.1
+        },
+        "valor_unitario": 15000,
+        "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+      },
+      "top3": [
+        {
+          "grupo": "máquina de lavar roupas",
+          "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "score": 7.474108310946753,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 7.474108310946753,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 15000,
+          "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+        },
+        {
+          "grupo": "disco de escovas para enceradeira",
+          "descricao": "disco de escovas para enceradeira disco de escovas - enceradeira industrial Disco de Escovas - Enceradeira Industrial (/)",
+          "sugeridos": "disco de escovas para enceradeira disco de escovas - enceradeira industrial Disco de Escovas - Enceradeira Industrial (/)",
+          "score": 6.974015013326876,
+          "score_normalized": 0.9330899049338864,
+          "score_breakdown": {
+            "bm25": 6.974015013326876,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 24.49,
+          "link_detalhes": "/detalhes?grupo=disco%20de%20escovas%20para%20enceradeira"
+        },
+        {
+          "grupo": "aspirador de pó e água",
+          "descricao": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "sugeridos": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "score": 6.945269927642908,
+          "score_normalized": 0.9292439497392223,
+          "score_breakdown": {
+            "bm25": 6.945269927642908,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 2800,
+          "link_detalhes": "/detalhes?grupo=aspirador%20de%20p%C3%B3%20e%20%C3%A1gua"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 15000,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q13",
+    "descricao": "enceradiera profissional",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: enceradiera (troca de 'i' e 'e')",
+    "result": {
+      "top1": {
+        "grupo": "polidora de piso alta rotação",
+        "descricao": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+        "sugeridos": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+        "score": 7.049741347533162,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 7.049741347533162,
+          "fuzzy": 0.1,
+          "synonym": 0.1
+        },
+        "valor_unitario": 16287.35,
+        "link_detalhes": "/detalhes?grupo=polidora%20de%20piso%20alta%20rota%C3%A7%C3%A3o"
+      },
+      "top3": [
+        {
+          "grupo": "polidora de piso alta rotação",
+          "descricao": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+          "sugeridos": "polidora de piso alta rotação polidora bdp 51 /1500c POLIDORA BDP 51 /1500C (/)",
+          "score": 7.049741347533162,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 7.049741347533162,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 16287.35,
+          "link_detalhes": "/detalhes?grupo=polidora%20de%20piso%20alta%20rota%C3%A7%C3%A3o"
+        },
+        {
+          "grupo": "limpador de vidros e janelas",
+          "descricao": "limpador de vidros e janelas aspirador profissional wvp10 adv 1676030 ASPIRADOR PROFISSIONAL WVP10 ADV (1676030) (/)",
+          "sugeridos": "limpador de vidros e janelas aspirador profissional wvp10 adv 1676030 ASPIRADOR PROFISSIONAL WVP10 ADV (1676030) (/)",
+          "score": 6.475865766322437,
+          "score_normalized": 0.9185962217732236,
+          "score_breakdown": {
+            "bm25": 6.475865766322437,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 5000,
+          "link_detalhes": "/detalhes?grupo=limpador%20de%20vidros%20e%20janelas"
+        },
+        {
+          "grupo": "enceradeira 410 mm",
+          "descricao": "enceradeira 410 mm enceradeira c410 ENCERADEIRA C410 (/)",
+          "sugeridos": "enceradeira 410 mm enceradeira c410 ENCERADEIRA C410 (/)",
+          "score": 6.456901541563511,
+          "score_normalized": 0.9159061621208134,
+          "score_breakdown": {
+            "bm25": 6.456901541563511,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 3151,
+          "link_detalhes": "/detalhes?grupo=enceradeira%20410%20mm"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 16287.35,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q14",
+    "descricao": "carrino de limpeza",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: carrino (faltando 'h')",
+    "result": {
+      "top1": {
+        "grupo": "balde de 15 l",
+        "descricao": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+        "sugeridos": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+        "score": 5.947882115544423,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 5.947882115544423,
+          "fuzzy": 0.1,
+          "synonym": 0
+        },
+        "valor_unitario": 55,
+        "link_detalhes": "/detalhes?grupo=balde%20de%2015%20l"
+      },
+      "top3": [
+        {
+          "grupo": "balde de 15 l",
+          "descricao": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+          "sugeridos": "balde de 15 l balde de limpeza Balde de Limpeza (/)",
+          "score": 5.947882115544423,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 5.947882115544423,
+            "fuzzy": 0.1,
+            "synonym": 0
+          },
+          "valor_unitario": 55,
+          "link_detalhes": "/detalhes?grupo=balde%20de%2015%20l"
+        },
+        {
+          "grupo": "cesto funcional multiuso",
+          "descricao": "cesto funcional multiuso cesto funcional de limpeza CESTO FUNCIONAL DE LIMPEZA (/)",
+          "sugeridos": "cesto funcional multiuso cesto funcional de limpeza CESTO FUNCIONAL DE LIMPEZA (/)",
+          "score": 5.4937333684793295,
+          "score_normalized": 0.9236453012614013,
+          "score_breakdown": {
+            "bm25": 5.4937333684793295,
+            "fuzzy": 0.1,
+            "synonym": 0
+          },
+          "valor_unitario": 27.01,
+          "link_detalhes": "/detalhes?grupo=cesto%20funcional%20multiuso"
+        },
+        {
+          "grupo": "carrinho coletor de lixo 120 l",
+          "descricao": "carrinho coletor de lixo 120 l carrinho coletor de lixo 120 litros Carrinho Coletor de Lixo 120 litros (/)",
+          "sugeridos": "carrinho coletor de lixo 120 l carrinho coletor de lixo 120 litros Carrinho Coletor de Lixo 120 litros (/)",
+          "score": 4.783130279207986,
+          "score_normalized": 0.8041736850680968,
+          "score_breakdown": {
+            "bm25": 4.783130279207986,
+            "fuzzy": 0.1,
+            "synonym": 0
+          },
+          "valor_unitario": 280,
+          "link_detalhes": "/detalhes?grupo=carrinho%20coletor%20de%20lixo%20120%20l"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 55,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q15",
+    "descricao": "esfregão úmido",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'mop água'",
+    "result": {
+      "top1": {
+        "grupo": "cabo de mop úmido com pinça",
+        "descricao": "cabo de mop úmido com pinça cabos de mop umido + pinca Cabos de mop úmido + Pinça (/)",
+        "sugeridos": "cabo de mop úmido com pinça cabos de mop umido + pinca Cabos de mop úmido + Pinça (/)",
+        "score": 10.447566834030816,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 10.447566834030816,
+          "fuzzy": 0.1,
+          "synonym": 0.1
+        },
+        "valor_unitario": 192,
+        "link_detalhes": "/detalhes?grupo=cabo%20de%20mop%20%C3%BAmido%20com%20pin%C3%A7a"
+      },
+      "top3": [
+        {
+          "grupo": "cabo de mop úmido com pinça",
+          "descricao": "cabo de mop úmido com pinça cabos de mop umido + pinca Cabos de mop úmido + Pinça (/)",
+          "sugeridos": "cabo de mop úmido com pinça cabos de mop umido + pinca Cabos de mop úmido + Pinça (/)",
+          "score": 10.447566834030816,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 10.447566834030816,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 192,
+          "link_detalhes": "/detalhes?grupo=cabo%20de%20mop%20%C3%BAmido%20com%20pin%C3%A7a"
+        },
+        {
+          "grupo": "suporte para mop água",
+          "descricao": "suporte para mop água suporte de mop umido tts - encaixa hexagonal SUPORTE DE MOP UMIDO TTS - ENCAIXA HEXAGONAL (/) (/)",
+          "sugeridos": "suporte para mop água suporte de mop umido tts - encaixa hexagonal SUPORTE DE MOP UMIDO TTS - ENCAIXA HEXAGONAL (/) (/)",
+          "score": 9.043946658182234,
+          "score_normalized": 0.8656509981561854,
+          "score_breakdown": {
+            "bm25": 9.043946658182234,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 5.7,
+          "link_detalhes": "/detalhes?grupo=suporte%20para%20mop%20%C3%A1gua"
+        },
+        {
+          "grupo": "esfregão elétrico",
+          "descricao": "esfregão elétrico i-mop xl I-MOP XL (/)",
+          "sugeridos": "esfregão elétrico i-mop xl I-MOP XL (/)",
+          "score": 5.750117580259306,
+          "score_normalized": 0.5503786356771102,
+          "score_breakdown": {
+            "bm25": 5.750117580259306,
+            "fuzzy": 0.1,
+            "synonym": 0.1
+          },
+          "valor_unitario": 10000,
+          "link_detalhes": "/detalhes?grupo=esfreg%C3%A3o%20el%C3%A9trico"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 192,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q16",
+    "descricao": "lustrador de piso",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'enceradeira'",
+    "result": {
+      "top1": {
+        "grupo": "secador de piso apito",
+        "descricao": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+        "sugeridos": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+        "score": 6.361683491660924,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 6.361683491660924,
+          "fuzzy": 0,
+          "synonym": 0
+        },
+        "valor_unitario": 4813.24,
+        "link_detalhes": "/detalhes?grupo=secador%20de%20piso%20apito"
+      },
+      "top3": [
+        {
+          "grupo": "secador de piso apito",
+          "descricao": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "sugeridos": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "score": 6.361683491660924,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 6.361683491660924,
+            "fuzzy": 0,
+            "synonym": 0
+          },
+          "valor_unitario": 4813.24,
+          "link_detalhes": "/detalhes?grupo=secador%20de%20piso%20apito"
+        },
+        {
+          "grupo": "lavadora de piso de operação a pé",
+          "descricao": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "sugeridos": "lavadora de piso de operação a pé lavadora de piso - b70 Lavadora de piso - B70 (/)",
+          "score": 6.13134956244338,
+          "score_normalized": 0.963793557236937,
+          "score_breakdown": {
+            "bm25": 6.13134956244338,
+            "fuzzy": 0,
+            "synonym": 0
+          },
+          "valor_unitario": 27700,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20de%20opera%C3%A7%C3%A3o%20a%20p%C3%A9"
+        },
+        {
+          "grupo": "lavadora de piso tripulada",
+          "descricao": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "sugeridos": "lavadora de piso tripulada lavadora de piso alfamat brava LAVADORA DE PISO ALFAMAT BRAVA (/)",
+          "score": 6.126354364169957,
+          "score_normalized": 0.9630083565459611,
+          "score_breakdown": {
+            "bm25": 6.126354364169957,
+            "fuzzy": 0,
+            "synonym": 0
+          },
+          "valor_unitario": 80192.02,
+          "link_detalhes": "/detalhes?grupo=lavadora%20de%20piso%20tripulada"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 4813.24,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q17",
+    "descricao": "máquina de lavar piso",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'lavadora de piso'",
+    "result": {
+      "top1": {
+        "grupo": "máquina de lavar roupas",
+        "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "score": 16.513086375966818,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 16.513086375966818,
+          "fuzzy": 0.1,
+          "synonym": 0
+        },
+        "valor_unitario": 15000,
+        "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+      },
+      "top3": [
+        {
+          "grupo": "máquina de lavar roupas",
+          "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "score": 16.513086375966818,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 16.513086375966818,
+            "fuzzy": 0.1,
+            "synonym": 0
+          },
+          "valor_unitario": 15000,
+          "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+        },
+        {
+          "grupo": "máquina removedora de chiclete",
+          "descricao": "máquina removedora de chiclete maquina removedora de chiclete Máquina Removedora de Chiclete (/)",
+          "sugeridos": "máquina removedora de chiclete maquina removedora de chiclete Máquina Removedora de Chiclete (/)",
+          "score": 8.454406027745023,
+          "score_normalized": 0.5119821840240346,
+          "score_breakdown": {
+            "bm25": 8.454406027745023,
+            "fuzzy": 0.1,
+            "synonym": 0
+          },
+          "valor_unitario": 7000,
+          "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20removedora%20de%20chiclete"
+        },
+        {
+          "grupo": "secador de piso apito",
+          "descricao": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "sugeridos": "secador de piso apito apito secador de piso APITO SECADOR DE PISO (/)",
+          "score": 6.361683491660924,
+          "score_normalized": 0.3852510273863602,
+          "score_breakdown": {
+            "bm25": 6.361683491660924,
+            "fuzzy": 0.1,
+            "synonym": 0
+          },
+          "valor_unitario": 4813.24,
+          "link_detalhes": "/detalhes?grupo=secador%20de%20piso%20apito"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 15000,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  },
+  {
+    "id": "Q18",
+    "descricao": "vácuo industrial",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'aspirador de pó industrial'",
+    "result": {
+      "top1": {
+        "grupo": "máquina de lavar roupas",
+        "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+        "score": 7.474108310946753,
+        "score_normalized": 1,
+        "score_breakdown": {
+          "bm25": 7.474108310946753,
+          "fuzzy": 0,
+          "synonym": 0.1
+        },
+        "valor_unitario": 15000,
+        "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+      },
+      "top3": [
+        {
+          "grupo": "máquina de lavar roupas",
+          "descricao": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "sugeridos": "máquina de lavar roupas maquina de lavar industrial Máquina de Lavar Industrial (/)",
+          "score": 7.474108310946753,
+          "score_normalized": 1,
+          "score_breakdown": {
+            "bm25": 7.474108310946753,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 15000,
+          "link_detalhes": "/detalhes?grupo=m%C3%A1quina%20de%20lavar%20roupas"
+        },
+        {
+          "grupo": "disco de escovas para enceradeira",
+          "descricao": "disco de escovas para enceradeira disco de escovas - enceradeira industrial Disco de Escovas - Enceradeira Industrial (/)",
+          "sugeridos": "disco de escovas para enceradeira disco de escovas - enceradeira industrial Disco de Escovas - Enceradeira Industrial (/)",
+          "score": 6.974015013326876,
+          "score_normalized": 0.9330899049338864,
+          "score_breakdown": {
+            "bm25": 6.974015013326876,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 24.49,
+          "link_detalhes": "/detalhes?grupo=disco%20de%20escovas%20para%20enceradeira"
+        },
+        {
+          "grupo": "aspirador de pó e água",
+          "descricao": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "sugeridos": "aspirador de pó e água aspirador de po/agua alfa pro 62 Aspirador de pó/água Alfa pro 62 (/)",
+          "score": 6.945269927642908,
+          "score_normalized": 0.9292439497392223,
+          "score_breakdown": {
+            "bm25": 6.945269927642908,
+            "fuzzy": 0,
+            "synonym": 0.1
+          },
+          "valor_unitario": 2800,
+          "link_detalhes": "/detalhes?grupo=aspirador%20de%20p%C3%B3%20e%20%C3%A1gua"
+        }
+      ],
+      "httpStatus": 200,
+      "httpHeaders": {
+        "access-control-allow-credentials": "true",
+        "connection": "close",
+        "content-encoding": "gzip",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Thu, 11 Dec 2025 17:12:06 GMT",
+        "transfer-encoding": "chunked",
+        "vary": "Origin, Accept-Encoding"
+      },
+      "top1ValorUnitario": 15000,
+      "top1VidaUtil": null,
+      "top1Manutencao": null
+    }
+  }
+]

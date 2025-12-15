@@ -1,0 +1,3913 @@
+{
+  "metadata": {
+    "description": "Golden fixtures for TF-IDF testing (Python → TypeScript)",
+    "domain": "cleaning_equipment",
+    "generated_by": "dump_tfidf_golden.py",
+    "corpus_size": 48,
+    "query_count": 32
+  },
+  "corpus": [
+    {
+      "id": "LAVADORA_001",
+      "text": "Lavadora De Piso Operação A Pé Alfa A500 50L 220V",
+      "text_normalized": "lavadora de piso operacao a pe alfa a500 50l 220v",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "LAVADORA_002",
+      "text": "lavadora de piso tripulada grande porte 150L motor 3HP",
+      "text_normalized": "lavadora de piso tripulada grande porte 150l motor 3hp",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "LAVADORA_003",
+      "text": "Lavadora de piso compacta 30L bivolt automática",
+      "text_normalized": "lavadora de piso compacta 30l bivolt automatica",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "LAVADORA_004",
+      "text": "lavadora de piso industrial 80L motor elétrico 2HP 220V",
+      "text_normalized": "lavadora de piso industrial 80l motor eletrico 2hp 220v",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "ASPIRADOR_001",
+      "text": "Aspirador de Água e Pó 20L 1400W 220V",
+      "text_normalized": "aspirador de agua e po 20l 1400w 220v",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "ASPIRADOR_002",
+      "text": "aspirador de pó e água industrial 80L motor duplo",
+      "text_normalized": "aspirador de po e agua industrial 80l motor duplo",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "ASPIRADOR_003",
+      "text": "Aspirador de Pó Profissional 15L 1200W bivolt",
+      "text_normalized": "aspirador de po profissional 15l 1200w bivolt",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "ASPIRADOR_004",
+      "text": "aspirador industrial seco e molhado 50L inox",
+      "text_normalized": "aspirador industrial seco e molhado 50l inox",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "HIDRO_001",
+      "text": "Hidrojateadora alta pressão 2000 PSI motor 3HP 220V",
+      "text_normalized": "lavadora alta pressao alta pressao 2000 psi motor 3hp 220v",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "HIDRO_002",
+      "text": "lavadora de alta pressão profissional 1800 PSI bivolt",
+      "text_normalized": "lavadora de alta pressao profissional 1800 psi bivolt",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "HIDRO_003",
+      "text": "hidrojato industrial 3000 PSI trifásico",
+      "text_normalized": "hidrojato industrial 3000 psi trifasico",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "ENCERADEIRA_001",
+      "text": "Enceradeira linha 200 rpm 350mm bivolt",
+      "text_normalized": "enceradeira linha 200 rpm 350mm bivolt",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "ENCERADEIRA_002",
+      "text": "enceradeira industrial 510mm 175 rpm motor 1.5HP",
+      "text_normalized": "enceradeira industrial 510mm 175 rpm motor 1 5hp",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "ENCERADEIRA_003",
+      "text": "polidora de piso profissional 430mm alta rotação",
+      "text_normalized": "polidora de piso profissional 430mm alta rotacao",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "VARREDEIRA_001",
+      "text": "varredeira manual 36L largura 70cm",
+      "text_normalized": "varredeira manual 36l largura 70cm",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "VARREDEIRA_002",
+      "text": "Varredeira Industrial motorizada 80L",
+      "text_normalized": "varredeira industrial motorizada 80l",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "VARREDEIRA_003",
+      "text": "varredeira compacta manual 20L uso interno",
+      "text_normalized": "varredeira compacta manual 20l uso interno",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "EXTRATORA_001",
+      "text": "extratora de carpete e tapete profissional 25L",
+      "text_normalized": "extratora de carpete e tapete profissional 25l",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "EXTRATORA_002",
+      "text": "Extratora Limpadora de Estofados 20L 1400W",
+      "text_normalized": "extratora limpadora de estofado 20l 1400w",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "MAQUINA_LAVAR_001",
+      "text": "máquina de lavar roupas industrial 15kg",
+      "text_normalized": "maquina de lavar roupa industrial 15kg",
+      "category": "cleaning_core"
+    },
+    {
+      "id": "MOP_001",
+      "text": "Refil mop plano lite spray microfibra",
+      "text_normalized": "refil em microfibra mop plano lite borrifador pano de microfibra",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "MOP_002",
+      "text": "conjunto de balde com mop giratório inox",
+      "text_normalized": "conjunto de balde com mop giratorio inox",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "MOP_003",
+      "text": "mop úmido profissional algodão 400g",
+      "text_normalized": "mop umido profissional algodao 400g",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "MOP_004",
+      "text": "mop seco pó microfibra 60cm",
+      "text_normalized": "mop seco po pano de microfibra 60cm",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "BALDE_001",
+      "text": "Balde 4 litros plástico azul",
+      "text_normalized": "balde 4 litro plastico azul",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "BALDE_002",
+      "text": "balde espremedor duplo 30L profissional",
+      "text_normalized": "balde espremedor de mop duplo 30l profissional",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "BALDE_003",
+      "text": "balde com espremedor lateral 15L",
+      "text_normalized": "balde com espremedor de mop lateral 15l",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "CARRINHO_001",
+      "text": "carrinho funcional completo limpeza profissional",
+      "text_normalized": "carrinho funcional completo limpeza profissional",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "CARRINHO_002",
+      "text": "carro standard completa cinza multiuso",
+      "text_normalized": "carro standard completa cinza limpador multiuso",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "CARRINHO_003",
+      "text": "carro cuba 440 L coleta de resíduos",
+      "text_normalized": "carro cuba 440 l coleta de residuo",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "VASSOURA_001",
+      "text": "vassoura de nylon base 40cm cabo alumínio",
+      "text_normalized": "vassoura de nylon base 40cm cabo aluminio",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "VASSOURA_002",
+      "text": "vassoura feiticeira cerdas macias",
+      "text_normalized": "vassoura feiticeira cerda macia",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "RODO_001",
+      "text": "rodo propulsor 60cm dupla borracha",
+      "text_normalized": "rodo propulsor 60cm dupla borracha",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "PA_001",
+      "text": "pá de lixo basculante com cabo longo",
+      "text_normalized": "pa de lixo basculante com cabo longo",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "PLACA_001",
+      "text": "placa de sinalização piso molhado amarela",
+      "text_normalized": "placa de sinalizacao piso molhado amarela",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "DISCO_001",
+      "text": "disco pad limpeza verde 440mm",
+      "text_normalized": "disco pad limpeza verde 440mm",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "DISCO_002",
+      "text": "pad lustrador branco 350mm enceradeira",
+      "text_normalized": "pad lustrador branco 350mm enceradeira",
+      "category": "cleaning_support"
+    },
+    {
+      "id": "CELULAR_001",
+      "text": "CELULAR smartphone com plano de dados",
+      "text_normalized": "celular telefone celular com plano de dado",
+      "category": "peripheral"
+    },
+    {
+      "id": "CELULAR_002",
+      "text": "celular básico comunicação equipe",
+      "text_normalized": "celular basico comunicacao equipe",
+      "category": "peripheral"
+    },
+    {
+      "id": "NOTEBOOK_001",
+      "text": "NOTEBOOK computador portátil",
+      "text_normalized": "notebook computador portatil",
+      "category": "peripheral"
+    },
+    {
+      "id": "RADIO_001",
+      "text": "rádio HT digital comunicação",
+      "text_normalized": "radio ht digital comunicacao",
+      "category": "peripheral"
+    },
+    {
+      "id": "RELOGIO_001",
+      "text": "relógio de ponto biométrico",
+      "text_normalized": "relogio de ponto biometrico",
+      "category": "peripheral"
+    },
+    {
+      "id": "CADEIRA_001",
+      "text": "cadeira fixa escritório",
+      "text_normalized": "cadeira fixa escritorio",
+      "category": "peripheral"
+    },
+    {
+      "id": "ARMARIO_001",
+      "text": "armário tipo roupeiro 08 vãos",
+      "text_normalized": "armario tipo roupeiro 08 vao",
+      "category": "peripheral"
+    },
+    {
+      "id": "ESCADA_001",
+      "text": "escada de alumínio 8 degraus",
+      "text_normalized": "escada de aluminio 8 degrau",
+      "category": "peripheral"
+    },
+    {
+      "id": "MOTOR_001",
+      "text": "motor 5HP trifásico WEG industrial",
+      "text_normalized": "motor 5hp trifasico weg industrial",
+      "category": "peripheral"
+    },
+    {
+      "id": "MOTOR_002",
+      "text": "motor elétrico 2HP 220V monofásico",
+      "text_normalized": "motor eletrico 2hp 220v monofasico",
+      "category": "peripheral"
+    },
+    {
+      "id": "BOMBA_001",
+      "text": "bomba centrífuga 2HP alta vazão",
+      "text_normalized": "bomba centrifuga 2hp alta vazao",
+      "category": "peripheral"
+    }
+  ],
+  "simple_tfidf": {
+    "config": {
+      "analyzer": "char_wb",
+      "ngram_range": [
+        3,
+        5
+      ],
+      "description": "TfidfSearchIndex with character n-grams"
+    },
+    "queries": [
+      {
+        "query": "lavadora de piso",
+        "query_normalized": "lavadora de piso",
+        "results": [
+          {
+            "id": "LAVADORA_004",
+            "score": 0.488207,
+            "rank": 1
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.468695,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.445879,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.426312,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.306344,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.230209,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.223994,
+            "rank": 7
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.162094,
+            "rank": 8
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.156169,
+            "rank": 9
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.113607,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "lavadora piso 50L",
+        "query_normalized": "lavadora piso 50l",
+        "results": [
+          {
+            "id": "LAVADORA_001",
+            "score": 0.529982,
+            "rank": 1
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.427425,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.408285,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.390367,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.256953,
+            "rank": 5
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.198091,
+            "rank": 6
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.189766,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.165979,
+            "rank": 8
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.134076,
+            "rank": 9
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.130207,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "aspirador de água e pó",
+        "query_normalized": "aspirador de agua e po",
+        "results": [
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.742845,
+            "rank": 1
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.666656,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.412853,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.368667,
+            "rank": 4
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.105815,
+            "rank": 5
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.064534,
+            "rank": 6
+          },
+          {
+            "id": "NOTEBOOK_001",
+            "score": 0.05808,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.047849,
+            "rank": 8
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.04088,
+            "rank": 9
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.039528,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "aspirador industrial 80L",
+        "query_normalized": "aspirador industrial 80l",
+        "results": [
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.73008,
+            "rank": 1
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.61601,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.408038,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.407122,
+            "rank": 4
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.380165,
+            "rank": 5
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.33606,
+            "rank": 6
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.327473,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.291457,
+            "rank": 8
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.278015,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.270367,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "hidrojateadora alta pressão",
+        "query_normalized": "lavadora alta pressao alta pressao",
+        "results": [
+          {
+            "id": "HIDRO_001",
+            "score": 0.874722,
+            "rank": 1
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.636006,
+            "rank": 2
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.185355,
+            "rank": 3
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.15941,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.141613,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.125242,
+            "rank": 6
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.125017,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.107996,
+            "rank": 8
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.056293,
+            "rank": 9
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.038738,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "lavadora alta pressão 220V",
+        "query_normalized": "lavadora alta pressao 220v",
+        "results": [
+          {
+            "id": "HIDRO_001",
+            "score": 0.859374,
+            "rank": 1
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.60539,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.32193,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.317239,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.192608,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.17376,
+            "rank": 6
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.170865,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.156857,
+            "rank": 8
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.128241,
+            "rank": 9
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.12098,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "enceradeira 350mm",
+        "query_normalized": "enceradeira 350mm",
+        "results": [
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.685512,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.664519,
+            "rank": 2
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.478573,
+            "rank": 3
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.157495,
+            "rank": 4
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.095402,
+            "rank": 5
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.094161,
+            "rank": 6
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.082418,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.07227,
+            "rank": 8
+          },
+          {
+            "id": "DISCO_001",
+            "score": 0.045227,
+            "rank": 9
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.044036,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "enceradeira industrial",
+        "query_normalized": "enceradeira industrial",
+        "results": [
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.685028,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.455085,
+            "rank": 2
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.43755,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.378718,
+            "rank": 4
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.320571,
+            "rank": 5
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.301941,
+            "rank": 6
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.297552,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.282288,
+            "rank": 8
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.270699,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.263253,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "varredeira 36L",
+        "query_normalized": "varredeira 36l",
+        "results": [
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.620297,
+            "rank": 1
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.473863,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.409372,
+            "rank": 3
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.113757,
+            "rank": 4
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.099411,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.096323,
+            "rank": 6
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.09488,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.075516,
+            "rank": 8
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.024894,
+            "rank": 9
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.017727,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "varredeira manual",
+        "query_normalized": "varredeira manual",
+        "results": [
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.693069,
+            "rank": 1
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.636158,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.428929,
+            "rank": 3
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.101629,
+            "rank": 4
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.09115,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.088812,
+            "rank": 6
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.084764,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.082515,
+            "rank": 8
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.036958,
+            "rank": 9
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.02224,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "extratora carpete",
+        "query_normalized": "extratora carpete",
+        "results": [
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.752723,
+            "rank": 1
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.384876,
+            "rank": 2
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.084145,
+            "rank": 3
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.039581,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.037637,
+            "rank": 5
+          },
+          {
+            "id": "CARRINHO_001",
+            "score": 0.031143,
+            "rank": 6
+          },
+          {
+            "id": "CARRINHO_002",
+            "score": 0.03111,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.029348,
+            "rank": 8
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.025262,
+            "rank": 9
+          },
+          {
+            "id": "PA_001",
+            "score": 0.024325,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "extratora estofados",
+        "query_normalized": "extratora estofado",
+        "results": [
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.764147,
+            "rank": 1
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.317006,
+            "rank": 2
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.081661,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.035334,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.033613,
+            "rank": 5
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.031555,
+            "rank": 6
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.029037,
+            "rank": 7
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.027008,
+            "rank": 8
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.026434,
+            "rank": 9
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.026357,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "mop",
+        "query_normalized": "mop",
+        "results": [
+          {
+            "id": "MOP_004",
+            "score": 0.245195,
+            "rank": 1
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.225436,
+            "rank": 2
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.224974,
+            "rank": 3
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.216555,
+            "rank": 4
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.214572,
+            "rank": 5
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.136788,
+            "rank": 6
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.040785,
+            "rank": 7
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.022615,
+            "rank": 8
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.020773,
+            "rank": 9
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.020564,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "mop microfibra",
+        "query_normalized": "mop pano de microfibra",
+        "results": [
+          {
+            "id": "MOP_004",
+            "score": 0.814081,
+            "rank": 1
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.789523,
+            "rank": 2
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.107409,
+            "rank": 3
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.096571,
+            "rank": 4
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.082971,
+            "rank": 5
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.079135,
+            "rank": 6
+          },
+          {
+            "id": "CELULAR_001",
+            "score": 0.046141,
+            "rank": 7
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.041052,
+            "rank": 8
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.040631,
+            "rank": 9
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.040457,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "balde espremedor",
+        "query_normalized": "balde espremedor de mop",
+        "results": [
+          {
+            "id": "BALDE_003",
+            "score": 0.750475,
+            "rank": 1
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.722392,
+            "rank": 2
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.241826,
+            "rank": 3
+          },
+          {
+            "id": "BALDE_001",
+            "score": 0.186106,
+            "rank": 4
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.090003,
+            "rank": 5
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.06758,
+            "rank": 6
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.062279,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.047935,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.040465,
+            "rank": 9
+          },
+          {
+            "id": "ESCADA_001",
+            "score": 0.035625,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "balde 30L",
+        "query_normalized": "balde 30l",
+        "results": [
+          {
+            "id": "BALDE_002",
+            "score": 0.442601,
+            "rank": 1
+          },
+          {
+            "id": "BALDE_001",
+            "score": 0.301252,
+            "rank": 2
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.282713,
+            "rank": 3
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.269641,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.163442,
+            "rank": 5
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.026695,
+            "rank": 6
+          },
+          {
+            "id": "PA_001",
+            "score": 0.02361,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.022585,
+            "rank": 8
+          },
+          {
+            "id": "VASSOURA_001",
+            "score": 0.021869,
+            "rank": 9
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.021528,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "carrinho funcional",
+        "query_normalized": "carrinho funcional",
+        "results": [
+          {
+            "id": "CARRINHO_001",
+            "score": 0.717656,
+            "rank": 1
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.099926,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.085127,
+            "rank": 3
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.08476,
+            "rank": 4
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.081421,
+            "rank": 5
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.079718,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.077071,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.076281,
+            "rank": 8
+          },
+          {
+            "id": "CARRINHO_002",
+            "score": 0.062657,
+            "rank": 9
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.017955,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "carrinho limpeza",
+        "query_normalized": "carrinho limpeza",
+        "results": [
+          {
+            "id": "CARRINHO_001",
+            "score": 0.599896,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_001",
+            "score": 0.332873,
+            "rank": 2
+          },
+          {
+            "id": "CARRINHO_002",
+            "score": 0.147692,
+            "rank": 3
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.086566,
+            "rank": 4
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.077292,
+            "rank": 5
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.033407,
+            "rank": 6
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.029336,
+            "rank": 7
+          },
+          {
+            "id": "PA_001",
+            "score": 0.020291,
+            "rank": 8
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.018258,
+            "rank": 9
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.012492,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "vassoura nylon",
+        "query_normalized": "vassoura nylon",
+        "results": [
+          {
+            "id": "VASSOURA_001",
+            "score": 0.643745,
+            "rank": 1
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.390468,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.05621,
+            "rank": 3
+          },
+          {
+            "id": "PA_001",
+            "score": 0.020458,
+            "rank": 4
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.017324,
+            "rank": 5
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.014966,
+            "rank": 6
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.011851,
+            "rank": 7
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.011328,
+            "rank": 8
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.009173,
+            "rank": 9
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.006118,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "vassoura",
+        "query_normalized": "vassoura",
+        "results": [
+          {
+            "id": "VASSOURA_002",
+            "score": 0.51545,
+            "rank": 1
+          },
+          {
+            "id": "VASSOURA_001",
+            "score": 0.487655,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.074201,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.022869,
+            "rank": 4
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.019757,
+            "rank": 5
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.015645,
+            "rank": 6
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.014954,
+            "rank": 7
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.012109,
+            "rank": 8
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.008077,
+            "rank": 9
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.007425,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "rodo",
+        "query_normalized": "rodo",
+        "results": [
+          {
+            "id": "RODO_001",
+            "score": 0.352987,
+            "rank": 1
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.029862,
+            "rank": 2
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.028842,
+            "rank": 3
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.0265,
+            "rank": 4
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.023718,
+            "rank": 5
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.02324,
+            "rank": 6
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.021576,
+            "rank": 7
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.020296,
+            "rank": 8
+          },
+          {
+            "id": "CELULAR_001",
+            "score": 0.017649,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.0,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "disco pad 440mm",
+        "query_normalized": "disco pad 440mm",
+        "results": [
+          {
+            "id": "DISCO_001",
+            "score": 0.718012,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.160897,
+            "rank": 2
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.065853,
+            "rank": 3
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.04318,
+            "rank": 4
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.041838,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.039858,
+            "rank": 6
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.025736,
+            "rank": 7
+          },
+          {
+            "id": "RADIO_001",
+            "score": 0.02236,
+            "rank": 8
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.018095,
+            "rank": 9
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.015056,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "celular",
+        "query_normalized": "celular",
+        "results": [
+          {
+            "id": "CELULAR_001",
+            "score": 0.764894,
+            "rank": 1
+          },
+          {
+            "id": "CELULAR_002",
+            "score": 0.485919,
+            "rank": 2
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.024989,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.02469,
+            "rank": 4
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.021682,
+            "rank": 5
+          },
+          {
+            "id": "PA_001",
+            "score": 0.021525,
+            "rank": 6
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.020821,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.01885,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.0,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.0,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "notebook",
+        "query_normalized": "notebook",
+        "results": [
+          {
+            "id": "NOTEBOOK_001",
+            "score": 0.594518,
+            "rank": 1
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.0,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.0,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.0,
+            "rank": 4
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.0,
+            "rank": 5
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.0,
+            "rank": 6
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.0,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.0,
+            "rank": 8
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.0,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.0,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "relógio ponto",
+        "query_normalized": "relogio ponto",
+        "results": [
+          {
+            "id": "RELOGIO_001",
+            "score": 0.745184,
+            "rank": 1
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.066875,
+            "rank": 2
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.018228,
+            "rank": 3
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.018068,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.014768,
+            "rank": 5
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.013063,
+            "rank": 6
+          },
+          {
+            "id": "ESCADA_001",
+            "score": 0.012727,
+            "rank": 7
+          },
+          {
+            "id": "CARRINHO_001",
+            "score": 0.012464,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.012406,
+            "rank": 9
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.011875,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "escada alumínio",
+        "query_normalized": "escada aluminio",
+        "results": [
+          {
+            "id": "ESCADA_001",
+            "score": 0.806176,
+            "rank": 1
+          },
+          {
+            "id": "VASSOURA_001",
+            "score": 0.367311,
+            "rank": 2
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.097395,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.052668,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.042858,
+            "rank": 5
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.028123,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.014644,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.014427,
+            "rank": 8
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.013797,
+            "rank": 9
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.01328,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "motor 5HP",
+        "query_normalized": "motor 5hp",
+        "results": [
+          {
+            "id": "MOTOR_001",
+            "score": 0.466075,
+            "rank": 1
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.390512,
+            "rank": 2
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.242605,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.223102,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.222132,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.191887,
+            "rank": 6
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.161668,
+            "rank": 7
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.159608,
+            "rank": 8
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.023713,
+            "rank": 9
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.021235,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "motor trifásico",
+        "query_normalized": "motor trifasico",
+        "results": [
+          {
+            "id": "MOTOR_001",
+            "score": 0.702561,
+            "rank": 1
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.447678,
+            "rank": 2
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.414829,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.19123,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.161605,
+            "rank": 5
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.159925,
+            "rank": 6
+          },
+          {
+            "id": "CELULAR_002",
+            "score": 0.141783,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.140781,
+            "rank": 8
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.118644,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.097868,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "lavadora motor 3HP",
+        "query_normalized": "lavadora motor 3hp",
+        "results": [
+          {
+            "id": "LAVADORA_002",
+            "score": 0.484708,
+            "rank": 1
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.430896,
+            "rank": 2
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.40317,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.260399,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.252804,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.247723,
+            "rank": 6
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.184511,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.183728,
+            "rank": 8
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.174372,
+            "rank": 9
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.160577,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "50L 220V",
+        "query_normalized": "50l 220v",
+        "results": [
+          {
+            "id": "LAVADORA_001",
+            "score": 0.387023,
+            "rank": 1
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.275039,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.232483,
+            "rank": 3
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.227062,
+            "rank": 4
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.186059,
+            "rank": 5
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.156559,
+            "rank": 6
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.066091,
+            "rank": 7
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.015492,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.015336,
+            "rank": 9
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.01437,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "profissional",
+        "query_normalized": "profissional",
+        "results": [
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.518645,
+            "rank": 1
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.51641,
+            "rank": 2
+          },
+          {
+            "id": "CARRINHO_001",
+            "score": 0.510451,
+            "rank": 3
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.496066,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.482158,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.464752,
+            "rank": 6
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.421373,
+            "rank": 7
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.050431,
+            "rank": 8
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.045199,
+            "rank": 9
+          },
+          {
+            "id": "RODO_001",
+            "score": 0.039652,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "industrial",
+        "query_normalized": "industrial",
+        "results": [
+          {
+            "id": "MOTOR_001",
+            "score": 0.519277,
+            "rank": 1
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.463624,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.458955,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.453179,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.449329,
+            "rank": 5
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.438491,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.426429,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.422897,
+            "rank": 8
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.044607,
+            "rank": 9
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.02093,
+            "rank": 10
+          }
+        ]
+      }
+    ]
+  },
+  "hybrid_tfidf": {
+    "config": {
+      "ngram_char": [
+        3,
+        5
+      ],
+      "ngram_word": [
+        1,
+        2
+      ],
+      "w_char": 0.6,
+      "w_word": 0.25,
+      "w_overlap": 0.15,
+      "description": "HybridTfidfSearchIndex with char + word + overlap"
+    },
+    "queries": [
+      {
+        "query": "lavadora de piso",
+        "query_normalized": "lavadora de piso",
+        "results": [
+          {
+            "id": "LAVADORA_004",
+            "score": 0.555936,
+            "rank": 1
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.538896,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.52583,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.508182,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.318605,
+            "rank": 5
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.227908,
+            "rank": 6
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.027561,
+            "rank": 7
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.020765,
+            "rank": 8
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.002048,
+            "rank": 9
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.001535,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "lavadora piso 50L",
+        "query_normalized": "lavadora piso 50l",
+        "results": [
+          {
+            "id": "LAVADORA_001",
+            "score": 0.552941,
+            "rank": 1
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.403186,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.386491,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.385054,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.227206,
+            "rank": 5
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.185097,
+            "rank": 6
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.020439,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.018812,
+            "rank": 8
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.015356,
+            "rank": 9
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.001609,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "aspirador de água e pó",
+        "query_normalized": "aspirador de agua e po",
+        "results": [
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.784727,
+            "rank": 1
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.647854,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.382463,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.327076,
+            "rank": 4
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.00127,
+            "rank": 5
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.001248,
+            "rank": 6
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.000761,
+            "rank": 7
+          },
+          {
+            "id": "NOTEBOOK_001",
+            "score": 0.000697,
+            "rank": 8
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.000659,
+            "rank": 9
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.000589,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "aspirador industrial 80L",
+        "query_normalized": "aspirador industrial 80l",
+        "results": [
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.684081,
+            "rank": 1
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.545619,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.304107,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.2744,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.042031,
+            "rank": 5
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.040353,
+            "rank": 6
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.026426,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.023258,
+            "rank": 8
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.022713,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.02243,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "hidrojateadora alta pressão",
+        "query_normalized": "lavadora alta pressao alta pressao",
+        "results": [
+          {
+            "id": "HIDRO_001",
+            "score": 0.865131,
+            "rank": 1
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.641467,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.138265,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.131045,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.130097,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.118852,
+            "rank": 6
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.018852,
+            "rank": 7
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.017608,
+            "rank": 8
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.000676,
+            "rank": 9
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.000465,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "lavadora alta pressão 220V",
+        "query_normalized": "lavadora alta pressao 220v",
+        "results": [
+          {
+            "id": "HIDRO_001",
+            "score": 0.842838,
+            "rank": 1
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.576585,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.297373,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.294015,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.168563,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.154233,
+            "rank": 6
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.01631,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.014908,
+            "rank": 8
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.014009,
+            "rank": 9
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.0133,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "enceradeira 350mm",
+        "query_normalized": "enceradeira 350mm",
+        "results": [
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.658849,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.65527,
+            "rank": 2
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.398195,
+            "rank": 3
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.00189,
+            "rank": 4
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.001145,
+            "rank": 5
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.00113,
+            "rank": 6
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.000989,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.000867,
+            "rank": 8
+          },
+          {
+            "id": "DISCO_001",
+            "score": 0.000543,
+            "rank": 9
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.000528,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "enceradeira industrial",
+        "query_normalized": "enceradeira industrial",
+        "results": [
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.660983,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.39944,
+            "rank": 2
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.3854,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.032185,
+            "rank": 4
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.028344,
+            "rank": 5
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.026655,
+            "rank": 6
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.02652,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.025601,
+            "rank": 8
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.025053,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.024833,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "varredeira 36L",
+        "query_normalized": "varredeira 36l",
+        "results": [
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.633798,
+            "rank": 1
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.408088,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.356122,
+            "rank": 3
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.001365,
+            "rank": 4
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.001193,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.001156,
+            "rank": 6
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.001139,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.000906,
+            "rank": 8
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.000299,
+            "rank": 9
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.000213,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "varredeira manual",
+        "query_normalized": "varredeira manual",
+        "results": [
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.701676,
+            "rank": 1
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.607058,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.375022,
+            "rank": 3
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.00122,
+            "rank": 4
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.001094,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.001066,
+            "rank": 6
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.001017,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.00099,
+            "rank": 8
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.000443,
+            "rank": 9
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.000267,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "extratora carpete",
+        "query_normalized": "extratora carpete",
+        "results": [
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.703057,
+            "rank": 1
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.351757,
+            "rank": 2
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.00101,
+            "rank": 3
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.000475,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.000452,
+            "rank": 5
+          },
+          {
+            "id": "CARRINHO_001",
+            "score": 0.000374,
+            "rank": 6
+          },
+          {
+            "id": "CARRINHO_002",
+            "score": 0.000373,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.000352,
+            "rank": 8
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.000303,
+            "rank": 9
+          },
+          {
+            "id": "PA_001",
+            "score": 0.000292,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "extratora estofados",
+        "query_normalized": "extratora estofado",
+        "results": [
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.718941,
+            "rank": 1
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.306978,
+            "rank": 2
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.00098,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.000424,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.000403,
+            "rank": 5
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.000379,
+            "rank": 6
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.000348,
+            "rank": 7
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.000324,
+            "rank": 8
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.000317,
+            "rank": 9
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.000316,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "mop",
+        "query_normalized": "mop",
+        "results": [
+          {
+            "id": "MOP_004",
+            "score": 0.316916,
+            "rank": 1
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.306425,
+            "rank": 2
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.302088,
+            "rank": 3
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.29605,
+            "rank": 4
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.293399,
+            "rank": 5
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.227274,
+            "rank": 6
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.023706,
+            "rank": 7
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.013145,
+            "rank": 8
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.012074,
+            "rank": 9
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.011953,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "mop microfibra",
+        "query_normalized": "mop pano de microfibra",
+        "results": [
+          {
+            "id": "MOP_004",
+            "score": 0.793658,
+            "rank": 1
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.763921,
+            "rank": 2
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.132685,
+            "rank": 3
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.121968,
+            "rank": 4
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.117808,
+            "rank": 5
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.114812,
+            "rank": 6
+          },
+          {
+            "id": "CELULAR_001",
+            "score": 0.000666,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.000614,
+            "rank": 8
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.000613,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.000613,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "balde espremedor",
+        "query_normalized": "balde espremedor de mop",
+        "results": [
+          {
+            "id": "BALDE_002",
+            "score": 0.756837,
+            "rank": 1
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.735758,
+            "rank": 2
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.283174,
+            "rank": 3
+          },
+          {
+            "id": "BALDE_001",
+            "score": 0.184783,
+            "rank": 4
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.012162,
+            "rank": 5
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.010476,
+            "rank": 6
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.009905,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.000679,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.000594,
+            "rank": 9
+          },
+          {
+            "id": "ESCADA_001",
+            "score": 0.000557,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "balde 30L",
+        "query_normalized": "balde 30l",
+        "results": [
+          {
+            "id": "BALDE_002",
+            "score": 0.51101,
+            "rank": 1
+          },
+          {
+            "id": "BALDE_001",
+            "score": 0.293918,
+            "rank": 2
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.279747,
+            "rank": 3
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.270826,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.023396,
+            "rank": 5
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.00032,
+            "rank": 6
+          },
+          {
+            "id": "PA_001",
+            "score": 0.000283,
+            "rank": 7
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.000271,
+            "rank": 8
+          },
+          {
+            "id": "VASSOURA_001",
+            "score": 0.000262,
+            "rank": 9
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.000258,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "carrinho funcional",
+        "query_normalized": "carrinho funcional",
+        "results": [
+          {
+            "id": "CARRINHO_001",
+            "score": 0.731214,
+            "rank": 1
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.001199,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.001022,
+            "rank": 3
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.001017,
+            "rank": 4
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.000977,
+            "rank": 5
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.000957,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.000925,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.000915,
+            "rank": 8
+          },
+          {
+            "id": "CARRINHO_002",
+            "score": 0.000752,
+            "rank": 9
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.000215,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "carrinho limpeza",
+        "query_normalized": "carrinho limpeza",
+        "results": [
+          {
+            "id": "CARRINHO_001",
+            "score": 0.627131,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_001",
+            "score": 0.032245,
+            "rank": 2
+          },
+          {
+            "id": "CARRINHO_002",
+            "score": 0.001772,
+            "rank": 3
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.001039,
+            "rank": 4
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.000928,
+            "rank": 5
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.000401,
+            "rank": 6
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.000352,
+            "rank": 7
+          },
+          {
+            "id": "PA_001",
+            "score": 0.000243,
+            "rank": 8
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.000219,
+            "rank": 9
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.00015,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "vassoura nylon",
+        "query_normalized": "vassoura nylon",
+        "results": [
+          {
+            "id": "VASSOURA_001",
+            "score": 0.635137,
+            "rank": 1
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.363469,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.000675,
+            "rank": 3
+          },
+          {
+            "id": "PA_001",
+            "score": 0.000245,
+            "rank": 4
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.000208,
+            "rank": 5
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.00018,
+            "rank": 6
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.000142,
+            "rank": 7
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.000136,
+            "rank": 8
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.00011,
+            "rank": 9
+          },
+          {
+            "id": "MOP_001",
+            "score": 7.3e-05,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "vassoura",
+        "query_normalized": "vassoura",
+        "results": [
+          {
+            "id": "VASSOURA_002",
+            "score": 0.538493,
+            "rank": 1
+          },
+          {
+            "id": "VASSOURA_001",
+            "score": 0.505517,
+            "rank": 2
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.043129,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.013293,
+            "rank": 4
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.011484,
+            "rank": 5
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.009093,
+            "rank": 6
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.008692,
+            "rank": 7
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.007039,
+            "rank": 8
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.004695,
+            "rank": 9
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.004316,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "rodo",
+        "query_normalized": "rodo",
+        "results": [
+          {
+            "id": "RODO_001",
+            "score": 0.415259,
+            "rank": 1
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.017357,
+            "rank": 2
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.016764,
+            "rank": 3
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.015403,
+            "rank": 4
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.013786,
+            "rank": 5
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.013508,
+            "rank": 6
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.012541,
+            "rank": 7
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.011797,
+            "rank": 8
+          },
+          {
+            "id": "CELULAR_001",
+            "score": 0.010258,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.0,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "disco pad 440mm",
+        "query_normalized": "disco pad 440mm",
+        "results": [
+          {
+            "id": "DISCO_001",
+            "score": 0.747029,
+            "rank": 1
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.01794,
+            "rank": 2
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.00079,
+            "rank": 3
+          },
+          {
+            "id": "ENCERADEIRA_001",
+            "score": 0.000518,
+            "rank": 4
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.000502,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.000478,
+            "rank": 6
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.000309,
+            "rank": 7
+          },
+          {
+            "id": "RADIO_001",
+            "score": 0.000268,
+            "rank": 8
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.000217,
+            "rank": 9
+          },
+          {
+            "id": "EXTRATORA_002",
+            "score": 0.000181,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "celular",
+        "query_normalized": "celular",
+        "results": [
+          {
+            "id": "CELULAR_001",
+            "score": 0.749275,
+            "rank": 1
+          },
+          {
+            "id": "CELULAR_002",
+            "score": 0.51706,
+            "rank": 2
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.014525,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_001",
+            "score": 0.014351,
+            "rank": 4
+          },
+          {
+            "id": "BOMBA_001",
+            "score": 0.012603,
+            "rank": 5
+          },
+          {
+            "id": "PA_001",
+            "score": 0.012511,
+            "rank": 6
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.012102,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.010957,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.0,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.0,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "notebook",
+        "query_normalized": "notebook",
+        "results": [
+          {
+            "id": "NOTEBOOK_001",
+            "score": 0.612971,
+            "rank": 1
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.0,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.0,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.0,
+            "rank": 4
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.0,
+            "rank": 5
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.0,
+            "rank": 6
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.0,
+            "rank": 7
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.0,
+            "rank": 8
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.0,
+            "rank": 9
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.0,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "relógio ponto",
+        "query_normalized": "relogio ponto",
+        "results": [
+          {
+            "id": "RELOGIO_001",
+            "score": 0.739575,
+            "rank": 1
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.000802,
+            "rank": 2
+          },
+          {
+            "id": "PLACA_001",
+            "score": 0.000219,
+            "rank": 3
+          },
+          {
+            "id": "CARRINHO_003",
+            "score": 0.000217,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.000177,
+            "rank": 5
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.000157,
+            "rank": 6
+          },
+          {
+            "id": "ESCADA_001",
+            "score": 0.000153,
+            "rank": 7
+          },
+          {
+            "id": "CARRINHO_001",
+            "score": 0.00015,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.000149,
+            "rank": 9
+          },
+          {
+            "id": "ARMARIO_001",
+            "score": 0.000142,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "escada alumínio",
+        "query_normalized": "escada aluminio",
+        "results": [
+          {
+            "id": "ESCADA_001",
+            "score": 0.75301,
+            "rank": 1
+          },
+          {
+            "id": "VASSOURA_001",
+            "score": 0.033602,
+            "rank": 2
+          },
+          {
+            "id": "CADEIRA_001",
+            "score": 0.001169,
+            "rank": 3
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.000632,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.000514,
+            "rank": 5
+          },
+          {
+            "id": "MOP_003",
+            "score": 0.000337,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.000176,
+            "rank": 7
+          },
+          {
+            "id": "VASSOURA_002",
+            "score": 0.000173,
+            "rank": 8
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.000166,
+            "rank": 9
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.000159,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "motor 5HP",
+        "query_normalized": "motor 5hp",
+        "results": [
+          {
+            "id": "MOTOR_001",
+            "score": 0.567092,
+            "rank": 1
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.442162,
+            "rank": 2
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.237687,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.219686,
+            "rank": 4
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.218952,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.199422,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.176383,
+            "rank": 7
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.00194,
+            "rank": 8
+          },
+          {
+            "id": "MOP_002",
+            "score": 0.000285,
+            "rank": 9
+          },
+          {
+            "id": "BALDE_003",
+            "score": 0.000255,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "motor trifásico",
+        "query_normalized": "motor trifasico",
+        "results": [
+          {
+            "id": "MOTOR_001",
+            "score": 0.674252,
+            "rank": 1
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.350577,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.208768,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.188224,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.188159,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.175794,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.145004,
+            "rank": 7
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.041919,
+            "rank": 8
+          },
+          {
+            "id": "CELULAR_002",
+            "score": 0.001701,
+            "rank": 9
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.001424,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "lavadora motor 3HP",
+        "query_normalized": "lavadora motor 3hp",
+        "results": [
+          {
+            "id": "LAVADORA_002",
+            "score": 0.550731,
+            "rank": 1
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.482052,
+            "rank": 2
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.393322,
+            "rank": 3
+          },
+          {
+            "id": "LAVADORA_001",
+            "score": 0.22193,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.220874,
+            "rank": 5
+          },
+          {
+            "id": "LAVADORA_003",
+            "score": 0.219818,
+            "rank": 6
+          },
+          {
+            "id": "MOTOR_001",
+            "score": 0.018042,
+            "rank": 7
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.01753,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.017432,
+            "rank": 9
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.015977,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "50L 220V",
+        "query_normalized": "50l 220v",
+        "results": [
+          {
+            "id": "LAVADORA_001",
+            "score": 0.479495,
+            "rank": 1
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.234398,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_001",
+            "score": 0.025877,
+            "rank": 3
+          },
+          {
+            "id": "MOTOR_002",
+            "score": 0.023732,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.023377,
+            "rank": 5
+          },
+          {
+            "id": "HIDRO_001",
+            "score": 0.018133,
+            "rank": 6
+          },
+          {
+            "id": "LAVADORA_002",
+            "score": 0.000793,
+            "rank": 7
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.000186,
+            "rank": 8
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.000184,
+            "rank": 9
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.000172,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "profissional",
+        "query_normalized": "profissional",
+        "results": [
+          {
+            "id": "MOP_003",
+            "score": 0.522962,
+            "rank": 1
+          },
+          {
+            "id": "ASPIRADOR_003",
+            "score": 0.521127,
+            "rank": 2
+          },
+          {
+            "id": "CARRINHO_001",
+            "score": 0.517787,
+            "rank": 3
+          },
+          {
+            "id": "BALDE_002",
+            "score": 0.504158,
+            "rank": 4
+          },
+          {
+            "id": "HIDRO_002",
+            "score": 0.491645,
+            "rank": 5
+          },
+          {
+            "id": "ENCERADEIRA_003",
+            "score": 0.479938,
+            "rank": 6
+          },
+          {
+            "id": "EXTRATORA_001",
+            "score": 0.446276,
+            "rank": 7
+          },
+          {
+            "id": "RODO_001",
+            "score": 0.029739,
+            "rank": 8
+          },
+          {
+            "id": "MOP_001",
+            "score": 0.029313,
+            "rank": 9
+          },
+          {
+            "id": "MOP_004",
+            "score": 0.026272,
+            "rank": 10
+          }
+        ]
+      },
+      {
+        "query": "industrial",
+        "query_normalized": "industrial",
+        "results": [
+          {
+            "id": "MOTOR_001",
+            "score": 0.524625,
+            "rank": 1
+          },
+          {
+            "id": "VARREDEIRA_002",
+            "score": 0.487669,
+            "rank": 2
+          },
+          {
+            "id": "ASPIRADOR_002",
+            "score": 0.471634,
+            "rank": 3
+          },
+          {
+            "id": "ASPIRADOR_004",
+            "score": 0.469043,
+            "rank": 4
+          },
+          {
+            "id": "LAVADORA_004",
+            "score": 0.466114,
+            "rank": 5
+          },
+          {
+            "id": "MAQUINA_LAVAR_001",
+            "score": 0.459985,
+            "rank": 6
+          },
+          {
+            "id": "HIDRO_003",
+            "score": 0.454017,
+            "rank": 7
+          },
+          {
+            "id": "ENCERADEIRA_002",
+            "score": 0.443679,
+            "rank": 8
+          },
+          {
+            "id": "DISCO_002",
+            "score": 0.025928,
+            "rank": 9
+          },
+          {
+            "id": "VARREDEIRA_003",
+            "score": 0.012166,
+            "rank": 10
+          }
+        ]
+      }
+    ]
+  }
+}

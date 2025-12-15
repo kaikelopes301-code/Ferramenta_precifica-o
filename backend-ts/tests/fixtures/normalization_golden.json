@@ -1,0 +1,750 @@
+[
+  {
+    "case_name": "simple_bomba",
+    "input": "bomba",
+    "output": {
+      "normalized": "bomba",
+      "consonant_key": "bmb_",
+      "expansion_variants": [],
+      "strip_accents": "bomba",
+      "normalize_text": "bomba",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "simple_aspirador",
+    "input": "aspirador",
+    "output": {
+      "normalized": "aspirador",
+      "consonant_key": "sprdr_",
+      "expansion_variants": [],
+      "strip_accents": "aspirador",
+      "normalize_text": "aspirador",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "simple_motor",
+    "input": "motor",
+    "output": {
+      "normalized": "motor",
+      "consonant_key": "mtr_",
+      "expansion_variants": [],
+      "strip_accents": "motor",
+      "normalize_text": "motor",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "aspirador_5hp_220v",
+    "input": "ASPIRADOR 5HP 220V INOX 30L",
+    "output": {
+      "normalized": "aspirador 5hp 220v inox 30l",
+      "consonant_key": "sprdrhpvnxl_522030",
+      "expansion_variants": [],
+      "strip_accents": "ASPIRADOR 5HP 220V INOX 30L",
+      "normalize_text": "aspirador 5hp 220v inox 30l",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 30.0,
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "lavadora_3000w",
+    "input": "Lavadora 220V 3.000W",
+    "output": {
+      "normalized": "lavadora 220v 3 000w",
+      "consonant_key": "lvdrvw_2203000",
+      "expansion_variants": [],
+      "strip_accents": "Lavadora 220V 3.000W",
+      "normalize_text": "lavadora 220v 3.000w",
+      "attributes_simple": {},
+      "attributes_full": {
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "bomba_centrifuga",
+    "input": "BOMBA CENTRÍFUGA 1,5HP 220V 50L/MIN",
+    "output": {
+      "normalized": "bomba centrifuga 1 5hp 220v 50l min",
+      "consonant_key": "bmbcntrfghpv_1522050",
+      "expansion_variants": [],
+      "strip_accents": "BOMBA CENTRIFUGA 1,5HP 220V 50L/MIN",
+      "normalize_text": "bomba centr fuga 1 5hp 220v 50l min",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 50.0,
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "motor_7cv",
+    "input": "Motor Elétrico 7CV 380V",
+    "output": {
+      "normalized": "motor eletrico 7hp 380v",
+      "consonant_key": "mtrltrchpv_7380",
+      "expansion_variants": [],
+      "strip_accents": "Motor Eletrico 7CV 380V",
+      "normalize_text": "motor el trico 7cv 380v",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "compressor_100psi",
+    "input": "Compressor de ar 100PSI 50L",
+    "output": {
+      "normalized": "compressor de ar 100psi 50l",
+      "consonant_key": "cmprssrdrpsl_10050",
+      "expansion_variants": [],
+      "strip_accents": "Compressor de ar 100PSI 50L",
+      "normalize_text": "compressor de ar 100psi 50l",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 50.0,
+        "pressure_bar": 6.89476
+      }
+    }
+  },
+  {
+    "case_name": "abrev_asp",
+    "input": "asp",
+    "output": {
+      "normalized": "aspirador",
+      "consonant_key": "sprdr_",
+      "expansion_variants": [],
+      "strip_accents": "asp",
+      "normalize_text": "asp",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "abrev_apa",
+    "input": "apa",
+    "output": {
+      "normalized": "aspirador de po e agua",
+      "consonant_key": "sprdrdpg_",
+      "expansion_variants": [],
+      "strip_accents": "apa",
+      "normalize_text": "apa",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "abrev_mot",
+    "input": "mot",
+    "output": {
+      "normalized": "mot",
+      "consonant_key": "mt_",
+      "expansion_variants": [],
+      "strip_accents": "mot",
+      "normalize_text": "mot",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "abrev_bld",
+    "input": "bld",
+    "output": {
+      "normalized": "balde",
+      "consonant_key": "bld_",
+      "expansion_variants": [],
+      "strip_accents": "bld",
+      "normalize_text": "bld",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "abrev_vassoura",
+    "input": "vassouras",
+    "output": {
+      "normalized": "vassoura nylon vassoura piacava vassoura feiticeira vassoura de teto vassourao",
+      "consonant_key": "vssrnylnvssr_",
+      "expansion_variants": [
+        "vassoura nylon",
+        "vassoura piacava",
+        "vassoura feiticeira",
+        "vassoura de teto",
+        "vassourao"
+      ],
+      "strip_accents": "vassouras",
+      "normalize_text": "vassouras",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "multi_attr_1",
+    "input": "Aspirador Industrial 80L 2400W 220V",
+    "output": {
+      "normalized": "aspirador industrial 80l 2400w 220v",
+      "consonant_key": "sprdrndstrll_802400220",
+      "expansion_variants": [],
+      "strip_accents": "Aspirador Industrial 80L 2400W 220V",
+      "normalize_text": "aspirador industrial 80l 2400w 220v",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 80.0,
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "multi_attr_2",
+    "input": "Lavadora de Piso 220V 1500RPM 30L",
+    "output": {
+      "normalized": "lavadora de piso 220v 1500rpm 30l",
+      "consonant_key": "lvdrdpsvrpml_220150030",
+      "expansion_variants": [],
+      "strip_accents": "Lavadora de Piso 220V 1500RPM 30L",
+      "normalize_text": "lavadora de piso 220v 1500rpm 30l",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 30.0,
+        "voltage_v": 220,
+        "rpm": 1500.0
+      }
+    }
+  },
+  {
+    "case_name": "multi_attr_3",
+    "input": "Hidrojateadora 150BAR 2000W Bivolt",
+    "output": {
+      "normalized": "lavadora alta pressao 150bar 2000w bivolt",
+      "consonant_key": "lvdrltprssbr_1502000",
+      "expansion_variants": [],
+      "strip_accents": "Hidrojateadora 150BAR 2000W Bivolt",
+      "normalize_text": "hidrojateadora 150bar 2000w bivolt",
+      "attributes_simple": {
+        "voltagem": "bivolt"
+      },
+      "attributes_full": {
+        "pressure_bar": 150.0,
+        "voltage_v": "bivolt"
+      }
+    }
+  },
+  {
+    "case_name": "empty_string",
+    "input": "",
+    "output": {
+      "normalized": "",
+      "consonant_key": "_",
+      "expansion_variants": [],
+      "strip_accents": "",
+      "normalize_text": "",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "only_numbers",
+    "input": "12345",
+    "output": {
+      "normalized": "12345",
+      "consonant_key": "_12345",
+      "expansion_variants": [],
+      "strip_accents": "12345",
+      "normalize_text": "12345",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "only_spaces",
+    "input": "   ",
+    "output": {
+      "normalized": "",
+      "consonant_key": "_",
+      "expansion_variants": [],
+      "strip_accents": "   ",
+      "normalize_text": "",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "special_chars",
+    "input": "!@#$%^&*()",
+    "output": {
+      "normalized": "",
+      "consonant_key": "_",
+      "expansion_variants": [],
+      "strip_accents": "!@#$%^&*()",
+      "normalize_text": " ",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "mixed_case",
+    "input": "MOTOR eLéTrIcO 220v",
+    "output": {
+      "normalized": "motor eletrico 220v",
+      "consonant_key": "mtrltrcv_220",
+      "expansion_variants": [],
+      "strip_accents": "MOTOR eLeTrIcO 220v",
+      "normalize_text": "motor el trico 220v",
+      "attributes_simple": {},
+      "attributes_full": {
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "accents_1",
+    "input": "lâmpada elétrica",
+    "output": {
+      "normalized": "lampada eletrica",
+      "consonant_key": "lmpdltrc_",
+      "expansion_variants": [],
+      "strip_accents": "lampada eletrica",
+      "normalize_text": "l mpada el trica",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "accents_2",
+    "input": "ácido peracético",
+    "output": {
+      "normalized": "acido peracetico",
+      "consonant_key": "cdprctc_",
+      "expansion_variants": [],
+      "strip_accents": "acido peracetico",
+      "normalize_text": " cido perac tico",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "accents_3",
+    "input": "manutenção preventiva",
+    "output": {
+      "normalized": "manutencao preventiva",
+      "consonant_key": "mntncprvntv_",
+      "expansion_variants": [],
+      "strip_accents": "manutencao preventiva",
+      "normalize_text": "manuten o preventiva",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "cedilla",
+    "input": "peça de reposição",
+    "output": {
+      "normalized": "peca de reposicao",
+      "consonant_key": "pcdrpsc_",
+      "expansion_variants": [],
+      "strip_accents": "peca de reposicao",
+      "normalize_text": "pe a de reposi o",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "voltage_110",
+    "input": "motor 110v",
+    "output": {
+      "normalized": "motor 110v",
+      "consonant_key": "mtrv_110",
+      "expansion_variants": [],
+      "strip_accents": "motor 110v",
+      "normalize_text": "motor 110v",
+      "attributes_simple": {},
+      "attributes_full": {
+        "voltage_v": 110
+      }
+    }
+  },
+  {
+    "case_name": "voltage_127",
+    "input": "aspirador 127v",
+    "output": {
+      "normalized": "aspirador 127v",
+      "consonant_key": "sprdrv_127",
+      "expansion_variants": [],
+      "strip_accents": "aspirador 127v",
+      "normalize_text": "aspirador 127v",
+      "attributes_simple": {},
+      "attributes_full": {
+        "voltage_v": 127
+      }
+    }
+  },
+  {
+    "case_name": "voltage_220",
+    "input": "lavadora 220v",
+    "output": {
+      "normalized": "lavadora 220v",
+      "consonant_key": "lvdrv_220",
+      "expansion_variants": [],
+      "strip_accents": "lavadora 220v",
+      "normalize_text": "lavadora 220v",
+      "attributes_simple": {},
+      "attributes_full": {
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "voltage_bivolt",
+    "input": "compressor bivolt",
+    "output": {
+      "normalized": "compressor bivolt",
+      "consonant_key": "cmprssrbvlt_",
+      "expansion_variants": [],
+      "strip_accents": "compressor bivolt",
+      "normalize_text": "compressor bivolt",
+      "attributes_simple": {
+        "voltagem": "bivolt"
+      },
+      "attributes_full": {
+        "voltage_v": "bivolt"
+      }
+    }
+  },
+  {
+    "case_name": "unit_hp",
+    "input": "motor 5hp",
+    "output": {
+      "normalized": "motor 5hp",
+      "consonant_key": "mtrhp_5",
+      "expansion_variants": [],
+      "strip_accents": "motor 5hp",
+      "normalize_text": "motor 5hp",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "unit_cv",
+    "input": "motor 5cv",
+    "output": {
+      "normalized": "motor 5hp",
+      "consonant_key": "mtrhp_5",
+      "expansion_variants": [],
+      "strip_accents": "motor 5cv",
+      "normalize_text": "motor 5cv",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "unit_kw",
+    "input": "motor 3.7kw",
+    "output": {
+      "normalized": "motor 3 7kw",
+      "consonant_key": "mtrkw_37",
+      "expansion_variants": [],
+      "strip_accents": "motor 3.7kw",
+      "normalize_text": "motor 3.7kw",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "unit_kva",
+    "input": "gerador 5kva",
+    "output": {
+      "normalized": "gerador 5kva",
+      "consonant_key": "grdrkv_5",
+      "expansion_variants": [],
+      "strip_accents": "gerador 5kva",
+      "normalize_text": "gerador 5kva",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "unit_rpm",
+    "input": "motor 3000rpm",
+    "output": {
+      "normalized": "motor 3000rpm",
+      "consonant_key": "mtrrpm_3000",
+      "expansion_variants": [],
+      "strip_accents": "motor 3000rpm",
+      "normalize_text": "motor 3000rpm",
+      "attributes_simple": {},
+      "attributes_full": {
+        "rpm": 3000.0
+      }
+    }
+  },
+  {
+    "case_name": "unit_liter",
+    "input": "tanque 50 litros",
+    "output": {
+      "normalized": "tanque 50 litro",
+      "consonant_key": "tnqltr_50",
+      "expansion_variants": [],
+      "strip_accents": "tanque 50 litros",
+      "normalize_text": "tanque 50 litros",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 50.0
+      }
+    }
+  },
+  {
+    "case_name": "unit_bar",
+    "input": "compressor 8bar",
+    "output": {
+      "normalized": "compressor 8bar",
+      "consonant_key": "cmprssrbr_8",
+      "expansion_variants": [],
+      "strip_accents": "compressor 8bar",
+      "normalize_text": "compressor 8bar",
+      "attributes_simple": {},
+      "attributes_full": {
+        "pressure_bar": 8.0
+      }
+    }
+  },
+  {
+    "case_name": "unit_psi",
+    "input": "compressor 120psi",
+    "output": {
+      "normalized": "compressor 120psi",
+      "consonant_key": "cmprssrps_120",
+      "expansion_variants": [],
+      "strip_accents": "compressor 120psi",
+      "normalize_text": "compressor 120psi",
+      "attributes_simple": {},
+      "attributes_full": {
+        "pressure_bar": 8.273712
+      }
+    }
+  },
+  {
+    "case_name": "unit_mm",
+    "input": "disco 180mm",
+    "output": {
+      "normalized": "disco 180mm",
+      "consonant_key": "dscmm_180",
+      "expansion_variants": [],
+      "strip_accents": "disco 180mm",
+      "normalize_text": "disco 180mm",
+      "attributes_simple": {
+        "tamanho_m": 0.18
+      },
+      "attributes_full": {
+        "diameter_mm": 180.0
+      }
+    }
+  },
+  {
+    "case_name": "unit_inches",
+    "input": "mangueira 1/2 inch",
+    "output": {
+      "normalized": "mangueira 1 2 pol",
+      "consonant_key": "mngrpl_12",
+      "expansion_variants": [],
+      "strip_accents": "mangueira 1/2 inch",
+      "normalize_text": "mangueira 1 2 inch",
+      "attributes_simple": {},
+      "attributes_full": {
+        "diameter_mm": 50.8
+      }
+    }
+  },
+  {
+    "case_name": "complex_1",
+    "input": "Enceradeira Industrial 510mm 1.5HP 220V",
+    "output": {
+      "normalized": "enceradeira industrial 510mm 1 5hp 220v",
+      "consonant_key": "ncrdrndstrlm_51015220",
+      "expansion_variants": [],
+      "strip_accents": "Enceradeira Industrial 510mm 1.5HP 220V",
+      "normalize_text": "enceradeira industrial 510mm 1.5hp 220v",
+      "attributes_simple": {
+        "tamanho_m": 0.51
+      },
+      "attributes_full": {
+        "diameter_mm": 510.0,
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "complex_2",
+    "input": "Extratora de Carpete 35L 1400W 220V",
+    "output": {
+      "normalized": "extratora de carpete 35l 1400w 220v",
+      "consonant_key": "xtrtrdcrptlw_351400220",
+      "expansion_variants": [],
+      "strip_accents": "Extratora de Carpete 35L 1400W 220V",
+      "normalize_text": "extratora de carpete 35l 1400w 220v",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 35.0,
+        "voltage_v": 220
+      }
+    }
+  },
+  {
+    "case_name": "complex_3",
+    "input": "Varredeira Manual 800mm com Coletor 40L",
+    "output": {
+      "normalized": "varredeira manual 800mm com coletor 40l",
+      "consonant_key": "vrrdrmnlmmcm_80040",
+      "expansion_variants": [],
+      "strip_accents": "Varredeira Manual 800mm com Coletor 40L",
+      "normalize_text": "varredeira manual 800mm com coletor 40l",
+      "attributes_simple": {
+        "tamanho_m": 0.8
+      },
+      "attributes_full": {
+        "capacity_l": 40.0,
+        "diameter_mm": 800.0
+      }
+    }
+  },
+  {
+    "case_name": "synonym_hidrojat",
+    "input": "hidrojat",
+    "output": {
+      "normalized": "hidrojateadora de alta pressao",
+      "consonant_key": "hdrjtdrdltpr_",
+      "expansion_variants": [],
+      "strip_accents": "hidrojat",
+      "normalize_text": "hidrojat",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "synonym_scrubber",
+    "input": "scrubber",
+    "output": {
+      "normalized": "lavadora de piso",
+      "consonant_key": "lvdrdps_",
+      "expansion_variants": [],
+      "strip_accents": "scrubber",
+      "normalize_text": "scrubber",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "synonym_vacuum",
+    "input": "vacuum cleaner",
+    "output": {
+      "normalized": "aspirador cleaner",
+      "consonant_key": "sprdrclnr_",
+      "expansion_variants": [],
+      "strip_accents": "vacuum cleaner",
+      "normalize_text": "vacuum cleaner",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "synonym_polisher",
+    "input": "floor polisher",
+    "output": {
+      "normalized": "floor enceradeira",
+      "consonant_key": "flrncrdr_",
+      "expansion_variants": [],
+      "strip_accents": "floor polisher",
+      "normalize_text": "floor polisher",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "decimal_comma",
+    "input": "motor 1,5hp",
+    "output": {
+      "normalized": "motor 1 5hp",
+      "consonant_key": "mtrhp_15",
+      "expansion_variants": [],
+      "strip_accents": "motor 1,5hp",
+      "normalize_text": "motor 1 5hp",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "decimal_dot",
+    "input": "motor 1.5hp",
+    "output": {
+      "normalized": "motor 1 5hp",
+      "consonant_key": "mtrhp_15",
+      "expansion_variants": [],
+      "strip_accents": "motor 1.5hp",
+      "normalize_text": "motor 1.5hp",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "decimal_thousand",
+    "input": "motor 3.000w",
+    "output": {
+      "normalized": "motor 3 000w",
+      "consonant_key": "mtrw_3000",
+      "expansion_variants": [],
+      "strip_accents": "motor 3.000w",
+      "normalize_text": "motor 3.000w",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "parentheses",
+    "input": "motor (elétrico) 5hp",
+    "output": {
+      "normalized": "motor eletrico 5hp",
+      "consonant_key": "mtrltrchp_5",
+      "expansion_variants": [],
+      "strip_accents": "motor (eletrico) 5hp",
+      "normalize_text": "motor el trico 5hp",
+      "attributes_simple": {},
+      "attributes_full": {}
+    }
+  },
+  {
+    "case_name": "brackets",
+    "input": "aspirador [industrial] 80l",
+    "output": {
+      "normalized": "aspirador industrial 80l",
+      "consonant_key": "sprdrndstrll_80",
+      "expansion_variants": [],
+      "strip_accents": "aspirador [industrial] 80l",
+      "normalize_text": "aspirador industrial 80l",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 80.0
+      }
+    }
+  },
+  {
+    "case_name": "slashes",
+    "input": "lavadora 50l/min",
+    "output": {
+      "normalized": "lavadora 50l min",
+      "consonant_key": "lvdrlmn_50",
+      "expansion_variants": [],
+      "strip_accents": "lavadora 50l/min",
+      "normalize_text": "lavadora 50l min",
+      "attributes_simple": {},
+      "attributes_full": {
+        "capacity_l": 50.0
+      }
+    }
+  }
+]

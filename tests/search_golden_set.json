@@ -1,0 +1,128 @@
+[
+  {
+    "id": "Q01",
+    "descricao": "lavadora de piso",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca genérica por lavadora de piso"
+  },
+  {
+    "id": "Q02",
+    "descricao": "aspirador de pó industrial",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca genérica por aspirador industrial"
+  },
+  {
+    "id": "Q03",
+    "descricao": "enceradeira profissional",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca genérica por enceradeira"
+  },
+  {
+    "id": "Q04",
+    "descricao": "mop água",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca por mop para limpeza úmida"
+  },
+  {
+    "id": "Q05",
+    "descricao": "carrinho de limpeza",
+    "tipo": "geral",
+    "esperados": [],
+    "obs": "busca por carrinho funcional"
+  },
+  {
+    "id": "Q06",
+    "descricao": "lavadora de piso 50L 220V",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica com especificações de capacidade e tensão"
+  },
+  {
+    "id": "Q07",
+    "descricao": "aspirador inox 1200w",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica com material e potência"
+  },
+  {
+    "id": "Q08",
+    "descricao": "enceradeira 350mm bivolt",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica com diâmetro e tipo de tensão"
+  },
+  {
+    "id": "Q09",
+    "descricao": "lavadora automática tripulada",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica por lavadora com operador"
+  },
+  {
+    "id": "Q10",
+    "descricao": "aspirador pó e água 62 litros",
+    "tipo": "tecnico",
+    "esperados": [],
+    "obs": "busca técnica por aspirador dupla função com capacidade"
+  },
+  {
+    "id": "Q11",
+    "descricao": "lavdora de piso",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: lavdora (faltando 'a')"
+  },
+  {
+    "id": "Q12",
+    "descricao": "asprador industrial",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: asprador (faltando 'i')"
+  },
+  {
+    "id": "Q13",
+    "descricao": "enceradiera profissional",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: enceradiera (troca de 'i' e 'e')"
+  },
+  {
+    "id": "Q14",
+    "descricao": "carrino de limpeza",
+    "tipo": "typo",
+    "esperados": [],
+    "obs": "typo proposital: carrino (faltando 'h')"
+  },
+  {
+    "id": "Q15",
+    "descricao": "esfregão úmido",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'mop água'"
+  },
+  {
+    "id": "Q16",
+    "descricao": "lustrador de piso",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'enceradeira'"
+  },
+  {
+    "id": "Q17",
+    "descricao": "máquina de lavar piso",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'lavadora de piso'"
+  },
+  {
+    "id": "Q18",
+    "descricao": "vácuo industrial",
+    "tipo": "sinonimo",
+    "esperados": [],
+    "obs": "sinônimo de 'aspirador de pó industrial'"
+  }
+]

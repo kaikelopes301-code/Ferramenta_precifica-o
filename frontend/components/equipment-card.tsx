@@ -6,6 +6,7 @@ import { Wrench, DollarSign, Calendar, TrendingUp, CheckCircle2, ShoppingCart, I
 import type { Equipment } from "@/app/page"
 import { useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
+import { MetricsTooltip } from "@/components/metrics-tooltip"
 
 interface EquipmentCardProps {
   equipment: Equipment
@@ -19,39 +20,80 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
   const [isAdding, setIsAdding] = useState(false)
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
+  // TODO: PARTE B - INSTRUMENTAÇÃO DE CONFIANÇA (DIA 1)
+  // Objetivo: descobrir como o frontend está interpretando o valor de confiança.
+  // ATUALIZAÇÃO V4.0: Backend agora envia confidenceItem como 0..1
+  
+  const rawConfidenceScore = equipment.confianca; // valor recebido do backend (0..1)
+  
+  // Log de debug (somente em dev)
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[CONFIDENCE_UI_DEBUG]", {
+      id: equipment.ranking,
+      nome: equipment.sugeridos?.substring(0, 50) ?? "",
+      rawConfidenceScore,
+      usingV4: rawConfidenceScore !== null && rawConfidenceScore !== undefined,
+      expectedRange: "0-100 (percentual)",
+      confidenceLevel: "calculado abaixo com getConfidenceConfig",
+    });
+  }
+
   const getConfidenceConfig = (confidence: number | null) => {
+    // Backend v4.0+ envia valores entre 0..1 (probabilidade)
     if (!confidence) return { 
       color: "text-muted-foreground", 
       bg: "bg-muted/10",
       label: "N/A",
-      icon: "⚪"
+      icon: "⚪",
+      percent: 0
     }
-    if (confidence >= 90) return { 
+    
+    const confidencePercent = confidence * 100
+    
+    if (confidencePercent >= 80) return { 
       color: "text-emerald-600 dark:text-emerald-400", 
       bg: "bg-emerald-500/10",
       label: "Excelente",
-      icon: "🟢"
+      icon: "🟢",
+      percent: confidencePercent
     }
-    if (confidence >= 75) return { 
+    if (confidencePercent >= 75) return { 
+      color: "text-green-600 dark:text-green-400", 
+      bg: "bg-green-500/10",
+      label: "Muito Boa",
+      icon: "🟢",
+      percent: confidencePercent
+    }
+    if (confidencePercent >= 50) return { 
       color: "text-yellow-600 dark:text-yellow-400", 
       bg: "bg-yellow-500/10",
       label: "Boa",
-      icon: "🟡"
+      icon: "🟡",
+      percent: confidencePercent
     }
     return { 
       color: "text-orange-600 dark:text-orange-400", 
       bg: "bg-orange-500/10",
-      label: "Moderada",
-      icon: "🟠"
+      label: "Ruim",
+      icon: "🟠",
+      percent: confidencePercent
     }
   }
 
   const getMaintenanceConfig = (maintenance: number | null) => {
-    if (!maintenance) return {
+    if (maintenance === null || maintenance === undefined) return {
       bg: "bg-muted/20 text-muted-foreground border-muted/30",
       label: "N/A",
       icon: "⚪",
       description: "Informação não disponível"
+    }
+    if (maintenance === 0) {
+      return {
+        bg: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/30",
+        label: "Nenhuma",
+        icon: "✨",
+        description: "Sem manutenção"
+      }
     }
     if (maintenance <= 20) {
       return {
@@ -89,8 +131,53 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
     return currencyBRL.format(Number(price))
   }
 
+  // Helper para extrair valores display (v4.0 com fallback para v3.0)
+  const getDisplayPrice = () => {
+    if (equipment.metrics?.valorUnitario) {
+      return equipment.metrics.valorUnitario.display
+    }
+    return equipment.valor_unitario
+  }
+
+  const getDisplayLifespan = () => {
+    if (equipment.metrics?.vidaUtilMeses) {
+      return equipment.metrics.vidaUtilMeses.display
+    }
+    return equipment.vida_util_meses
+  }
+
+  const getDisplayMaintenance = () => {
+    if (equipment.metrics?.manutencao) {
+      // Backend envia como fração (0..1), converter para %
+      return equipment.metrics.manutencao.display * 100
+    }
+    return equipment.manutencao_percent
+  }
+
   const confidenceConfig = getConfidenceConfig(equipment.confianca)
-  const maintenanceConfig = getMaintenanceConfig(equipment.manutencao_percent)
+  const maintenanceConfig = getMaintenanceConfig(getDisplayMaintenance())
+
+  // TODO: PARTE C - INSTRUMENTAÇÃO DE TÍTULO/DESCRIÇÃO (DIA 1)
+  // Objetivo: descobrir como o título está sendo montado e se vem duplicado do backend ou é duplicado no frontend.
+  // Problema observado:
+  //   - "vassoura feiticeira vassoura magica Vassoura Mágica (/)"
+  //   - "radio ht digital radio ht digital RADIO HT DIGITAL (/)"
+  // O campo 'sugeridos' vem do backend, então a duplicação provavelmente é lá.
+  // Mas vamos confirmar com logs.
+  
+  const title = equipment.sugeridos;
+  
+  // Log de debug (somente em dev)
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[TITLE_UI_DEBUG]", {
+      id: equipment.ranking,
+      title,
+      // O backend TypeScript pode enviar outros campos. Vamos verificar se existem:
+      sugeridos: equipment.sugeridos,
+      // Nota: A interface Equipment só tem 'sugeridos' como campo de texto principal.
+      // Se a duplicação acontece, é porque 'sugeridos' já vem duplicado do backend.
+    });
+  }
 
   const handleAdd = async () => {
     setIsAdding(true)
@@ -127,7 +214,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                 <TrendingUp className="h-3.5 w-3.5 text-primary" />
                 <span className="text-xs font-black text-primary">#{equipment.ranking}</span>
               </div>
-              {equipment.confianca && equipment.confianca >= 90 && (
+              {equipment.confianca && equipment.confianca >= 0.90 && (
                 <Badge variant="outline" className="rounded-full text-[10px] px-2.5 py-0.5 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border-emerald-500/40 font-bold">
                   Top
                 </Badge>
@@ -136,7 +223,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
 
             {/* Nome do equipamento */}
             <h3 className={`${dense ? 'text-base' : 'text-lg'} font-black leading-tight break-words text-foreground group-hover:text-primary transition-colors`}>
-              {equipment.sugeridos}
+              {title}
             </h3>
 
             {/* Marca */}
@@ -175,10 +262,20 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
               <DollarSign className={`${dense ? 'h-6 w-6' : 'h-8 w-8'} text-primary-foreground`} />
             </div>
             <div className="flex-1">
-              <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest mb-1.5">Valor Unitário</p>
+              <div className="flex items-center gap-2 mb-1.5">
+                <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Valor Unitário</p>
+                {equipment.metrics?.valorUnitario && (
+                  <Info className="h-3 w-3 text-primary/60 cursor-help" title="Hover para ver estatísticas" />
+                )}
+              </div>
               <p className={`${dense ? 'text-xl' : 'text-2xl'} font-black text-primary leading-none`}>
-                {formatPrice(equipment.valor_unitario)}
+                {formatPrice(getDisplayPrice())}
               </p>
+              {equipment.metrics?.valorUnitario && equipment.metrics.valorUnitario.n > 1 && (
+                <p className="text-[9px] text-muted-foreground mt-1">
+                  baseado em {equipment.metrics.valorUnitario.n} {equipment.metrics.valorUnitario.n === 1 ? 'cotação' : 'cotações'}
+                </p>
+              )}
             </div>
           </div>
           {/* Brilho decorativo */}
@@ -194,13 +291,21 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                 <Calendar className={`${dense ? 'h-3.5 w-3.5' : 'h-4 w-4'} text-blue-600 dark:text-blue-400`} />
               </div>
               <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Vida útil</span>
+              {equipment.metrics?.vidaUtilMeses && (
+                <Info className="h-2.5 w-2.5 text-blue-500/60 ml-auto cursor-help" title="Hover para ver estatísticas" />
+              )}
             </div>
             <p className={`${dense ? 'text-lg' : 'text-xl'} font-bold text-foreground leading-tight`}>
-              {equipment.vida_util_meses ? `${equipment.vida_util_meses}m` : "N/A"}
+              {getDisplayLifespan() ? `${getDisplayLifespan()}m` : "N/A"}
             </p>
             <p className="text-[10px] text-muted-foreground mt-1.5 leading-snug">
-              {equipment.vida_util_meses ? 'Durabilidade estimada' : 'Não informado'}
+              {getDisplayLifespan() ? (equipment.metrics?.vidaUtilMeses ? `${equipment.metrics.vidaUtilMeses.n} amostras` : 'Durabilidade estimada') : 'Não informado'}
             </p>
+            {equipment.metrics?.vidaUtilMeses && equipment.metrics.vidaUtilMeses.n < 3 && (
+              <Badge variant="outline" className="mt-2 text-[9px] px-2 py-0.5 bg-yellow-500/15 text-yellow-700 dark:text-yellow-400 border-yellow-500/30">
+                ⚠️ Poucas amostras
+              </Badge>
+            )}
           </div>
 
           {/* Confiança */}
@@ -217,7 +322,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
             </div>
             <div className="flex items-baseline gap-1.5">
               <p className={`${dense ? 'text-lg' : 'text-xl'} font-bold ${confidenceConfig.color} leading-tight`}>
-                {equipment.confianca ? `${equipment.confianca}%` : "N/A"}
+                {equipment.confianca ? `${Math.round(confidenceConfig.percent)}%` : "N/A"}
               </p>
               <span className="text-xs">{confidenceConfig.icon}</span>
             </div>
@@ -296,31 +401,64 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                   </div>
 
                   <div className="space-y-3">
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-primary/5 to-transparent border border-primary/20">
-                      <div className="flex items-center gap-2">
-                        <DollarSign className="h-4 w-4 text-primary" />
-                        <span className="text-sm font-medium">Valor Unitário</span>
-                      </div>
-                      <span className="text-sm font-semibold">
-                        {formatPrice(equipment.valor_unitario)}
-                      </span>
+                    <div className="p-3 rounded-xl bg-gradient-to-r from-primary/5 to-transparent border border-primary/20">
+                      <MetricsTooltip
+                        label="Valor Unitário"
+                        displayValue={formatPrice(getDisplayPrice())}
+                        metrics={equipment.metrics?.valorUnitario}
+                        unit="BRL"
+                        icon={<DollarSign className="h-4 w-4 text-primary" />}
+                      />
                     </div>
                   
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-blue-500/5 to-transparent border border-blue-500/20">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                        <span className="text-sm font-medium">Vida Útil</span>
-                      </div>
-                      <span className="text-sm font-semibold">{equipment.vida_util_meses ? `${equipment.vida_util_meses} meses` : 'N/A'}</span>
+                    <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500/5 to-transparent border border-blue-500/20">
+                      <MetricsTooltip
+                        label="Vida Útil"
+                        displayValue={getDisplayLifespan() ? `${getDisplayLifespan()} meses` : 'N/A'}
+                        metrics={equipment.metrics?.vidaUtilMeses}
+                        unit=" meses"
+                        icon={<Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />}
+                      />
                     </div>
-                    <div className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-orange-500/5 to-transparent border border-orange-500/20">
-                      <div className="flex items-center gap-2">
-                        <Wrench className="h-4 w-4 text-orange-600 dark:text-orange-400" />
-                        <span className="text-sm font-medium">Manutenção</span>
-                      </div>
-                      <span className="text-sm font-semibold">{equipment.manutencao_percent != null ? `${equipment.manutencao_percent}%` : 'N/A'}</span>
+                    
+                    <div className="p-3 rounded-xl bg-gradient-to-r from-orange-500/5 to-transparent border border-orange-500/20">
+                      <MetricsTooltip
+                        label="Manutenção"
+                        displayValue={getDisplayMaintenance() != null ? `${Math.round(getDisplayMaintenance()!)}%` : 'N/A'}
+                        metrics={equipment.metrics?.manutencao}
+                        unit="%"
+                        icon={<Wrench className="h-4 w-4 text-orange-600 dark:text-orange-400" />}
+                      />
                     </div>
-                    {/* Marca removida deste modal conforme solicitação */}
+                    
+                    {equipment.sources && equipment.sources.nLinhas > 0 && (
+                      <div className="p-3 rounded-xl bg-muted/30 border border-border/50">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-2 text-xs font-semibold text-muted-foreground">
+                            <Info className="h-3.5 w-3.5" />
+                            <span>Rastreabilidade</span>
+                          </div>
+                          <div className="grid grid-cols-2 gap-2 text-[11px]">
+                            <div>
+                              <span className="text-muted-foreground">Amostras:</span>
+                              <span className="ml-1 font-bold text-foreground">{equipment.sources.nLinhas}</span>
+                            </div>
+                            {equipment.sources.fornecedores && equipment.sources.fornecedores.length > 0 && (
+                              <div>
+                                <span className="text-muted-foreground">Fornecedores:</span>
+                                <span className="ml-1 font-bold text-foreground">{equipment.sources.fornecedores.length}</span>
+                              </div>
+                            )}
+                          </div>
+                          {equipment.sources.fornecedores && equipment.sources.fornecedores.length > 0 && (
+                            <div className="text-[10px] text-muted-foreground">
+                              {equipment.sources.fornecedores.slice(0, 3).join(', ')}
+                              {equipment.sources.fornecedores.length > 3 && ` +${equipment.sources.fornecedores.length - 3} outros`}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )}
                   </div>    
 
                   {/* Removido link externo: manter experiência 100% na mesma página */}

@@ -33,15 +33,15 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
   
-  // API Proxy
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/backend/:path*',
-  //       destination: 'http://localhost:8000/:path*',
-  //     },
-  //   ];
-  // },
+  // API Proxy para desenvolvimento
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://localhost:4000/api/:path*',
+      },
+    ];
+  },
   
   // Compiler optimizations
   compiler: {

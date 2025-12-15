@@ -1,0 +1,36 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test coverage
+coverage/
+
+# Temp files
+*.tmp
+*.temp
+
+# Local data (SQLite + caches)
+data/app.db
+data/*.db
+data/*.sqlite
+data/*.sqlite3
+data/*.sqlite3-*
+data/cache/

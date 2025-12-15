@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, FileText, DollarSign, Calendar, Wrench, Building2 } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
+import { API_BASE_URL } from "@/lib/api"
 import Image from "next/image"
 
 interface DetailItem {
@@ -22,8 +23,6 @@ interface DetailResponse {
   items: DetailItem[]
   total: number
 }
-
-const API_BASE_URL = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:8000'
 
 export default function DetailsPage() {
   const searchParams = useSearchParams()
@@ -46,8 +45,8 @@ export default function DetailsPage() {
     if (!grupo) return
 
     try {
-      const response = await fetch(`${API_BASE_URL}/detalhes/${encodeURIComponent(grupo)}`)
-      
+      const response = await fetch(`${API_BASE_URL}/api/detalhes/${encodeURIComponent(grupo)}`)
+
       if (!response.ok) {
         throw new Error('Grupo não encontrado')
       }
@@ -90,7 +89,7 @@ export default function DetailsPage() {
             </Button>
             <ThemeToggle />
           </div>
-          
+
           <div className="text-center">
             <div className="inline-flex items-center gap-3 rounded-full bg-primary/10 px-6 py-3 text-primary">
               <div className="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
@@ -113,7 +112,7 @@ export default function DetailsPage() {
             </Button>
             <ThemeToggle />
           </div>
-          
+
           <div className="text-center">
             <h1 className="text-2xl font-bold text-foreground mb-4">
               Detalhes não encontrados
@@ -150,16 +149,16 @@ export default function DetailsPage() {
               className="transition-all duration-500 hover:scale-105"
             />
           </div>
-          
+
           <h1 className="text-4xl font-bold tracking-tight mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
             Detalhes do Equipamento
           </h1>
-          
+
           <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/20 px-6 py-2 text-primary">
             <FileText className="h-4 w-4" />
             <span className="font-medium">{details.grupo}</span>
           </div>
-          
+
           <p className="text-muted-foreground mt-4">
             {details.total} {details.total === 1 ? 'item encontrado' : 'itens encontrados'}
           </p>
@@ -245,7 +244,7 @@ export default function DetailsPage() {
         {details.items.length > 1 && (
           <div className="mt-12 rounded-2xl border border-border bg-gradient-to-br from-card to-card/80 p-8">
             <h2 className="text-2xl font-bold mb-6 text-center">Estatísticas do Grupo</h2>
-            
+
             <div className="grid gap-6 md:grid-cols-3">
               {/* Average Price */}
               <div className="text-center p-4 rounded-xl bg-primary/10 border border-primary/20">
@@ -260,8 +259,8 @@ export default function DetailsPage() {
                     const prices = details.items
                       .map(item => item.valor_unitario)
                       .filter((price): price is number => price !== undefined)
-                    const avg = prices.length > 0 
-                      ? prices.reduce((sum, price) => sum + price, 0) / prices.length 
+                    const avg = prices.length > 0
+                      ? prices.reduce((sum, price) => sum + price, 0) / prices.length
                       : 0
                     return formatPrice(avg)
                   })()}
@@ -281,7 +280,7 @@ export default function DetailsPage() {
                     const lives = details.items
                       .map(item => item.vida_util_meses)
                       .filter((life): life is number => life !== undefined)
-                    const avg = lives.length > 0 
+                    const avg = lives.length > 0
                       ? Math.round(lives.reduce((sum, life) => sum + life, 0) / lives.length)
                       : 0
                     return avg > 0 ? `${avg} meses` : "N/A"

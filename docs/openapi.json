@@ -1,0 +1,1126 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Precificação de Equipamentos API",
+    "description": "API para precificação de equipamentos médico-hospitalares usando busca semântica",
+    "version": "2.0.0"
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Health Check",
+        "description": "Verifica se a API está funcionando.",
+        "operationId": "health_check_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/debug/semantic-test": {
+      "get": {
+        "tags": [
+          "health"
+        ],
+        "summary": "Debug Semantic Test",
+        "description": "Testa o índice semântico com uma query de exemplo.\n\n⚠️ Endpoint de debug - considerar remover em produção.",
+        "operationId": "debug_semantic_test_debug_semantic_test_get",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "bomba hidraulica",
+              "title": "Q"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/stats": {
+      "get": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Cache Stats",
+        "description": "Retorna estatísticas de todos os caches.",
+        "operationId": "cache_stats_cache_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/cache/clear": {
+      "post": {
+        "tags": [
+          "admin"
+        ],
+        "summary": "Cache Clear",
+        "description": "Limpa todos os caches (LRU, JSON, TF-IDF, atributos).",
+        "operationId": "cache_clear_cache_clear_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/upload": {
+      "post": {
+        "tags": [
+          "data"
+        ],
+        "summary": "Upload Excel",
+        "description": "Faz upload de uma planilha Excel para uso na busca.",
+        "operationId": "upload_excel_upload_post",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_upload_excel_upload_post"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/status": {
+      "get": {
+        "tags": [
+          "data"
+        ],
+        "summary": "Data Status",
+        "description": "Retorna status dos dados carregados.",
+        "operationId": "data_status_data_status_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buscar": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Buscar",
+        "description": "Busca TF-IDF simples (legado, ainda usado pelo frontend).\n\nPipeline: normalização → TF-IDF → agregação por grupo → formatação",
+        "operationId": "buscar_buscar_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buscar-lote": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Buscar Lote",
+        "description": "Busca TF-IDF em lote (legado, ainda usado pelo frontend).\n\nPipeline: paralelo(TF-IDF por query) → fallback tokens → formatação",
+        "operationId": "buscar_lote_buscar_lote_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buscar-inteligente": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Buscar Inteligente Endpoint",
+        "description": "Busca semântica com reranking e cache.\n\nPipeline: cache → semantic + TF-IDF paralelo → reranking → \n          combinação de scores → agregação → formatação",
+        "operationId": "buscar_inteligente_endpoint_buscar_inteligente_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Query"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/buscar-lote-inteligente": {
+      "post": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Buscar Lote Inteligente Endpoint",
+        "description": "Busca semântica em lote.\n\nPipeline: cache por query → semantic + reranking → formatação",
+        "operationId": "buscar_lote_inteligente_endpoint_buscar_lote_inteligente_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchQuery"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/detalhes/{grupo}": {
+      "get": {
+        "tags": [
+          "search"
+        ],
+        "summary": "Detalhes Grupo",
+        "description": "Retorna detalhes de um grupo de equipamentos.",
+        "operationId": "detalhes_grupo_detalhes__grupo__get",
+        "parameters": [
+          {
+            "name": "grupo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Grupo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/feedback": {
+      "post": {
+        "tags": [
+          "feedback"
+        ],
+        "summary": "Salvar Feedback",
+        "description": "Salva feedback do usuário sobre um resultado de busca.",
+        "operationId": "salvar_feedback_feedback_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeedbackItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/feedback-lote": {
+      "post": {
+        "tags": [
+          "feedback"
+        ],
+        "summary": "Salvar Feedback Lote",
+        "description": "Salva feedback em lote para múltiplos resultados.",
+        "operationId": "salvar_feedback_lote_feedback_lote_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BatchFeedback"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/feedback/stats": {
+      "get": {
+        "tags": [
+          "feedback"
+        ],
+        "summary": "Feedback Stats",
+        "description": "Retorna estatísticas de feedback coletado.",
+        "operationId": "feedback_stats_feedback_stats_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/historico": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get History",
+        "description": "Retorna histórico de buscas do usuário.",
+        "operationId": "get_history_historico_get",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/favoritos": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "List Favorites",
+        "description": "Lista os favoritos do usuário.",
+        "operationId": "list_favorites_favoritos_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add Favorite",
+        "description": "Adiciona um item aos favoritos.",
+        "operationId": "add_favorite_favoritos_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FavoriteItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/favoritos/{fav_id}": {
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Delete Favorite",
+        "description": "Remove um item dos favoritos.",
+        "operationId": "delete_favorite_favoritos__fav_id__delete",
+        "parameters": [
+          {
+            "name": "fav_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Fav Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kit": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "List Kit",
+        "description": "Lista os itens do kit do usuário.",
+        "operationId": "list_kit_kit_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Add To Kit",
+        "description": "Adiciona um item ao kit.",
+        "operationId": "add_to_kit_kit_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/KitItem"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kit/{kit_id}": {
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Remove From Kit",
+        "description": "Remove um item do kit.",
+        "operationId": "remove_from_kit_kit__kit_id__delete",
+        "parameters": [
+          {
+            "name": "kit_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Kit Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kit/orcamento": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Gerar Orcamento",
+        "description": "Gera orçamento a partir do kit do usuário.",
+        "operationId": "gerar_orcamento_kit_orcamento_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/kit/export": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Exportar Kit Excel",
+        "description": "Exporta o kit do usuário em formato Excel (.xlsx).",
+        "operationId": "exportar_kit_excel_kit_export_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/simular-troca": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Simular Troca",
+        "description": "Simula a troca de um equipamento, calculando economia e payback.",
+        "operationId": "simular_troca_simular_troca_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferencias": {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Get Prefs",
+        "description": "Retorna as preferências do usuário.",
+        "operationId": "get_prefs_preferencias_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "/preferencias/context-tags": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Set Context Tags",
+        "description": "Atualiza as tags de contexto do usuário.",
+        "operationId": "set_context_tags_preferencias_context_tags_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BatchFeedback": {
+        "properties": {
+          "items": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "use_tfidf": {
+            "type": "boolean",
+            "title": "Use Tfidf",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "title": "BatchFeedback",
+        "description": "Modelo para feedback em lote."
+      },
+      "BatchQuery": {
+        "properties": {
+          "descricoes": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Descricoes"
+          },
+          "top_k": {
+            "type": "integer",
+            "title": "Top K",
+            "default": 5
+          },
+          "use_tfidf": {
+            "type": "boolean",
+            "title": "Use Tfidf",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "descricoes"
+        ],
+        "title": "BatchQuery",
+        "description": "Modelo para busca em lote."
+      },
+      "Body_upload_excel_upload_post": {
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "title": "File"
+          }
+        },
+        "type": "object",
+        "required": [
+          "file"
+        ],
+        "title": "Body_upload_excel_upload_post"
+      },
+      "FavoriteItem": {
+        "properties": {
+          "item_name": {
+            "type": "string",
+            "title": "Item Name"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "extra": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extra"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_name"
+        ],
+        "title": "FavoriteItem",
+        "description": "Modelo para adicionar item aos favoritos."
+      },
+      "FeedbackItem": {
+        "properties": {
+          "ranking": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ranking"
+          },
+          "sugeridos": {
+            "type": "string",
+            "title": "Sugeridos"
+          },
+          "valor_unitario": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Valor Unitario"
+          },
+          "vida_util_meses": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Vida Util Meses"
+          },
+          "manutencao_percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Manutencao Percent"
+          },
+          "confianca": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Confianca"
+          },
+          "sugestao_incorreta": {
+            "type": "boolean",
+            "title": "Sugestao Incorreta",
+            "default": false
+          },
+          "feedback": {
+            "type": "string",
+            "title": "Feedback",
+            "default": ""
+          },
+          "equipamento_material_revisado": {
+            "type": "string",
+            "title": "Equipamento Material Revisado",
+            "default": ""
+          },
+          "query": {
+            "type": "string",
+            "title": "Query"
+          },
+          "use_tfidf": {
+            "type": "boolean",
+            "title": "Use Tfidf",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "sugeridos",
+          "query"
+        ],
+        "title": "FeedbackItem",
+        "description": "Modelo para feedback individual sobre um resultado."
+      },
+      "HTTPValidationError": {
+        "properties": {
+          "detail": {
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            },
+            "type": "array",
+            "title": "Detail"
+          }
+        },
+        "type": "object",
+        "title": "HTTPValidationError"
+      },
+      "KitItem": {
+        "properties": {
+          "item_name": {
+            "type": "string",
+            "title": "Item Name"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Price"
+          },
+          "qty": {
+            "type": "integer",
+            "title": "Qty",
+            "default": 1
+          },
+          "extra": {
+            "anyOf": [
+              {
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Extra"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_name"
+        ],
+        "title": "KitItem",
+        "description": "Modelo para adicionar item ao kit/orçamento."
+      },
+      "Query": {
+        "properties": {
+          "descricao": {
+            "type": "string",
+            "title": "Descricao"
+          },
+          "top_k": {
+            "type": "integer",
+            "title": "Top K",
+            "default": 5
+          },
+          "min_score": {
+            "type": "number",
+            "title": "Min Score",
+            "default": 0.0
+          },
+          "use_tfidf": {
+            "type": "boolean",
+            "title": "Use Tfidf",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "descricao"
+        ],
+        "title": "Query",
+        "description": "Modelo para busca individual."
+      },
+      "ValidationError": {
+        "properties": {
+          "loc": {
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "type": "array",
+            "title": "Location"
+          },
+          "msg": {
+            "type": "string",
+            "title": "Message"
+          },
+          "type": {
+            "type": "string",
+            "title": "Error Type"
+          }
+        },
+        "type": "object",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "title": "ValidationError"
+      }
+    }
+  }
+}

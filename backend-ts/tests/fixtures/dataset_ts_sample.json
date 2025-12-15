@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "description": "Test fixture for CorpusRepository unit tests",
+    "source": "manual",
+    "exportedAt": "2025-12-06T00:00:00Z",
+    "corpusHash": "test_fixture_hash_12345678",
+    "totalRows": 20,
+    "uniqueDocuments": 20,
+    "targetCols": ["descricao_padronizada"],
+    "groupCol": "descricao_padronizada"
+  },
+  "corpus": [
+    {
+      "id": "DOC_00001",
+      "groupId": "Lavadora De Piso Operação A Pé Alfa A500 50L 220V",
+      "text": "lavadora piso operacao pe alfa a500 50l 220v",
+      "rawText": "Lavadora De Piso Operação A Pé Alfa A500 50L 220V"
+    },
+    {
+      "id": "DOC_00002",
+      "groupId": "Lavadora de piso tripulada grande porte 150L motor 3HP",
+      "text": "lavadora piso tripulada grande porte 150l motor 3hp",
+      "rawText": "Lavadora de piso tripulada grande porte 150L motor 3HP"
+    },
+    {
+      "id": "DOC_00003",
+      "groupId": "Lavadora de piso compacta 30L bivolt automática",
+      "text": "lavadora piso compacta 30l bivolt automatica",
+      "rawText": "Lavadora de piso compacta 30L bivolt automática"
+    },
+    {
+      "id": "DOC_00004",
+      "groupId": "Aspirador de Água e Pó 20L 1400W 220V",
+      "text": "aspirador agua po 20l 1400w 220v",
+      "rawText": "Aspirador de Água e Pó 20L 1400W 220V"
+    },
+    {
+      "id": "DOC_00005",
+      "groupId": "Aspirador de pó e água industrial 80L motor duplo",
+      "text": "aspirador po agua industrial 80l motor duplo",
+      "rawText": "Aspirador de pó e água industrial 80L motor duplo"
+    },
+    {
+      "id": "DOC_00006",
+      "groupId": "Hidrojateadora alta pressão 2000 PSI motor 3HP 220V",
+      "text": "hidrojateadora alta pressao 2000 psi motor 3hp 220v",
+      "rawText": "Hidrojateadora alta pressão 2000 PSI motor 3HP 220V"
+    },
+    {
+      "id": "DOC_00007",
+      "groupId": "Enceradeira linha 200 rpm 350mm bivolt",
+      "text": "enceradeira linha 200 rpm 350mm bivolt",
+      "rawText": "Enceradeira linha 200 rpm 350mm bivolt"
+    },
+    {
+      "id": "DOC_00008",
+      "groupId": "Varredeira manual 36L largura 70cm",
+      "text": "varredeira manual 36l largura 70cm",
+      "rawText": "Varredeira manual 36L largura 70cm"
+    },
+    {
+      "id": "DOC_00009",
+      "groupId": "Extratora de carpete e tapete profissional 25L",
+      "text": "extratora carpete tapete profissional 25l",
+      "rawText": "Extratora de carpete e tapete profissional 25L"
+    },
+    {
+      "id": "DOC_00010",
+      "groupId": "Refil mop plano lite spray microfibra",
+      "text": "refil mop plano lite spray microfibra",
+      "rawText": "Refil mop plano lite spray microfibra"
+    },
+    {
+      "id": "DOC_00011",
+      "groupId": "Balde 4 litros plástico azul",
+      "text": "balde 4 litros plastico azul",
+      "rawText": "Balde 4 litros plástico azul"
+    },
+    {
+      "id": "DOC_00012",
+      "groupId": "Balde espremedor duplo 30L profissional",
+      "text": "balde espremedor duplo 30l profissional",
+      "rawText": "Balde espremedor duplo 30L profissional"
+    },
+    {
+      "id": "DOC_00013",
+      "groupId": "Carrinho funcional completo limpeza profissional",
+      "text": "carrinho funcional completo limpeza profissional",
+      "rawText": "Carrinho funcional completo limpeza profissional"
+    },
+    {
+      "id": "DOC_00014",
+      "groupId": "Vassoura de nylon base 40cm cabo alumínio",
+      "text": "vassoura nylon base 40cm cabo aluminio",
+      "rawText": "Vassoura de nylon base 40cm cabo alumínio"
+    },
+    {
+      "id": "DOC_00015",
+      "groupId": "Disco pad limpeza verde 440mm",
+      "text": "disco pad limpeza verde 440mm",
+      "rawText": "Disco pad limpeza verde 440mm"
+    },
+    {
+      "id": "DOC_00016",
+      "groupId": "CELULAR smartphone com plano de dados",
+      "text": "celular smartphone plano dados",
+      "rawText": "CELULAR smartphone com plano de dados"
+    },
+    {
+      "id": "DOC_00017",
+      "groupId": "NOTEBOOK computador portátil",
+      "text": "notebook computador portatil",
+      "rawText": "NOTEBOOK computador portátil"
+    },
+    {
+      "id": "DOC_00018",
+      "groupId": "Relógio de ponto biométrico",
+      "text": "relogio ponto biometrico",
+      "rawText": "Relógio de ponto biométrico"
+    },
+    {
+      "id": "DOC_00019",
+      "groupId": "Escada de alumínio 8 degraus",
+      "text": "escada aluminio 8 degraus",
+      "rawText": "Escada de alumínio 8 degraus"
+    },
+    {
+      "id": "DOC_00020",
+      "groupId": "Motor 5HP trifásico WEG industrial",
+      "text": "motor 5hp trifasico weg industrial",
+      "rawText": "Motor 5HP trifásico WEG industrial"
+    }
+  ]
+}

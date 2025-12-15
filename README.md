@@ -248,17 +248,17 @@ Query → Verifica cache → [HIT] → Retorna imediato
 - TypeScript
 
 **Backend:**
-- FastAPI (Python)
-- FAISS (busca vetorial)
+- type script
+- busca hibirda que usa: tf-idf, embindings, e b2b.
 - Sentence Transformers
-- Re-ranking com IA
 
 ## 🚦 Como rodar?
 
 ### Backend
 ```bash
-cd backend
-python -m uvicorn src.api.main:app --reload
+cd backend-ts
+npm pip install
+npm run dev
 ```
 
 ### Frontend
@@ -292,19 +292,3 @@ Design moderno e profissional com:
 - Animações suaves
 - Interface responsiva
 - Cards informativos
-
----
-
-# Docker 
-
-
-
-
-
-## Frontend - NEXT.JS
-
-**Compila a imagem**
-`
-
-**Atlas Inovações** • 2025 • Powered by IA ✨
-

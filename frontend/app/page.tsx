@@ -19,12 +19,38 @@ const HorizontalScroll = dynamic(() => import("@/components/horizontal-scroll").
 const CartWidget = dynamic(() => import("@/components/cart-widget").then(m => m.CartWidget), { ssr: false, loading: () => null })
 type CartItem = import("@/components/cart-widget").CartItem
 
+export type NumericMetrics = {
+  display: number
+  mean: number
+  median: number
+  min: number
+  max: number
+  n: number
+  unit?: string
+}
+
+export type EquipmentSources = {
+  fornecedores?: string[]
+  bids?: string[]
+  nLinhas: number
+}
+
 export type Equipment = {
   ranking: number
   sugeridos: string
+  // Campos legacy (v3.0) - mantidos para retrocompatibilidade
   valor_unitario: number | null
   vida_util_meses: number | null
   manutencao_percent: number | null
+  // Campos v4.0 - métricas agregadas
+  metrics?: {
+    valorUnitario?: NumericMetrics
+    vidaUtilMeses?: NumericMetrics
+    manutencao?: NumericMetrics
+  }
+  sources?: EquipmentSources
+  equipmentId?: string
+  title?: string
   confianca: number | null
   link_detalhes: string
   isIncorrect?: boolean
@@ -74,9 +100,9 @@ export default function Home() {
 
   const checkDataStatus = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/data/status`)
+      const response = await fetch(`${API_BASE_URL}/api/data/status`)
       const data = await response.json()
-      setHasData(data.has_data)
+      setHasData(data.dataset?.total_products > 0)
     } catch (error) {
       console.error('Erro ao verificar status dos dados:', error)
     }
@@ -91,21 +117,30 @@ export default function Home() {
     formData.append('file', file)
 
     try {
-      const response = await fetch(`${API_BASE_URL}/upload`, {
-        method: 'POST',
-        body: formData,
-      })
-
-      if (!response.ok) {
-        throw new Error('Erro no upload')
-      }
-
-      const result = await response.json()
-      setHasData(true)
+      // TODO: Backend TypeScript não tem rota /upload implementada ainda
+      // Por enquanto, funcionalidade não implementada no backend TS
       toast({
-        title: "✅ Sucesso!",
-        description: `Planilha carregada com ${result.rows} linhas`,
-      })
+        title: '⚠️ Funcionalidade em Desenvolvimento',
+        description: 'Upload de arquivos será disponibilizado em breve.',
+      });
+      setUploadingFile(false);
+      event.target.value = '';
+      return;
+      
+      // TODO: Implementar quando backend TS tiver rota /api/upload
+      // const response = await fetch(`${API_BASE_URL}/api/upload`, {
+      //   method: 'POST',
+      //   body: formData,
+      // })
+      // if (!response.ok) {
+      //   throw new Error('Erro no upload')
+      // }
+      // const result = await response.json()
+      // setHasData(true)
+      // toast({
+      //   title: "✅ Sucesso!",
+      //   description: `Planilha carregada com ${result.rows} linhas`,
+      // })
     } catch (error) {
       toast({
         title: "❌ Erro",
@@ -206,13 +241,33 @@ export default function Home() {
 
       if (descricoes.length === 1) {
         // Busca individual (1 descrição apenas)
-        const searchResponse = await fetch(`${API_BASE_URL}/buscar`, {
+        const searchResponse = await fetch(`${API_BASE_URL}/api/search`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-user-id': USER_ID },
-          body: JSON.stringify({ descricao: descricoes[0] || description, top_k: options.topK })
+          body: JSON.stringify({ query: descricoes[0] || description, top_k: options.topK })
         })
         // Tolera resposta não-OK: tenta extrair JSON e faz fallback gracioso
         const searchData = await searchResponse.json().catch(() => ({ resultados: [] }))
+        
+        // TODO: PARTE A - INSTRUMENTAÇÃO DO CONSUMO DA API (DIA 1)
+        // Log de debug para diagnóstico de como o frontend recebe os dados do backend.
+        // Objetivo: descobrir se confiança vem como 0-1 ou 0-100, e quais campos estão sendo usados.
+        if (process.env.NODE_ENV !== "production") {
+          const firstResult = searchData.resultados?.[0]
+          console.log("[SEARCH_DEBUG] raw response:", {
+            descricaoBuscada: descricoes[0] || description,
+            resultadosCount: searchData.resultados?.length ?? 0,
+            primeiroResultado: {
+              grupo: firstResult?.grupo,
+              confidenceItem: firstResult?.confidenceItem,
+              score: firstResult?.score,
+              score_normalized: firstResult?.score_normalized,
+              hasConfidenceItem: 'confidenceItem' in (firstResult || {}),
+            },
+            confianca: searchData.confianca,
+          });
+        }
+        
         if (!searchResponse.ok) {
           console.warn('Busca inteligente retornou erro', searchData)
           toast({
@@ -220,61 +275,172 @@ export default function Home() {
             description: 'O serviço de busca demorou ou retornou erro. Tentaremos novamente em seguida.',
           })
         }
-        const mapped = (searchData.resultados || []).map((r:any, idx: number) => ({
-          ranking: r.ranking ?? (idx + 1),
-          sugeridos: r.sugeridos,
-          valor_unitario: r.valor_unitario ?? null,
-          vida_util_meses: r.vida_util_meses ?? null,
-          manutencao_percent: r.manutencao_percent ?? null,
-          confianca: r.score ?? r.confianca ?? null,
-          link_detalhes: r.link_detalhes || '#',
-          marca: r.marca ?? null,
-          origemDescricao: descricoes[0] || description
-        }))
+        // Backend v4.0+ envia confidenceItem como 0..1
+        const mapped = (searchData.resultados || []).map((r: any, idx: number) => {
+          // Priorizar confidenceItem (v4.0), fallback para score_normalized (v3.0)
+          const rawConfidence = r.confidenceItem ?? r.score_normalized ?? r.score ?? null
+          const confidence = typeof rawConfidence === 'number' ? rawConfidence : null
+          
+          // Debug: verificar se confidenceItem existe
+          if (process.env.NODE_ENV !== 'production' && idx === 0) {
+            console.log('[CONFIDENCE_MAPPING_DEBUG] Primeiro item:', {
+              confidenceItem: r.confidenceItem,
+              score_normalized: r.score_normalized,
+              score: r.score,
+              finalConfidence: confidence,
+              hasConfidenceItem: 'confidenceItem' in r,
+            })
+          }
+          
+          // Mapear métricas v4.0 se disponíveis
+          const metrics = r.metrics ? {
+            valorUnitario: r.metrics.valorUnitario,
+            vidaUtilMeses: r.metrics.vidaUtilMeses,
+            manutencao: r.metrics.manutencao
+          } : undefined
+          
+          const sources = r.sources ? {
+            fornecedores: r.sources.fornecedores,
+            bids: r.sources.bids,
+            nLinhas: r.sources.nLinhas ?? 0
+          } : undefined
+          
+          return {
+            ranking: r.ranking ?? (idx + 1),
+            sugeridos: r.sugeridos || r.descricao || r.grupo,
+            equipmentId: r.equipmentId,
+            title: r.title,
+            // Campos legacy (v3.0) - usar como fallback
+            valor_unitario: r.valor_unitario ?? metrics?.valorUnitario?.display ?? null,
+            vida_util_meses: r.vida_util_meses ?? metrics?.vidaUtilMeses?.display ?? null,
+            manutencao_percent: r.manutencao_percent ?? (metrics?.manutencao?.display ? metrics.manutencao.display * 100 : null),
+            // Campos v4.0
+            metrics,
+            sources,
+            confianca: confidence,
+            link_detalhes: r.link_detalhes || '#',
+            marca: r.marca ?? null,
+            origemDescricao: descricoes[0] || description
+          }
+        })
+        
+        // Debug: validar que todos são numbers
+        if (process.env.NODE_ENV !== 'production') {
+          const confidences = mapped.map((e: Equipment) => e.confianca)
+          const allNumbers = confidences.every((c: number | null) => c === null || typeof c === 'number')
+          console.assert(allNumbers, '[SORT_DEBUG] Algumas confianças não são numbers:', confidences)
+          
+          // Validação: confidence deve ser monótona (ordem decrescente)
+          let monotonic = true
+          for (let i = 1; i < confidences.length; i++) {
+            const prev = confidences[i-1] || 0
+            const curr = confidences[i] || 0
+            if (curr > prev + 1e-6) { // tolerância (0..1)
+              monotonic = false
+              console.error(`[CONF_ORDER_ERROR] Confiança não-monótona: item[${i-1}]=${prev.toFixed(1)} < item[${i}]=${curr.toFixed(1)}`)
+            }
+          }
+          
+          console.log('[CONFIDENCE_V4_DEBUG] Valores de confiança:', {
+            source: 'confidenceItem (v4.0)',
+            values: confidences.filter((c: number | null) => c !== null).slice(0, 5),
+            expectedRange: '0..1',
+            allNumeric: allNumbers,
+            monotonic
+          })
+          
+          // Log de métricas v4.0
+          const hasMetrics = mapped.some((e: Equipment) => e.metrics)
+          if (hasMetrics) {
+            console.log('[METRICS_V4_DEBUG] Métricas agregadas detectadas:', {
+              total: mapped.length,
+              withMetrics: mapped.filter((e: Equipment) => e.metrics).length,
+              example: mapped.find((e: Equipment) => e.metrics)
+            })
+          }
+        }
+        
         setEquipments(mapped)
       } else {
-        // Busca em lote (2+ descrições)
-        const resp = await fetch(`${API_BASE_URL}/buscar-lote`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'x-user-id': USER_ID },
-          body: JSON.stringify({
-            descricoes,
-            top_k: options.topK,
-            use_tfidf: options.useTfidf,
-          }),
-        })
-        // Tolerar não-OK e continuar com fallback
-        const data = await resp.json().catch(() => ({ resultados: [] }))
-        if (!resp.ok) {
-          console.warn('Busca em lote retornou erro', data)
+        // Busca em lote (2+ descrições) - fazer múltiplas chamadas individuais
+        const batchPromises = descricoes.map(desc => 
+          fetch(`${API_BASE_URL}/api/search`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'x-user-id': USER_ID },
+            body: JSON.stringify({ query: desc, top_k: options.topK }),
+          }).then(r => r.json().catch(() => ({ query_original: desc, resultados: [] })))
+        );
+        const batchData = await Promise.all(batchPromises);
+        
+        // Verificar se houve erros
+        const hasErrors = batchData.some(d => !d.resultados || d.resultados.length === 0);
+        if (hasErrors) {
+          console.warn('Algumas buscas em lote falharam', batchData)
           toast({
             title: '⚠️ Aviso',
             description: 'A busca em lote encontrou um erro. Resultados parciais podem estar vazios.',
           })
         }
-        const rows = (data.resultados || []) as Array<any>
-        setBatchResults(rows)
+        
+        // Processar resultados em lote
         const map: Record<string, Equipment[]> = {}
-        for (const r of rows) {
-          // CORRIGIDO: Backend retorna 'query_original', não 'descricao_original'
-          const desc = (r.query_original || r.descricao_original) as string
+        
+        for (const searchResult of batchData) {
+          const desc = searchResult.query_original || ''
           if (!map[desc]) map[desc] = []
-          map[desc].push({
-            ranking: 0,
-            sugeridos: r.sugerido || r.sugeridos || 'N/A',
-            valor_unitario: r.valor_unitario ?? null,
-            vida_util_meses: r.vida_util_meses ?? null,
-            manutencao_percent: r.manutencao_percent ?? null,
-            confianca: r.confianca ?? r.score ?? null,
-            link_detalhes: r.link_detalhes || '#',
-            marca: r.marca ?? null,
-            origemDescricao: desc,
-          })
+          
+          for (const r of (searchResult.resultados || [])) {
+            // Backend v4.0+ envia confidenceItem como 0-100 (percentual)
+            const rawConfidence = r.confidenceItem ?? r.score_normalized ?? r.score ?? null
+            const confidence = typeof rawConfidence === 'number' ? rawConfidence : null
+            
+            // Mapear métricas v4.0 se disponíveis
+            const metrics = r.metrics ? {
+              valorUnitario: r.metrics.valorUnitario,
+              vidaUtilMeses: r.metrics.vidaUtilMeses,
+              manutencao: r.metrics.manutencao
+            } : undefined
+            
+            const sources = r.sources ? {
+              fornecedores: r.sources.fornecedores,
+              bids: r.sources.bids,
+              nLinhas: r.sources.nLinhas ?? 0
+            } : undefined
+            
+            map[desc].push({
+              ranking: 0,
+              sugeridos: r.sugeridos || r.descricao || r.grupo,
+              equipmentId: r.equipmentId,
+              title: r.title,
+              valor_unitario: r.valor_unitario ?? metrics?.valorUnitario?.display ?? null,
+              vida_util_meses: r.vida_util_meses ?? metrics?.vidaUtilMeses?.display ?? null,
+              manutencao_percent: r.manutencao_percent ?? (metrics?.manutencao?.display ? metrics.manutencao.display * 100 : null),
+              metrics,
+              sources,
+              confianca: confidence,
+              link_detalhes: r.link_detalhes || '#',
+              marca: r.marca ?? null,
+              origemDescricao: desc,
+            })
+          }
         }
         const groups: Array<{ descricao: string; itens: Equipment[] }> = []
         Object.entries(map).forEach(([descricao, itens]) => {
-          const ordered = itens.sort((a, b) => (b.confianca ?? 0) - (a.confianca ?? 0))
+          // Ordenação NUMÉRICA por confiança (descendente)
+          const ordered = itens.sort((a, b) => {
+            const confA = typeof a.confianca === 'number' ? a.confianca : 0
+            const confB = typeof b.confianca === 'number' ? b.confianca : 0
+            return confB - confA
+          })
           ordered.forEach((it, idx) => (it.ranking = idx + 1))
+          
+          // Debug: validar ordenação em dev
+          if (process.env.NODE_ENV !== 'production' && ordered.length > 1) {
+            const confidences = ordered.map(it => it.confianca ?? 0)
+            const isSorted = confidences.every((val, i) => i === 0 || confidences[i - 1] >= val)
+            console.assert(isSorted, `[SORT_DEBUG] Batch "${descricao}" não está ordenado corretamente:`, confidences)
+          }
+          
           groups.push({ descricao, itens: ordered })
         })
         const orderedGroups = descricoes
@@ -461,6 +627,11 @@ export default function Home() {
                   <span className="flex h-3 w-3 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.7)]"></span>
                   {equipments.length} {equipments.length === 1 ? "resultado" : "resultados"}
                 </span>
+                {equipments[0]?.origemDescricao && equipments[0].origemDescricao.trim().split(/\s+/).length === 1 && (
+                  <span className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-4 py-2 text-xs font-medium text-yellow-700 dark:text-yellow-400 border border-yellow-500/30" title="Buscas com uma palavra tendem a ter confiança menor devido à maior abrangência">
+                    💡 Busca ampla
+                  </span>
+                )}
               </div>
             </div>
             <HorizontalScroll itemMinWidth={240}>
@@ -497,8 +668,8 @@ export default function Home() {
                       'Valor Unitário',
                       'Vida Útil (meses)',
                       'Manutenção (%)',
-                      'Confiança (%)',
-                      'Marca',
+                      'Confiança (%)'
+                      
                     ]
                     const rows = (batchResults || []).map((r:any) => [
                       `"${r.descricao_original || ''}"`,
@@ -507,7 +678,7 @@ export default function Home() {
                       r.vida_util_meses ?? 'N/A',
                       r.manutencao_percent ?? 'N/A',
                       r.confianca ?? 'N/A',
-                      `"${r.marca || ''}"`,
+                      
                     ].join(','))
                     const csv = [headers.join(','), ...rows].join('\n')
                     const blob = new Blob([csv], { type: 'text/csv' })
@@ -539,14 +710,43 @@ export default function Home() {
                     return (b.valor_unitario ?? -Infinity) - (a.valor_unitario ?? -Infinity)
                   case 'life-desc':
                     return (b.vida_util_meses ?? 0) - (a.vida_util_meses ?? 0)
-                  case 'conf-asc':
-                    return (a.confianca ?? 0) - (b.confianca ?? 0)
+                  case 'conf-asc': {
+                    const confA = typeof a.confianca === 'number' ? a.confianca : 0
+                    const confB = typeof b.confianca === 'number' ? b.confianca : 0
+                    return confA - confB
+                  }
                   case 'conf-desc':
-                  default:
-                    return (b.confianca ?? 0) - (a.confianca ?? 0)
+                  default: {
+                    const confA = typeof a.confianca === 'number' ? a.confianca : 0
+                    const confB = typeof b.confianca === 'number' ? b.confianca : 0
+                    return confB - confA
+                  }
                 }
               })
               sortedItems.forEach((it, idx) => (it.ranking = idx + 1))
+              
+              // Debug: validar ordenação em dev
+              if (process.env.NODE_ENV !== 'production' && sortedItems.length > 1 && sortKey.startsWith('conf')) {
+                const confidences = sortedItems.map(it => it.confianca ?? 0)
+                const isAsc = sortKey === 'conf-asc'
+                const isSorted = confidences.every((val, i) => {
+                  if (i === 0) return true
+                  return isAsc ? confidences[i - 1] <= val : confidences[i - 1] >= val
+                })
+                console.assert(isSorted, `[SORT_DEBUG] Batch "${group.descricao}" com sort "${sortKey}" não ordenado:`, confidences)
+                
+                // Alertar se ordem de confiança difere de relevância (rankings)
+                if (sortKey === 'conf-desc') {
+                  const rankings = sortedItems.map(it => it.ranking)
+                  const rankingsMatch = rankings.every((r, i) => i === 0 || rankings[i-1] <= r)
+                  if (!rankingsMatch) {
+                    console.warn('[CONF_RELEVANCE_MISMATCH] Ordem de confiança difere de relevância (ranking):', {
+                      confidences: confidences.slice(0, 5),
+                      rankings: rankings.slice(0, 5)
+                    })
+                  }
+                }
+              }
               
               return (
                 <section key={gi} className="space-y-8">

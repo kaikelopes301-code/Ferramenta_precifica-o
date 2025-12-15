@@ -12,8 +12,10 @@ import { registerShutdownHandlers } from './domain/services/analytics/shutdownHo
 
 async function start(): Promise<void> {
   try {
-    logger.info('🚀 Starting AFM Precificação Backend TypeScript v2.0...');
-    logger.info(`[RERANK] enabled=${config.searchRerankerEnabled}`);
+    logger.info({
+      env: config.nodeEnv,
+      rerankEnabled: config.searchRerankerEnabled,
+    }, '🚀 Starting AFM Precificação Backend (TypeScript)');
 
     // Initialize database first
     logger.info('📦 Initializing database...');
@@ -45,18 +47,17 @@ async function start(): Promise<void> {
       }
     }
 
-    logger.info(`✅ Server listening on port ${config.port}`);
-    logger.info(`📊 Environment: ${config.nodeEnv}`);
-    logger.info(`🔍 Search Engine: IntegratedSearchEngine v2.0 (BM25 + Fuzzy + Synonyms)`);
-    logger.info(`🌐 CORS: Enabled`);
-    logger.info(`📡 Endpoints:`);
-    logger.info(`   - POST http://localhost:${config.port}/api/search`);
-    logger.info(`   - GET  http://localhost:${config.port}/api/health`);
-    logger.info(`   - GET  http://localhost:${config.port}/api/metrics`);
-    logger.info(`   - GET  http://localhost:${config.port}/api/history`);
-    logger.info(`   - GET/POST/DELETE http://localhost:${config.port}/api/favorites`);
-    logger.info(`   - GET/POST/DELETE http://localhost:${config.port}/api/kit`);
-    logger.info(`   - GET  http://localhost:${config.port}/api/data/status`);
+    logger.info({
+      port: config.port,
+      env: config.nodeEnv,
+      endpoints: {
+        root: '/',
+        health: '/api/health',
+        search: '/api/search',
+        details: '/api/detalhes/:grupo',
+        metrics: '/api/metrics',
+      },
+    }, '✅ Server ready');
 
     // Register graceful shutdown handlers
     registerShutdownHandlers();

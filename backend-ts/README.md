@@ -112,6 +112,14 @@ npm run build              # Compilar TS
 npm run type-check         # Verificar tipos
 ```
 
+## 🌐 Endpoints
+
+- `GET /` e `HEAD /`: landing simples (útil para Render/browser).
+- `GET /api/health`: health check (usado pelo Render).
+- `POST /api/search`: busca (contrato estável; não mudar).
+- `GET /api/detalhes/:grupo`: usado pela tela `/detalhes` do frontend.
+  - Se o corpus ainda não estiver disponível, responde `503` com JSON (`code=CORPUS_NOT_READY`).
+
 ## 🚢 Deploy
 
 ### Render (Free Tier)

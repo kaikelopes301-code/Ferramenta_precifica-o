@@ -8,15 +8,20 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 import cookie from '@fastify/cookie';
 import './fastifyDecorations.js';
-import { initializeSearchEngine } from './searchRoutes.js';
+import { getCorpusRepository, initializeSearchEngine } from './searchRoutes.js';
 import { registerRoutes } from './registerRoutes.js';
 import { registerRateLimiter } from './middleware/rateLimiter.js';
 import requestLoggerPlugin from './middleware/requestLogger.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { config } from '../config/env.js';
 import { logger } from '../infra/logging.js';
+import type { CorpusRepository } from '../infra/corpusRepository.js';
 
-export function buildApp(): FastifyInstance {
+type BuildAppOptions = {
+  corpusRepository?: CorpusRepository
+}
+
+export function buildApp(options: BuildAppOptions = {}): FastifyInstance {
   const app = Fastify({
     logger: config.enableRequestLogging
       ? {
@@ -52,6 +57,11 @@ export function buildApp(): FastifyInstance {
   // Request logger (THIRD)
   void app.register(requestLoggerPlugin);
 
+  // Optional dependency injection (must happen BEFORE routes/plugins that use it)
+  if (options.corpusRepository && !app.corpusRepository) {
+    app.decorate('corpusRepository', options.corpusRepository)
+  }
+
   // Routes (FOURTH)
   registerRoutes(app);
 
@@ -73,7 +83,7 @@ export async function initializeApp(): Promise<FastifyInstance> {
     logger.info('[API] ✅ Search engine ready');
 
     logger.info('[API] 🏗️  Building Fastify app...');
-    const app = buildApp();
+    const app = buildApp({ corpusRepository: getCorpusRepository() ?? undefined });
     logger.info('[API] ✅ App built successfully');
 
     logger.info('[API] 🎉 Application initialized successfully');

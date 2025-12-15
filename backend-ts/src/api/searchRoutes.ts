@@ -42,6 +42,15 @@ let searchEngine: IntegratedSearchEngine | null = null;
 let corpusRepo: FileCorpusRepository | null = null;
 let abbrevCompiled: Awaited<ReturnType<typeof loadAbbrevCompiled>> = null;
 
+/**
+ * Exposes the initialized corpus repository (if any) for dependency injection.
+ *
+ * This is used by route plugins (e.g. detailsRoutes) that rely on the corpus.
+ */
+export function getCorpusRepository(): FileCorpusRepository | null {
+    return corpusRepo;
+}
+
 // Performance tracking
 let totalRequests = 0;
 let totalLatency = 0;

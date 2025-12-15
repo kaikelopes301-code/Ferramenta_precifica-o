@@ -7,6 +7,7 @@
 
 import type { FastifyPluginAsync } from 'fastify';
 import type { CorpusRepository } from '../../infra/corpusRepository.js';
+import type { CorpusDocument } from '../../domain/searchEngine.js';
 import { logger } from '../../infra/logging.js';
 
 interface DetailsParams {
@@ -35,12 +36,7 @@ interface DetailsResponse {
 }
 
 export const detailsRoutes: FastifyPluginAsync = async (fastify) => {
-    const corpusRepo = fastify.corpusRepository as CorpusRepository | undefined;
-
-    if (!corpusRepo) {
-        logger.warn('[detailsRoutes] CorpusRepository not available');
-        return;
-    }
+    let loggedMissingCorpus = false;
 
     /**
      * GET /api/detalhes/:grupo
@@ -86,6 +82,13 @@ export const detailsRoutes: FastifyPluginAsync = async (fastify) => {
                             total: { type: 'number' }
                         }
                     },
+                    503: {
+                        type: 'object',
+                        properties: {
+                            error: { type: 'string' },
+                            code: { type: 'string' }
+                        }
+                    },
                     404: {
                         type: 'object',
                         properties: {
@@ -97,18 +100,32 @@ export const detailsRoutes: FastifyPluginAsync = async (fastify) => {
             }
         },
         async (request, reply) => {
+            const corpusRepo = fastify.corpusRepository as CorpusRepository | undefined;
+            if (!corpusRepo) {
+                if (!loggedMissingCorpus) {
+                    loggedMissingCorpus = true;
+                    logger.error('[detailsRoutes] CorpusRepository missing - returning 503 (service not ready)');
+                }
+                return reply.status(503).send({
+                    error: 'Service not ready',
+                    code: 'CORPUS_NOT_READY',
+                });
+            }
+
             const { grupo } = request.params;
             const grupoDecoded = decodeURIComponent(grupo);
 
             logger.info(`[detailsRoutes] Fetching details for grupo: ${grupoDecoded}`);
 
             try {
-                // Get all documents and filter by groupId
-                const allDocs = await corpusRepo.getAllDocuments();
-                const groupDocs = allDocs.filter(doc => 
-                    doc.groupId === grupoDecoded || 
-                    doc.groupId.toLowerCase() === grupoDecoded.toLowerCase()
-                );
+                // Prefer repository-level filtering when available.
+                // Fallback to scanning all documents for legacy implementations.
+                const groupDocs: CorpusDocument[] = 'getDocumentsByGroupId' in (corpusRepo as any)
+                    ? (await (corpusRepo as any).getDocumentsByGroupId(grupoDecoded)) as CorpusDocument[]
+                    : (await corpusRepo.getAllDocuments()).filter((doc: CorpusDocument) =>
+                        doc.groupId === grupoDecoded ||
+                        doc.groupId?.toLowerCase?.() === grupoDecoded.toLowerCase()
+                    );
 
                 if (groupDocs.length === 0) {
                     logger.warn(`[detailsRoutes] No documents found for grupo: ${grupoDecoded}`);
@@ -119,7 +136,7 @@ export const detailsRoutes: FastifyPluginAsync = async (fastify) => {
                 }
 
                 // Transform to response format
-                const items: EquipmentDetailDTO[] = groupDocs.map(doc => ({
+                const items: EquipmentDetailDTO[] = groupDocs.map((doc: CorpusDocument) => ({
                     fornecedor: doc.supplier,
                     marca: doc.brand,
                     descricao: doc.rawText || doc.groupDescription || doc.text,

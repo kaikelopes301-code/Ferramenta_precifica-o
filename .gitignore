@@ -128,12 +128,18 @@ __pycache__/
 # AFM - artefatos gerados (não versionar)
 data/app.db
 data/*.db
+data/*.db-wal
+data/*.db-shm
+data/*.db-journal
 data/*.sqlite
 data/*.sqlite3
 data/*.sqlite3-*
 data/cache/
 backend-ts/data/app.db
 backend-ts/data/*.db
+backend-ts/data/*.db-wal
+backend-ts/data/*.db-shm
+backend-ts/data/*.db-journal
 backend-ts/data/*.sqlite
 backend-ts/data/*.sqlite3
 backend-ts/data/*.sqlite3-*

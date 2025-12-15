@@ -265,7 +265,9 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
               <div className="flex items-center gap-2 mb-1.5">
                 <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest">Valor Unitário</p>
                 {equipment.metrics?.valorUnitario && (
-                  <Info className="h-3 w-3 text-primary/60 cursor-help" title="Hover para ver estatísticas" />
+                  <span title="Hover para ver estatísticas">
+                    <Info className="h-3 w-3 text-primary/60 cursor-help" />
+                  </span>
                 )}
               </div>
               <p className={`${dense ? 'text-xl' : 'text-2xl'} font-black text-primary leading-none`}>
@@ -292,7 +294,9 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
               </div>
               <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Vida útil</span>
               {equipment.metrics?.vidaUtilMeses && (
-                <Info className="h-2.5 w-2.5 text-blue-500/60 ml-auto cursor-help" title="Hover para ver estatísticas" />
+                <span title="Hover para ver estatísticas" className="ml-auto">
+                  <Info className="h-2.5 w-2.5 text-blue-500/60 cursor-help" />
+                </span>
               )}
             </div>
             <p className={`${dense ? 'text-lg' : 'text-xl'} font-bold text-foreground leading-tight`}>

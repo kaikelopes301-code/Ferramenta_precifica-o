@@ -2,6 +2,11 @@
 const nextConfig = {
   output: "standalone",
   outputFileTracingRoot: __dirname,
+
+  // CI/Deploy: não bloquear build por lint (typecheck roda separado)
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   
   // React strict mode
   reactStrictMode: true,

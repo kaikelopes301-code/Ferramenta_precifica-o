@@ -41,6 +41,31 @@ export function registerRoutes(app: FastifyInstance): void {
     app.decorate('getRegisteredRoutes', () => routes.slice())
   }
 
+  // Landing para evitar 404 no Render/browser (Render costuma fazer HEAD /)
+  registerWithSource(
+    app,
+    async (instance) => {
+      instance.get('/', async () => {
+        return {
+          ok: true,
+          service: 'AFM Precificação API',
+          env: process.env.NODE_ENV ?? 'unknown',
+          endpoints: {
+            health: '/api/health',
+            search: '/api/search',
+            metrics: '/api/metrics',
+          },
+        }
+      })
+
+      instance.head('/', async (_req, reply) => {
+        reply.code(200).send()
+      })
+    },
+    'src/api/registerRoutes.ts',
+    routes
+  )
+
   registerWithSource(app, registerSearchRoutes, 'src/api/searchRoutes.ts', routes)
   registerWithSource(app, historyRoutes, 'src/api/routes/historyRoutes.ts', routes)
   registerWithSource(app, favoritesRoutes, 'src/api/routes/favoritesRoutes.ts', routes)

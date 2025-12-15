@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button"
 import { ArrowLeft, FileText, DollarSign, Calendar, Wrench, Building2 } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
-import { API_BASE_URL } from "@/lib/api"
 import Image from "next/image"
 
 interface DetailItem {
@@ -45,7 +44,7 @@ export default function DetailsPage() {
     if (!grupo) return
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/detalhes/${encodeURIComponent(grupo)}`)
+      const response = await fetch(`/api/detalhes/${encodeURIComponent(grupo)}`)
 
       if (!response.ok) {
         throw new Error('Grupo não encontrado')

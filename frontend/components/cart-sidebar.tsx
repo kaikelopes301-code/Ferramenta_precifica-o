@@ -49,19 +49,32 @@ export function CartSidebar({ items, onChangeQty, onChangeNotes, onRemove, onCle
 
   const exportExcel = async () => {
     try {
-      const XLSX = await import('xlsx')
-      const rows = items.map((it) => ({
-        'Item': it.name,
-        'Quantidade': it.qty,
-        'Preço Unitário': it.price != null ? currencyBRL.format(it.price) : '—',
-        'Subtotal': it.price != null ? currencyBRL.format(it.price * it.qty) : '—',
-        'Observações': it.notes || ''
-      }))
-      const wb = XLSX.utils.book_new()
-      const ws = XLSX.utils.json_to_sheet(rows)
-      XLSX.utils.book_append_sheet(wb, ws, 'Carrinho')
-      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' })
-      const blob = new Blob([wbout], { type: 'application/octet-stream' })
+      const ExcelJSImport = await import('exceljs')
+      const ExcelJS: any = (ExcelJSImport as any).default ?? ExcelJSImport
+      const wb = new ExcelJS.Workbook()
+      const ws = wb.addWorksheet('Carrinho', { views: [{ state: 'frozen', ySplit: 1 }] })
+      ws.columns = [
+        { header: 'Item', key: 'item', width: 45 },
+        { header: 'Quantidade', key: 'qty', width: 12 },
+        { header: 'Preço Unitário', key: 'pu', width: 18, style: { numFmt: '#,##0.00' } },
+        { header: 'Subtotal', key: 'sub', width: 18, style: { numFmt: '#,##0.00' } },
+        { header: 'Observações', key: 'obs', width: 40 },
+      ]
+      items.forEach((it) => {
+        const qty = Math.max(1, it.qty || 1)
+        const price = it.price ?? null
+        ws.addRow({
+          item: it.name,
+          qty,
+          pu: price,
+          sub: price != null ? price * qty : null,
+          obs: it.notes || '',
+        })
+      })
+      ws.getRow(1).font = { bold: true }
+
+      const buf = await wb.xlsx.writeBuffer()
+      const blob = new Blob([buf], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' })
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url

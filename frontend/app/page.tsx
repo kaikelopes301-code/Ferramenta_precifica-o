@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
-import { API_BASE_URL } from "@/lib/api";
 
 // Adia carregamento de componentes não críticos para reduzir JS inicial
 const HorizontalScroll = dynamic(() => import("@/components/horizontal-scroll").then(m => m.HorizontalScroll), { ssr: false, loading: () => null })
@@ -100,7 +99,7 @@ export default function Home() {
 
   const checkDataStatus = async () => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/data/status`)
+      const response = await fetch('/api/data/status')
       const data = await response.json()
       setHasData(data.dataset?.total_products > 0)
     } catch (error) {
@@ -128,7 +127,7 @@ export default function Home() {
       return;
       
       // TODO: Implementar quando backend TS tiver rota /api/upload
-      // const response = await fetch(`${API_BASE_URL}/api/upload`, {
+      // const response = await fetch('/api/upload', {
       //   method: 'POST',
       //   body: formData,
       // })
@@ -241,7 +240,7 @@ export default function Home() {
 
       if (descricoes.length === 1) {
         // Busca individual (1 descrição apenas)
-        const searchResponse = await fetch(`${API_BASE_URL}/api/search`, {
+        const searchResponse = await fetch('/api/search', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'x-user-id': USER_ID },
           body: JSON.stringify({ query: descricoes[0] || description, top_k: options.topK })
@@ -364,7 +363,7 @@ export default function Home() {
       } else {
         // Busca em lote (2+ descrições) - fazer múltiplas chamadas individuais
         const batchPromises = descricoes.map(desc => 
-          fetch(`${API_BASE_URL}/api/search`, {
+          fetch('/api/search', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-user-id': USER_ID },
             body: JSON.stringify({ query: desc, top_k: options.topK }),

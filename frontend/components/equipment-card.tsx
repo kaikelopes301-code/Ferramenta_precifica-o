@@ -24,39 +24,39 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
 
   const getConfidenceConfig = (confidence: number | null) => {
     // Backend v4.0+ envia valores entre 0..1 (probabilidade)
-    if (!confidence) return { 
-      color: "text-muted-foreground", 
+    if (!confidence) return {
+      color: "text-muted-foreground",
       bg: "bg-muted/10",
       label: "N/A",
       icon: "⚪",
       percent: 0
     }
-    
+
     const confidencePercent = confidence * 100
-    
-    if (confidencePercent >= 80) return { 
-      color: "text-emerald-600 dark:text-emerald-400", 
+
+    if (confidencePercent >= 80) return {
+      color: "text-emerald-600 dark:text-emerald-400",
       bg: "bg-emerald-500/10",
       label: "Excelente",
       icon: "🟢",
       percent: confidencePercent
     }
-    if (confidencePercent >= 75) return { 
-      color: "text-green-600 dark:text-green-400", 
+    if (confidencePercent >= 75) return {
+      color: "text-green-600 dark:text-green-400",
       bg: "bg-green-500/10",
       label: "Muito Boa",
       icon: "🟢",
       percent: confidencePercent
     }
-    if (confidencePercent >= 50) return { 
-      color: "text-yellow-600 dark:text-yellow-400", 
+    if (confidencePercent >= 50) return {
+      color: "text-yellow-600 dark:text-yellow-400",
       bg: "bg-yellow-500/10",
       label: "Boa",
       icon: "🟡",
       percent: confidencePercent
     }
-    return { 
-      color: "text-orange-600 dark:text-orange-400", 
+    return {
+      color: "text-orange-600 dark:text-orange-400",
       bg: "bg-orange-500/10",
       label: "Ruim",
       icon: "🟠",
@@ -103,11 +103,11 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
     }
   }
 
-  const currencyBRL = new Intl.NumberFormat('pt-BR', { 
-    style: 'currency', 
-    currency: 'BRL', 
-    minimumFractionDigits: 2, 
-    maximumFractionDigits: 2 
+  const currencyBRL = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
   })
 
   const formatPrice = (price: number | null) => {
@@ -152,16 +152,15 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
 
   return (
     <Card
-      className={`group relative overflow-hidden card-premium ${
-        selected ? 'ring-2 ring-blue-500 border-blue-500 shadow-xl shadow-blue-500/20' : ''
-      } ${dense ? 'w-[260px] sm:w-[280px] md:min-w-[300px]' : 'w-[280px] sm:w-[300px] md:min-w-[320px] lg:min-w-[340px]'} flex-shrink-0`}
+      className={`group relative overflow-hidden card-premium ${selected ? 'ring-2 ring-blue-500 border-blue-500 shadow-xl shadow-blue-500/20' : ''
+        } ${dense ? 'w-[260px] sm:w-[280px] md:min-w-[300px]' : 'w-[280px] sm:w-[300px] md:min-w-[320px] lg:min-w-[340px]'} flex-shrink-0`}
     >
       {/* Brilho gradiente animado no topo */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
-      
+
       {/* Efeito de brilho hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-      
+
       {/* Badge de seleção animado */}
       {selected && (
         <div className="absolute top-3 left-3 z-10 animate-pop-in">
@@ -240,6 +239,17 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
               <p className={`${dense ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl lg:text-3xl'} font-black text-primary leading-none`}>
                 {formatPrice(getDisplayPrice())}
               </p>
+              {(() => {
+                const p = getDisplayPrice()
+                const l = getDisplayLifespan()
+                const monthly = (p && l && l > 0) ? p / l : null
+                if (!monthly) return null
+                return (
+                  <p className="text-[10px] sm:text-xs text-muted-foreground font-medium mt-0.5 ml-0.5">
+                    {currencyBRL.format(monthly)}/mês
+                  </p>
+                )
+              })()}
               {equipment.metrics?.valorUnitario && equipment.metrics.valorUnitario.n > 1 && (
                 <p className="text-[9px] text-muted-foreground mt-1">
                   baseado em {equipment.metrics.valorUnitario.n} {equipment.metrics.valorUnitario.n === 1 ? 'cotação' : 'cotações'}
@@ -280,7 +290,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
           </div>
 
           {/* Confiança */}
-          <div 
+          <div
             className={`group/stat rounded-xl border border-border/60 ${confidenceConfig.bg} ${dense ? 'p-3' : 'p-4'} hover:shadow-soft transition-all duration-300 hover:-translate-y-0.5 cursor-help`}
             title="A confiança é calculada a partir do score relativo do grupo mais similar conforme o modelo TF-IDF híbrido."
           >
@@ -327,9 +337,8 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
           onClick={handleAdd}
           disabled={isAdding}
           size="sm"
-          className={`flex-1 btn-interactive shadow-medium hover:shadow-xl bg-gradient-to-r from-primary via-primary/95 to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground font-bold transition-all duration-300 text-xs sm:text-sm ${
-            isAdding ? 'scale-95 opacity-80' : ''
-          }`}
+          className={`flex-1 btn-interactive shadow-medium hover:shadow-xl bg-gradient-to-r from-primary via-primary/95 to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground font-bold transition-all duration-300 text-xs sm:text-sm ${isAdding ? 'scale-95 opacity-80' : ''
+            }`}
         >
           {isAdding ? (
             <>
@@ -384,7 +393,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                         icon={<DollarSign className="h-4 w-4 text-primary" />}
                       />
                     </div>
-                  
+
                     <div className="p-3 rounded-xl bg-gradient-to-r from-blue-500/5 to-transparent border border-blue-500/20">
                       <MetricsTooltip
                         label="Vida Útil"
@@ -394,7 +403,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                         icon={<Calendar className="h-4 w-4 text-blue-600 dark:text-blue-400" />}
                       />
                     </div>
-                    
+
                     <div className="p-3 rounded-xl bg-gradient-to-r from-orange-500/5 to-transparent border border-orange-500/20">
                       <MetricsTooltip
                         label="Manutenção"
@@ -404,7 +413,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                         icon={<Wrench className="h-4 w-4 text-orange-600 dark:text-orange-400" />}
                       />
                     </div>
-                    
+
                     {equipment.sources && equipment.sources.nLinhas > 0 && (
                       <div className="p-3 rounded-xl bg-muted/30 border border-border/50">
                         <div className="space-y-2">
@@ -433,7 +442,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                         </div>
                       </div>
                     )}
-                  </div>    
+                  </div>
 
                   {/* Removido link externo: manter experiência 100% na mesma página */}
                 </Dialog.Content>

@@ -44,7 +44,7 @@ export default function Home() {
   const [lastSelectedIdx, setLastSelectedIdx] = useState<number | null>(null)
   const [cart, setCart] = useState<CartItem[]>([])
   const [singleFilter, setSingleFilter] = useState("")
-  const [singleSort, setSingleSort] = useState<'conf-desc'|'price-asc'|'price-desc'|'life-desc'>('conf-desc')
+  const [singleSort, setSingleSort] = useState<'conf-desc' | 'price-asc' | 'price-desc' | 'life-desc'>('conf-desc')
 
   const checkDataStatus = async () => {
     try {
@@ -71,18 +71,18 @@ export default function Home() {
     try {
       // Simulação de upload para permitir visualização da interface
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       setHasData(true);
       setUploadingFile(false);
-      
+
       toast({
         title: "✅ Sucesso!",
         description: "Ambiente de busca desbloqueado com sucesso.",
       });
-      
+
       // Limpar input
       event.target.value = '';
-      
+
       /* 
       // TODO: Implementar quando backend TS tiver rota /api/upload
       const response = await fetch('/api/upload', {
@@ -142,8 +142,8 @@ export default function Home() {
       }
       return [...prev, { id: cartId, name: e.sugeridos, price: e.valor_unitario ?? null, qty: 1, vidaUtilMeses: e.vida_util_meses ?? null, manutencaoPercent: e.manutencao_percent ?? null, fornecedor: null, marca: e.marca ?? null, descricao: e.origemDescricao ?? lastQuery }]
     })
-    toast({ 
-      title: '🛒 Adicionado ao carrinho', 
+    toast({
+      title: '🛒 Adicionado ao carrinho',
       description: e.sugeridos,
       // Removed duration as it is not part of ToastProps
     })
@@ -206,7 +206,7 @@ export default function Home() {
         })
         // Tolera resposta não-OK: tenta extrair JSON e faz fallback gracioso
         const searchData = await searchResponse.json().catch(() => ({ resultados: [] }))
-        
+
         if (!searchResponse.ok) {
           console.warn('Busca inteligente retornou erro', searchData)
           toast({
@@ -219,20 +219,20 @@ export default function Home() {
           // Priorizar confidenceItem (v4.0), fallback para score_normalized (v3.0)
           const rawConfidence = r.confidenceItem ?? r.score_normalized ?? r.score ?? null
           const confidence = typeof rawConfidence === 'number' ? rawConfidence : null
-          
+
           // Mapear métricas v4.0 se disponíveis
           const metrics = r.metrics ? {
             valorUnitario: r.metrics.valorUnitario,
             vidaUtilMeses: r.metrics.vidaUtilMeses,
             manutencao: r.metrics.manutencao
           } : undefined
-          
+
           const sources = r.sources ? {
             fornecedores: r.sources.fornecedores,
             bids: r.sources.bids,
             nLinhas: r.sources.nLinhas ?? 0
           } : undefined
-          
+
           return {
             ranking: r.ranking ?? (idx + 1),
             sugeridos: r.sugeridos || r.descricao || r.grupo,
@@ -251,11 +251,11 @@ export default function Home() {
             origemDescricao: descricoes[0] || description
           }
         })
-        
+
         setEquipments(mapped)
       } else {
         // Busca em lote (2+ descrições) - fazer múltiplas chamadas individuais
-        const batchPromises = descricoes.map(desc => 
+        const batchPromises = descricoes.map(desc =>
           fetch('/api/search', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'x-user-id': USER_ID },
@@ -263,7 +263,7 @@ export default function Home() {
           }).then(r => r.json().catch(() => ({ query_original: desc, resultados: [] })))
         );
         const batchData = await Promise.all(batchPromises);
-        
+
         // Verificar se houve erros
         const hasErrors = batchData.some(d => !d.resultados || d.resultados.length === 0);
         if (hasErrors) {
@@ -273,32 +273,32 @@ export default function Home() {
             description: 'A busca em lote encontrou um erro. Resultados parciais podem estar vazios.',
           })
         }
-        
+
         // Processar resultados em lote
         const map: Record<string, Equipment[]> = {}
-        
+
         for (const searchResult of batchData) {
           const desc = searchResult.query_original || ''
           if (!map[desc]) map[desc] = []
-          
+
           for (const r of (searchResult.resultados || [])) {
             // Backend v4.0+ envia confidenceItem como 0-100 (percentual)
             const rawConfidence = r.confidenceItem ?? r.score_normalized ?? r.score ?? null
             const confidence = typeof rawConfidence === 'number' ? rawConfidence : null
-            
+
             // Mapear métricas v4.0 se disponíveis
             const metrics = r.metrics ? {
               valorUnitario: r.metrics.valorUnitario,
               vidaUtilMeses: r.metrics.vidaUtilMeses,
               manutencao: r.metrics.manutencao
             } : undefined
-            
+
             const sources = r.sources ? {
               fornecedores: r.sources.fornecedores,
               bids: r.sources.bids,
               nLinhas: r.sources.nLinhas ?? 0
             } : undefined
-            
+
             map[desc].push({
               ranking: 0,
               sugeridos: r.sugeridos || r.descricao || r.grupo,
@@ -325,7 +325,7 @@ export default function Home() {
             return confB - confA
           })
           ordered.forEach((it, idx) => (it.ranking = idx + 1))
-          
+
           groups.push({ descricao, itens: ordered })
         })
         const orderedGroups = descricoes
@@ -351,13 +351,13 @@ export default function Home() {
       <InteractiveBackground />
       <CursorFollower />
       <SkipLinks />
-      
+
       {/* Navbar profissional */}
-      <Navbar 
+      <Navbar
         cartItemCount={cart.length}
         onCartClick={() => setCartOpen(true)}
       />
-      
+
       <div className="app-container py-6 sm:py-10 lg:py-16" id="main-content">
         {/* Header premium com gradientes */}
         <div className="mb-6 sm:mb-12 lg:mb-16 px-2 sm:px-0 relative">
@@ -365,19 +365,19 @@ export default function Home() {
           <div className="hidden lg:block absolute inset-0 -z-10">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-500/10 rounded-full blur-3xl"></div>
           </div>
-          
+
           <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8">
             <div className="space-y-3 sm:space-y-4 lg:space-y-6 animate-fade-slide-up" style={{ animationDelay: '100ms' }}>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-transparent">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-transparent px-2">
                 Precificação de Equipamentos
               </h1>
-              
-              <p className="mx-auto max-w-3xl text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-medium px-2 sm:px-4">
+
+              <p className="mx-auto max-w-3xl text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-medium px-4 sm:px-4">
                 Descreva os equipamentos que precisa e receba sugestões com <span className="text-blue-600 font-bold">preço, vida útil e manutenção</span> — tudo com IA.
               </p>
             </div>
-            
-            {/* Feature badges - Apenas desktop (no mobile aparecem após a barra de busca) */}
+
+            {/* Feature badges - Apenas desktop (no mobile agora aparecem acima da busca) */}
             <div className="hidden sm:flex flex-wrap justify-center gap-2 sm:gap-3 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
               <div className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-md hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 cursor-default backdrop-blur-sm">
                 <Zap className="h-4 w-4 group-hover:text-blue-600 transition-colors" />
@@ -401,50 +401,50 @@ export default function Home() {
             <div className="relative rounded-3xl border-2 border-dashed border-blue-300/40 bg-gradient-to-br from-white via-blue-50/30 to-white p-14 text-center card-glass hover:border-blue-400/60 transition-all duration-500 group overflow-hidden">
               {/* Efeito de brilho animado */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-              
+
               <div className="relative z-10">
                 <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-blue-500/20 via-blue-600/15 to-blue-500/20 mb-7 shadow-xl relative">
                   <div className="absolute inset-0 rounded-full bg-blue-500/20 animate-ping opacity-50"></div>
                   <Upload className="h-11 w-11 text-blue-600 relative z-10" />
                 </div>
                 <h3 className="text-2xl font-black mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-transparent">
-                Carregue sua planilha
-              </h3>
-              <p className="text-muted-foreground mb-10 text-lg max-w-md mx-auto leading-relaxed">
-                Faça upload de um arquivo Excel (.xlsx) com os dados dos equipamentos
-              </p>
-              <div className="flex flex-col items-center gap-5">
-                <Label htmlFor="file-upload" className="cursor-pointer">
-                  <Button 
-                    asChild 
-                    disabled={uploadingFile}
-                    size="lg"
-                    className="btn-interactive shadow-large hover:shadow-xl px-10 py-7 text-base font-bold tracking-wide"
-                  >
-                    <span className="flex items-center gap-3">
-                      {uploadingFile ? (
-                        <>
-                          <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>
-                          Carregando...
-                        </>
-                      ) : (
-                        <>
-                          <Upload className="h-5 w-5" />
-                          Selecionar arquivo
-                        </>
-                      )}
-                    </span>
-                  </Button>
-                </Label>
-                <Input
-                  id="file-upload"
-                  type="file"
-                  accept=".xlsx"
-                  onChange={handleFileUpload}
-                  className="hidden"
-                />
-                <p className="text-xs text-muted-foreground font-medium">Formatos aceitos: .xlsx (máx. 10MB)</p>
-              </div>
+                  Carregue sua planilha
+                </h3>
+                <p className="text-muted-foreground mb-10 text-lg max-w-md mx-auto leading-relaxed">
+                  Faça upload de um arquivo Excel (.xlsx) com os dados dos equipamentos
+                </p>
+                <div className="flex flex-col items-center gap-5">
+                  <Label htmlFor="file-upload" className="cursor-pointer">
+                    <Button
+                      asChild
+                      disabled={uploadingFile}
+                      size="lg"
+                      className="btn-interactive shadow-large hover:shadow-xl px-10 py-7 text-base font-bold tracking-wide"
+                    >
+                      <span className="flex items-center gap-3">
+                        {uploadingFile ? (
+                          <>
+                            <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary-foreground border-t-transparent"></div>
+                            Carregando...
+                          </>
+                        ) : (
+                          <>
+                            <Upload className="h-5 w-5" />
+                            Selecionar arquivo
+                          </>
+                        )}
+                      </span>
+                    </Button>
+                  </Label>
+                  <Input
+                    id="file-upload"
+                    type="file"
+                    accept=".xlsx"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                  <p className="text-xs text-muted-foreground font-medium">Formatos aceitos: .xlsx (máx. 10MB)</p>
+                </div>
               </div>
             </div>
           </div>
@@ -453,29 +453,31 @@ export default function Home() {
         {/* Search Input */}
         {hasData && (
           <div id="search" className="space-y-4 sm:space-y-8 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
-            <SearchInput onSearch={handleSearch} isLoading={isLoading} />
-            
-            {/* Feature badges - Apenas mobile (no desktop aparecem acima) */}
-            <div className="flex sm:hidden flex-wrap justify-center gap-2">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-sm">
+
+            {/* Feature badges - Mobile (agora acima da busca) */}
+            <div className="flex sm:hidden flex-wrap justify-center gap-2 mb-8 px-2">
+              <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/60 border border-blue-200 text-blue-700 shadow-sm backdrop-blur-sm">
                 <Zap className="h-3 w-3" />
-                <span className="text-xs font-semibold">Busca Instantânea</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide">Busca Rápida</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-sm">
+              <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/60 border border-blue-200 text-blue-700 shadow-sm backdrop-blur-sm">
                 <TrendingUp className="h-3 w-3" />
-                <span className="text-xs font-semibold">Análise IA</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide">IA</span>
               </div>
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-sm">
+              <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-white/60 border border-blue-200 text-blue-700 shadow-sm backdrop-blur-sm">
                 <Shield className="h-3 w-3" />
-                <span className="text-xs font-semibold">Dados Confiáveis</span>
+                <span className="text-[10px] font-bold uppercase tracking-wide">Confiável</span>
               </div>
             </div>
+
+            <SearchInput onSearch={handleSearch} isLoading={isLoading} />
           </div>
         )}
 
+
         {/* Results */}
         <div ref={resultsRef} />
-        
+
         {/* Loading State melhorado */}
         {isLoading && (
           <div className="mt-12 sm:mt-16 md:mt-20" id="results" role="status" aria-live="polite" aria-label="Carregando resultados">
@@ -514,7 +516,7 @@ export default function Home() {
                   selected={selected.has(itemId(equipment))}
                   onToggleSelect={() => {
                     const id = itemId(equipment)
-                    setSelected(prev => { const next = new Set(prev); if(next.has(id)) next.delete(id); else next.add(id); return next })
+                    setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next })
                   }}
                   onAdd={() => addToCart(equipment)}
                 />
@@ -527,9 +529,9 @@ export default function Home() {
         {!isLoading && batchGroups.length > 0 && (
           <div id="results" className="mt-12 sm:mt-16 md:mt-20 space-y-12 sm:space-y-14 md:space-y-16 animate-fade-slide-up" role="region" aria-live="polite" aria-label="Resultados da busca em lotes">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:justify-end gap-3">
-              <Button 
-                size="sm" 
-                variant="outline" 
+              <Button
+                size="sm"
+                variant="outline"
                 className="btn-interactive shadow-soft hover:shadow-medium text-xs sm:text-sm"
                 onClick={() => {
                   try {
@@ -540,16 +542,16 @@ export default function Home() {
                       'Vida Útil (meses)',
                       'Manutenção (%)',
                       'Confiança (%)'
-                      
+
                     ]
-                    const rows = (batchResults || []).map((r:any) => [
+                    const rows = (batchResults || []).map((r: any) => [
                       `"${r.descricao_original || ''}"`,
                       `"${r.sugerido || 'N/A'}"`,
                       r.valor_unitario ?? 'N/A',
                       r.vida_util_meses ?? 'N/A',
                       r.manutencao_percent ?? 'N/A',
                       r.confianca ?? 'N/A',
-                      
+
                     ].join(','))
                     const csv = [headers.join(','), ...rows].join('\n')
                     const blob = new Blob([csv], { type: 'text/csv' })
@@ -570,7 +572,7 @@ export default function Home() {
                 Baixar CSV
               </Button>
             </div>
-            
+
             {batchGroups.map((group, gi) => {
               const sortKey = batchSortMap[group.descricao] || 'conf-desc'
               const sortedItems = [...group.itens].sort((a, b) => {
@@ -595,7 +597,7 @@ export default function Home() {
                 }
               })
               sortedItems.forEach((it, idx) => (it.ranking = idx + 1))
-              
+
               return (
                 <section key={gi} className="space-y-6 sm:space-y-8">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 flex-wrap">
@@ -634,7 +636,7 @@ export default function Home() {
                         selected={selected.has(itemId(equipment))}
                         onToggleSelect={() => {
                           const id = itemId(equipment)
-                          setSelected(prev => { const next = new Set(prev); if(next.has(id)) next.delete(id); else next.add(id); return next })
+                          setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next })
                         }}
                         onAdd={() => addToCart(equipment)}
                       />
@@ -648,12 +650,12 @@ export default function Home() {
 
         {/* Empty State melhorado */}
         {!isLoading && hasData && equipments.length === 0 && batchGroups.length === 0 && lastQuery && (
-          <EmptyState 
-            type="no-results" 
+          <EmptyState
+            type="no-results"
             lastQuery={lastQuery}
           />
         )}
-        
+
         {!isLoading && hasData && equipments.length === 0 && batchGroups.length === 0 && !lastQuery && (
           <EmptyState type="no-search" />
         )}
@@ -676,12 +678,12 @@ export default function Home() {
                 Soluções inteligentes para precificação de equipamentos
               </p>
             </div>
-            
+
             {/* Links */}
             <div className="flex flex-col items-center">
               <h3 className="text-sm font-bold text-slate-900 mb-4">Links</h3>
               <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-600">
-                <InfoModal 
+                <InfoModal
                   trigger="Sobre"
                   title="Sobre a Ferramenta"
                   content={`O AFM Precificação de Equipamentos é uma ferramenta inteligente desenvolvida para auxiliar na estimativa de custos, vida útil e manutenção de equipamentos de limpeza.
@@ -689,7 +691,7 @@ export default function Home() {
 Utilizando algoritmos avançados e uma base de dados atualizada, fornecemos insights precisos para otimizar seu planejamento financeiro e operacional.`}
                 />
                 <span className="text-slate-300">•</span>
-                <InfoModal 
+                <InfoModal
                   trigger="Contato"
                   title="Fale Conosco"
                   content={`Entre em contato conosco para dúvidas, sugestões ou suporte:
@@ -697,7 +699,7 @@ Utilizando algoritmos avançados e uma base de dados atualizada, fornecemos insi
 Email: kaike.costa@atlasinovacoes.com.br`}
                 />
                 <span className="text-slate-300">•</span>
-                <InfoModal 
+                <InfoModal
                   trigger="Termos"
                   title="Termos de Uso"
                   content={`1. O uso desta ferramenta é para fins estimativos.
@@ -710,7 +712,7 @@ Email: kaike.costa@atlasinovacoes.com.br`}
                 />
               </div>
             </div>
-            
+
             {/* Copyright e Powered */}
             <div className="flex flex-col items-center md:items-end">
               <p className="text-sm text-slate-600 font-semibold mb-2">
@@ -736,6 +738,6 @@ Email: kaike.costa@atlasinovacoes.com.br`}
         onChangeNotes={changeNotes}
         onChangeName={changeName}
       />
-    </main>
+    </main >
   )
 }

@@ -81,7 +81,7 @@ export function CartWidget({ items, isOpen, onClose, onClear, onRemove, onChange
         if (ex) resumoMap.set(key, { ...ex, qty: ex.qty + (it.qty || 0) })
         else resumoMap.set(key, { desc: it.descricao || '', name: it.name, price: it.price ?? null, qty: it.qty || 0, vida: it.vidaUtilMeses ?? null, manperc: it.manutencaoPercent ?? null })
       }
-  const totalItensUnicos = resumoMap.size
+      const totalItensUnicos = resumoMap.size
       const quantidadeTotal = items.reduce((acc, it) => acc + (it.qty || 0), 0)
       let valorTotal = 0
       resumoMap.forEach((v) => {
@@ -121,9 +121,9 @@ export function CartWidget({ items, isOpen, onClose, onClear, onRemove, onChange
       } as any
       kpi1.alignment = { wrapText: true, vertical: 'middle', horizontal: 'center' }
       kpi1.fill = kpiBoxFill
-      ;(['A5','A6','A7','B5','B6','B7'] as const).forEach((addr) => {
-        wsOverview.getCell(addr).border = borderThin
-      })
+        ; (['A5', 'A6', 'A7', 'B5', 'B6', 'B7'] as const).forEach((addr) => {
+          wsOverview.getCell(addr).border = borderThin
+        })
 
       // Cartão 2: C5:D7
       wsOverview.mergeCells('C5:D7')
@@ -136,9 +136,9 @@ export function CartWidget({ items, isOpen, onClose, onClear, onRemove, onChange
       } as any
       kpi2.alignment = { wrapText: true, vertical: 'middle', horizontal: 'center' }
       kpi2.fill = kpiBoxFill
-      ;(['C5','C6','C7','D5','D6','D7'] as const).forEach((addr) => {
-        wsOverview.getCell(addr).border = borderThin
-      })
+        ; (['C5', 'C6', 'C7', 'D5', 'D6', 'D7'] as const).forEach((addr) => {
+          wsOverview.getCell(addr).border = borderThin
+        })
 
       // Cartão 3: E5:F7
       wsOverview.mergeCells('E5:F7')
@@ -151,9 +151,9 @@ export function CartWidget({ items, isOpen, onClose, onClear, onRemove, onChange
       } as any
       kpi3.alignment = { wrapText: true, vertical: 'middle', horizontal: 'center' }
       kpi3.fill = kpiBoxFill
-      ;(['E5','E6','E7','F5','F6','F7'] as const).forEach((addr) => {
-        wsOverview.getCell(addr).border = borderThin
-      })
+        ; (['E5', 'E6', 'E7', 'F5', 'F6', 'F7'] as const).forEach((addr) => {
+          wsOverview.getCell(addr).border = borderThin
+        })
 
       // 2) Itens detalhados (uma linha por unidade)
       const wsItens = wb.addWorksheet('Itens', { views: [{ state: 'frozen', ySplit: 1 }] })
@@ -202,10 +202,10 @@ export function CartWidget({ items, isOpen, onClose, onClear, onRemove, onChange
       URL.revokeObjectURL(url)
       toast({ title: '✅ Exportado com sucesso', description: 'Arquivo Resultados.xlsx gerado.' })
       return
-      } catch (e) {
+    } catch (e) {
       // Fallback para CSV caso o Excel falhe (problemas de bundle do exceljs, etc.)
       try {
-        const headers = ['Descrição (Usuário)','Sugestão','Quantidade','Vida Útil (meses)','Preço Unitário','Manutenção (%)','Subtotal']
+        const headers = ['Descrição (Usuário)', 'Sugestão', 'Quantidade', 'Vida Útil (meses)', 'Preço Unitário', 'Manutenção (%)', 'Subtotal']
         const resumoMap = new Map<string, { desc: string | null; name: string; price: number | null; qty: number; vida: number | null; manperc: number | null }>()
         for (const it of items) {
           const key = `${it.descricao || ''}__${it.id}`
@@ -245,193 +245,188 @@ export function CartWidget({ items, isOpen, onClose, onClear, onRemove, onChange
 
   return (
     <>
-      {/* Overlay Backdrop */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[90] transition-opacity duration-300"
-          onClick={onClose}
-          aria-hidden="true"
-        />
-      )}
+      {/* Overlay Backdrop - Smooth Fade */}
+      <div
+        className={`fixed inset-0 bg-slate-900/40 backdrop-blur-[2px] z-[90] transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
 
-      {/* Painel do Carrinho Slide-over */}
-      <div 
-        className={`fixed top-0 right-0 h-full w-full sm:w-[440px] bg-white shadow-2xl border-l border-slate-100 z-[100] transform transition-transform duration-300 ease-out flex flex-col ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+      {/* Painel do Carrinho - Premium Slide-over */}
+      <div
+        className={`fixed top-2 bottom-2 right-2 w-[95%] sm:w-[480px] bg-white/90 backdrop-blur-2xl shadow-2xl z-[100] transform transition-all duration-500 cubic-bezier(0.32, 0.72, 0, 1) flex flex-col rounded-[2rem] border border-white/20 focus:outline-none ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-[110%] opacity-0'
+          }`}
       >
-        {/* Header Minimalista */}
-        <div className="px-6 py-5 border-b border-slate-100 bg-white/50 backdrop-blur-md sticky top-0 z-10">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-              <ShoppingCart className="h-5 w-5 text-blue-600" />
-              Seu Carrinho
-            </h2>
-            <button
-              onClick={onClose}
-              className="h-8 w-8 rounded-full hover:bg-slate-100 flex items-center justify-center transition-colors text-slate-500 hover:text-slate-900"
-            >
-              <X className="h-5 w-5" strokeWidth={2} />
-            </button>
-          </div>
-          
-          <div className="flex items-baseline justify-between">
-            <span className="text-sm font-medium text-slate-500">{items.length} {items.length === 1 ? 'item' : 'itens'}</span>
-            <div className="text-right">
-              <div className="text-2xl font-bold text-slate-900 tracking-tight">
-                {currencyBRL.format(totals.totalPrice)}
+        {/* Header com Design Limpo */}
+        <div className="px-6 py-6 border-b border-slate-100/50 bg-white/50 flex-shrink-0">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-10 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 shadow-inner">
+                <ShoppingCart className="h-5 w-5" />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-slate-900 tracking-tight">Seu Carrinho</h2>
+                <div className="text-sm font-medium text-slate-400">{items.length} {items.length === 1 ? 'item' : 'itens'} adicionados</div>
               </div>
             </div>
+            <button
+              onClick={onClose}
+              className="h-9 w-9 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-slate-900 flex items-center justify-center transition-all duration-300 hover:rotate-90"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </div>
+
+          <div className="mt-4 flex items-center justify-between bg-blue-50/50 p-3 rounded-2xl border border-blue-100/50">
+            <span className="text-sm font-semibold text-blue-700/80 uppercase tracking-wide px-2">Total Estimado</span>
+            <span className="text-2xl font-black text-slate-900 bg-gradient-to-r from-blue-700 to-blue-500 bg-clip-text text-transparent px-2">
+              {currencyBRL.format(totals.totalPrice)}
+            </span>
           </div>
         </div>
 
-        {/* Lista de Itens */}
-        <div className="flex-1 overflow-y-auto px-6 py-4 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent">
+        {/* Lista Scrollável */}
+        <div className="flex-1 overflow-y-auto px-4 py-4 scrollbar-thin scrollbar-thumb-slate-200 scrollbar-track-transparent space-y-4">
           {items.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center space-y-4 opacity-60">
-              <div className="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center">
+            <div className="h-full flex flex-col items-center justify-center text-center p-8 animate-fade-in">
+              <div className="w-24 h-24 rounded-full bg-slate-50 mb-6 flex items-center justify-center shadow-inner relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-transparent to-white/50" />
                 <ShoppingCart className="h-10 w-10 text-slate-300" strokeWidth={1.5} />
               </div>
-              <div>
-                <p className="text-lg font-semibold text-slate-900">Carrinho vazio</p>
-                <p className="text-sm text-slate-500">Adicione equipamentos para começar</p>
-              </div>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Seu carrinho está vazio</h3>
+              <p className="text-slate-500 max-w-[200px] leading-relaxed">
+                Explore nosso catálogo e adicione equipamentos para começar seu orçamento.
+              </p>
             </div>
           ) : (
-            <div className="space-y-6">
-              {items.map((it) => (
-                <div 
-                  key={it.id}
-                  className="group relative"
-                >
-                  {/* Info do Item */}
-                  <div className="flex gap-4 mb-3">
-                    <div className="flex-1 min-w-0">
+            items.map((it) => (
+              <div
+                key={it.id}
+                className="group relative bg-white border border-slate-100 shadow-sm hover:shadow-md transition-all duration-300 rounded-[1.5rem] p-4 overflow-hidden"
+              >
+                {/* Efeito hover lateral */}
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                <div className="flex gap-4">
+                  <div className="flex-1 min-w-0">
+                    {/* Título Editável */}
+                    <div className="mb-2">
                       {editingId === it.id ? (
-                        <div className="flex items-center gap-2 mb-1">
+                        <div className="flex items-center gap-2 animate-fade-in">
                           <input
                             value={editingValue}
                             onChange={(e) => setEditingValue(e.target.value)}
                             onKeyDown={(e) => {
                               if (e.key === 'Enter') {
-                                const newVal = editingValue.trim()
-                                if (newVal) onChangeName(it.id, newVal)
-                                setEditingId(null)
-                              } else if (e.key === 'Escape') {
+                                const val = editingValue.trim()
+                                if (val) onChangeName(it.id, val)
                                 setEditingId(null)
                               }
                             }}
-                            onBlur={() => {
-                              const newVal = editingValue.trim()
-                              if (newVal) onChangeName(it.id, newVal)
-                              setEditingId(null)
-                            }}
                             autoFocus
-                            className="flex-1 min-w-0 text-sm px-2 py-1 rounded-md border border-blue-200 bg-blue-50/50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                            className="w-full text-base font-semibold px-2 py-1 rounded-lg border-2 border-blue-100 bg-blue-50 text-slate-900 focus:outline-none focus:border-blue-500 bg-white"
                           />
-                          <button
-                            onClick={() => {
-                              const newVal = editingValue.trim()
-                              if (newVal) onChangeName(it.id, newVal)
-                              setEditingId(null)
-                            }}
-                            className="h-7 w-7 rounded-lg hover:bg-blue-100 text-blue-600 flex items-center justify-center"
-                            title="Salvar"
-                          >
+                          <button onClick={() => { if (editingValue.trim()) onChangeName(it.id, editingValue.trim()); setEditingId(null) }} className="p-2 bg-green-100 text-green-700 rounded-lg hover:bg-green-200">
                             <Check className="h-4 w-4" />
                           </button>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2 mb-1 group/title">
-                          <h3 className="font-semibold text-slate-900 text-sm leading-tight truncate cursor-default" title={it.name}>
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="font-bold text-slate-800 text-base leading-snug cursor-text hover:text-blue-700 transition-colors" onClick={() => { setEditingId(it.id); setEditingValue(it.name) }} title="Clique para editar">
                             {it.name}
                           </h3>
-                          <button
-                            onClick={() => { setEditingId(it.id); setEditingValue(it.name) }}
-                            className="opacity-0 group-hover/title:opacity-100 h-6 w-6 rounded-md hover:bg-slate-100 text-slate-400 hover:text-blue-600 flex items-center justify-center flex-shrink-0 transition-all"
-                            title="Editar nome"
-                          >
-                            <Pencil className="h-3 w-3" />
-                          </button>
                         </div>
                       )}
-                      <p className="text-xs font-medium text-slate-500">
-                        {it.price != null ? currencyBRL.format(it.price) : 'Preço sob consulta'}
-                      </p>
+                      <div className="text-xs font-medium text-slate-400 mt-1 flex items-center gap-1">
+                        {it.marca && <span className="bg-slate-100 px-2 py-0.5 rounded-full">{it.marca}</span>}
+                        <span>{it.price != null ? currencyBRL.format(it.price) : 'Consulte'} unit.</span>
+                      </div>
                     </div>
+
+                    {/* Controles Inferiores */}
+                    <div className="flex items-center justify-between mt-4 bg-slate-50/80 rounded-xl p-1.5 border border-slate-100">
+                      <div className="flex items-center gap-1 bg-white rounded-lg shadow-sm border border-slate-100 p-0.5">
+                        <button
+                          onClick={() => onChangeQty(it.id, Math.max(1, it.qty - 1))}
+                          disabled={it.qty <= 1}
+                          className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-slate-100 text-slate-500 hover:text-blue-600 disabled:opacity-30 disabled:hover:bg-transparent"
+                        >
+                          <Minus className="h-3.5 w-3.5" strokeWidth={2.5} />
+                        </button>
+                        <span className="w-8 text-center text-sm font-bold text-slate-800">{it.qty}</span>
+                        <button
+                          onClick={() => onChangeQty(it.id, it.qty + 1)}
+                          className="h-7 w-7 flex items-center justify-center rounded-md hover:bg-blue-50 text-slate-500 hover:text-blue-600"
+                        >
+                          <Plus className="h-3.5 w-3.5" strokeWidth={2.5} />
+                        </button>
+                      </div>
+
+                      <div className="px-3 font-bold text-slate-900 text-sm">
+                        {it.price != null ? currencyBRL.format(it.price * it.qty) : '—'}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Botão Remover Lateral */}
+                  <div className="flex flex-col items-center gap-2 border-l border-slate-100 pl-3 ml-1">
                     <button
                       onClick={() => onRemove(it.id)}
-                      className="opacity-0 group-hover:opacity-100 h-8 w-8 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 flex items-center justify-center transition-all flex-shrink-0"
-                      title="Remover"
+                      className="h-8 w-8 rounded-xl bg-red-50 text-red-500 hover:bg-red-500 hover:text-white flex items-center justify-center transition-all duration-300 shadow-sm"
+                      title="Remover item"
                     >
-                      <Trash2 className="h-4 w-4" strokeWidth={1.5} />
+                      <Trash2 className="h-4 w-4" />
                     </button>
-                  </div>
-
-                  {/* Controles */}
-                  <div className="flex items-center justify-between gap-4 bg-slate-50/50 rounded-xl p-2 border border-slate-100">
-                    {/* Quantidade */}
-                    <div className="flex items-center gap-1">
+                    {editingId !== it.id && (
                       <button
-                        onClick={() => onChangeQty(it.id, Math.max(1, it.qty - 1))}
-                        className="h-7 w-7 rounded-lg bg-white border border-slate-200 hover:border-blue-300 hover:text-blue-600 flex items-center justify-center transition-all shadow-sm disabled:opacity-50 disabled:hover:border-slate-200 disabled:hover:text-slate-400"
-                        disabled={it.qty <= 1}
+                        onClick={() => { setEditingId(it.id); setEditingValue(it.name) }}
+                        className="h-8 w-8 rounded-xl bg-slate-50 text-slate-400 hover:bg-blue-500 hover:text-white flex items-center justify-center transition-all duration-300"
                       >
-                        <Minus className="h-3 w-3" strokeWidth={2.5} />
+                        <Pencil className="h-4 w-4" />
                       </button>
-                      <span className="w-8 text-center text-sm font-bold text-slate-700">{it.qty}</span>
-                      <button
-                        onClick={() => onChangeQty(it.id, it.qty + 1)}
-                        className="h-7 w-7 rounded-lg bg-white border border-slate-200 hover:border-blue-300 hover:text-blue-600 flex items-center justify-center transition-all shadow-sm"
-                      >
-                        <Plus className="h-3 w-3" strokeWidth={2.5} />
-                      </button>
-                    </div>
-
-                    {/* Subtotal */}
-                    <div className="text-sm font-bold text-slate-900">
-                      {it.price != null ? currencyBRL.format(it.price * it.qty) : '—'}
-                    </div>
+                    )}
                   </div>
+                </div>
 
-                  {/* Observações */}
+                {/* Área de Obs */}
+                <div className="mt-3 pt-3 border-t border-slate-50">
                   <textarea
-                    placeholder="Adicionar observações..."
+                    placeholder="Adicionar observação..."
                     value={it.notes || ''}
-                    rows={1}
                     onChange={(e) => onChangeNotes(it.id, e.target.value)}
+                    rows={1}
+                    className="w-full text-xs font-medium px-3 py-2 bg-slate-50/50 hover:bg-white focus:bg-white rounded-xl border border-transparent hover:border-slate-200 focus:border-blue-300 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none resize-none placeholder:text-slate-400"
                     onInput={(e) => {
                       const el = e.currentTarget
                       el.style.height = 'auto'
-                      const lineH = parseFloat(getComputedStyle(el).lineHeight || '20') || 20
-                      const maxH = lineH * 3
-                      const nextH = Math.min(el.scrollHeight, maxH)
-                      el.style.height = `${nextH}px`
-                      el.style.overflowY = el.scrollHeight > maxH ? 'auto' : 'hidden'
+                      el.style.height = el.scrollHeight + 'px'
                     }}
-                    className="mt-2 w-full text-xs px-3 py-2 rounded-lg border border-transparent hover:border-slate-200 focus:border-blue-300 bg-transparent hover:bg-slate-50 focus:bg-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 transition-all resize-none"
                   />
                 </div>
-              ))}
-            </div>
+              </div>
+            ))
           )}
         </div>
 
-        {/* Footer com Ações */}
+        {/* Footer Actions */}
         {items.length > 0 && (
-          <div className="px-6 py-6 border-t border-slate-100 bg-white space-y-3 shadow-[0_-4px_20px_-4px_rgba(0,0,0,0.05)] z-20">
+          <div className="p-6 bg-white border-t border-slate-100 shrink-0">
             <Button
               onClick={exportExcel}
-              className="w-full h-12 bg-slate-900 hover:bg-blue-700 text-white rounded-xl font-bold text-base shadow-lg shadow-slate-900/10 hover:shadow-blue-700/20 transition-all duration-300"
+              className="group w-full h-14 bg-slate-900 hover:bg-blue-600 text-white rounded-2xl font-bold text-lg shadow-xl shadow-slate-900/10 hover:shadow-blue-600/20 transition-all duration-300 mb-3 flex items-center justify-center gap-3"
             >
-              <Download className="mr-2 h-5 w-5" strokeWidth={2} />
-              Exportar Orçamento
+              <span className="bg-white/20 p-1.5 rounded-lg group-hover:bg-white/30 transition-colors">
+                <Download className="h-5 w-5" strokeWidth={2.5} />
+              </span>
+              Gerar Orçamento
             </Button>
-            
+
             <button
               onClick={onClear}
-              className="w-full text-sm font-medium text-slate-500 hover:text-red-600 py-2 transition-colors"
+              className="w-full py-3 text-sm font-medium text-slate-400 hover:text-red-500 transition-colors flex items-center justify-center gap-2 hover:bg-red-50 rounded-xl"
             >
+              <Trash2 className="h-4 w-4" />
               Esvaziar carrinho
             </button>
           </div>

@@ -8,7 +8,10 @@ import Metrics from "@/components/metrics"
 const inter = Inter({ 
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter'
+  variable: '--font-inter',
+  preload: true,
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Arial', 'sans-serif'],
+  adjustFontFallback: true
 })
 
 export const metadata: Metadata = {

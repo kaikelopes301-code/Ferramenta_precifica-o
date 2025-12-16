@@ -11,12 +11,20 @@ const nextConfig = {
   // React strict mode
   reactStrictMode: true,
   
-  // ✅ REMOVIDO swcMinify (já é padrão)
+  // Production optimizations
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
+  compress: true,
   
   // Server external packages
   serverExternalPackages: ['@prisma/client', 'bcrypt'],
   
-  // ✅ REMOVIDO experimental.optimizeCss (bug no Next 15)
+  // Compiler optimizations
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
+  },
   
   // Image optimization
   images: {

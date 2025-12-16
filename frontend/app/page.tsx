@@ -9,9 +9,9 @@ import { EquipmentCardSkeleton } from "@/components/equipment-card-skeleton"
 import { EmptyState } from "@/components/empty-state"
 import { LoadingState } from "@/components/loading-state"
 import { SkipLinks } from "@/components/skip-links"
+import { Logo } from "@/components/logo"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Sparkles, Upload, Download, TrendingUp, Zap, Shield } from "lucide-react"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -475,18 +475,14 @@ export default function Home() {
           
           {/* Top bar */}
           <div className="mb-8 sm:mb-10 md:mb-12 flex items-center justify-between animate-fade-slide-up">
-            <Link 
+            <Link
               href="/" 
               className="flex items-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]" 
               aria-label="Ir para a página inicial"
             >
-              <Image
-                src={isDark ? "/logo-atlas-branca.png" : "/logo-atlas-letras-preta.png"}
-                alt="Atlas Inovações"
+              <Logo 
                 width={260}
                 height={76}
-                priority
-                sizes="(max-width: 640px) 180px, (max-width: 768px) 220px, 260px"
                 className="select-none drop-shadow-sm w-[180px] sm:w-[220px] md:w-[260px] h-auto"
               />
             </Link>

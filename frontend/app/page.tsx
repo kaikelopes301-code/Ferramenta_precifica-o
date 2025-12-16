@@ -5,6 +5,10 @@ import Link from "next/link"
 import dynamic from "next/dynamic"
 import { SearchInput } from "@/components/search-input"
 import { EquipmentCard } from "@/components/equipment-card"
+import { EquipmentCardSkeleton } from "@/components/equipment-card-skeleton"
+import { EmptyState } from "@/components/empty-state"
+import { LoadingState } from "@/components/loading-state"
+import { SkipLinks } from "@/components/skip-links"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Sparkles, Upload, Download, TrendingUp, Zap, Shield } from "lucide-react"
 import Image from "next/image"
@@ -462,14 +466,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background">
-      <div className="app-container section-spacing">
+      <SkipLinks />
+      <div className="app-container section-spacing" id="main-content">
         {/* Header com gradiente melhorado */}
         <div className="mb-20 px-2 sm:px-0 relative overflow-hidden">
           <div className="hidden lg:block absolute inset-0 -z-10 gradient-mesh" />
           <div className="hidden lg:block absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
           
           {/* Top bar */}
-          <div className="mb-12 flex items-center justify-between animate-fade-slide-up">
+          <div className="mb-8 sm:mb-10 md:mb-12 flex items-center justify-between animate-fade-slide-up">
             <Link 
               href="/" 
               className="flex items-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]" 
@@ -481,10 +486,11 @@ export default function Home() {
                 width={260}
                 height={76}
                 priority
-                className="select-none drop-shadow-sm"
+                sizes="(max-width: 640px) 180px, (max-width: 768px) 220px, 260px"
+                className="select-none drop-shadow-sm w-[180px] sm:w-[220px] md:w-[260px] h-auto"
               />
             </Link>
-            <div className="transition-all duration-300 hover:scale-110 active:scale-95">
+            <div className="transition-all duration-300 hover:scale-110 active:scale-95 shrink-0">
               <ThemeToggle />
             </div>
           </div>
@@ -575,7 +581,7 @@ export default function Home() {
 
         {/* Search Input */}
         {hasData && (
-          <div className="space-y-8 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
+          <div id="search" className="space-y-8 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
             <SearchInput onSearch={handleSearch} isLoading={isLoading} />
           </div>
         )}
@@ -585,27 +591,11 @@ export default function Home() {
         
         {/* Loading State melhorado */}
         {isLoading && (
-          <div className="mt-20">
-            <div className="mb-12 text-center animate-fade-slide-up">
-              <div className="inline-flex items-center gap-4 rounded-full bg-gradient-to-r from-primary/15 via-primary/20 to-primary/15 px-10 py-5 text-primary shadow-large backdrop-blur-md border border-primary/30">
-                <div className="relative">
-                  <div className="h-4 w-4 animate-ping rounded-full bg-primary absolute"></div>
-                  <div className="h-4 w-4 rounded-full bg-primary"></div>
-                </div>
-                <span className="font-bold text-lg tracking-wide">Analisando equipamentos...</span>
-              </div>
-            </div>
-            <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(260px,1fr))] xl:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] 2xl:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+          <div className="mt-12 sm:mt-16 md:mt-20" id="results" role="status" aria-live="polite" aria-label="Carregando resultados">
+            <LoadingState type="search" message="Analisando equipamentos..." />
+            <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(260px,1fr))] xl:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] 2xl:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="group">
-                  <div className="h-96 rounded-3xl bg-gradient-to-br from-card to-card/60 border border-border/60 shadow-large relative overflow-hidden">
-                    <div className="absolute inset-0 animate-shimmer"></div>
-                  </div>
-                  <div className="mt-6 space-y-3">
-                    <div className="h-6 rounded-lg bg-muted/60 skeleton w-3/4"></div>
-                    <div className="h-4 rounded-lg bg-muted/40 skeleton w-1/2"></div>
-                  </div>
-                </div>
+                <EquipmentCardSkeleton key={i} />
               ))}
             </div>
           </div>
@@ -613,7 +603,7 @@ export default function Home() {
 
         {/* Results - Single */}
         {!isLoading && equipments.length > 0 && batchGroups.length === 0 && (
-          <div className="mt-12 sm:mt-16 md:mt-20 animate-fade-slide-up">
+          <div id="results" className="mt-12 sm:mt-16 md:mt-20 animate-fade-slide-up" role="region" aria-live="polite" aria-label="Resultados da busca">
             <div className="mb-8 sm:mb-10 md:mb-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
               <div>
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight bg-gradient-to-r from-foreground to-foreground/85 bg-clip-text text-transparent">
@@ -653,7 +643,7 @@ export default function Home() {
 
         {/* Results - Batch */}
         {!isLoading && batchGroups.length > 0 && (
-          <div className="mt-12 sm:mt-16 md:mt-20 space-y-12 sm:space-y-14 md:space-y-16 animate-fade-slide-up">
+          <div id="results" className="mt-12 sm:mt-16 md:mt-20 space-y-12 sm:space-y-14 md:space-y-16 animate-fade-slide-up" role="region" aria-live="polite" aria-label="Resultados da busca em lotes">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:justify-end gap-3">
               <Button 
                 size="sm" 
@@ -798,49 +788,15 @@ export default function Home() {
         )}
 
         {/* Empty State melhorado */}
-        {!isLoading && hasData && equipments.length === 0 && batchGroups.length === 0 && (
-          <div className="mt-20 sm:mt-24 md:mt-32 text-center animate-fade-slide-up">
-            <div className="mx-auto mb-8 sm:mb-10 flex h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 items-center justify-center rounded-full bg-gradient-to-br from-primary/25 via-primary/20 to-primary/15 border-2 border-primary/30 shadow-xl relative">
-              <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
-              <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-primary animate-pulse-glow relative z-10" />
-            </div>
-            <h3 className="mb-4 sm:mb-5 text-2xl sm:text-3xl font-black bg-gradient-to-r from-foreground to-foreground/85 bg-clip-text text-transparent px-4">
-              Comece sua busca
-            </h3>
-            <p className="text-muted-foreground text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed font-medium px-4">
-              Digite a descrição dos equipamentos que você precisa precificar e receba sugestões inteligentes
-            </p>
-            {lastQuery && (
-              <div className="mb-12 max-w-2xl mx-auto text-left card-glass rounded-2xl p-7 shadow-xl border-2 border-border/70">
-                <p className="text-sm font-bold text-primary mb-4 flex items-center gap-2">
-                  <Sparkles className="h-4 w-4" />
-                  Sugestões para melhorar sua busca:
-                </p>
-                <ul className="list-disc pl-6 space-y-2.5 text-sm text-muted-foreground font-medium">
-                  {(() => {
-                    const tips: string[] = []
-                    const q = lastQuery.toLowerCase()
-                    if (!/(110|127|220|12v|24v|bivolt|\bv\b)/.test(q)) tips.push('Inclua voltagem ou tensão (ex.: 220V, 127V, bivolt).')
-                    if (!/(nylon|aço|inox|pi[aã]cava|algod[aã]o|microfibra|pl[aá]stico|borracha)/.test(q)) tips.push('Informe material (ex.: nylon, inox, microfibra, piaçava).')
-                    if (!/(tamanho|\b\d+\s?cm\b|\b\d+\s?mm\b|\b\d+\s?l\b)/.test(q)) tips.push('Adicione tamanho/capacidade (ex.: 60 cm, 10 mm, 20 L).')
-                    if (!/(bosch|makita|karcher|wap|3m|tramontina|voith|flash\s?limp|kärcher)/.test(q) && !/marca|modelo/.test(q)) tips.push('Se souber, inclua marca/modelo para maior precisão.')
-                    if (tips.length === 0) tips.push('Sua descrição já está bem detalhada! ✨')
-                    return tips.map((t, i) => <li key={i}>{t}</li>)
-                  })()}
-                </ul>
-              </div>
-            )}
-            <div className="flex flex-wrap justify-center gap-3 text-sm">
-              {['vassouras', 'mops', 'aspiradores', 'panos', 'baldes'].map((tag) => (
-                <span 
-                  key={tag}
-                  className="px-5 py-2.5 rounded-full bg-muted/60 text-muted-foreground hover:bg-primary/15 hover:text-primary transition-all duration-300 cursor-pointer hover:scale-105 shadow-medium hover:shadow-large font-semibold"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+        {!isLoading && hasData && equipments.length === 0 && batchGroups.length === 0 && lastQuery && (
+          <EmptyState 
+            type="no-results" 
+            lastQuery={lastQuery}
+          />
+        )}
+        
+        {!isLoading && hasData && equipments.length === 0 && batchGroups.length === 0 && !lastQuery && (
+          <EmptyState type="no-search" />
         )}
 
         {/* Future AI Assistant melhorado */}

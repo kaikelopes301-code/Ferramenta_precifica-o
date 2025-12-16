@@ -1,12 +1,12 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft, FileText, DollarSign, Calendar, Wrench, Building2 } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { useToast } from "@/hooks/use-toast"
 import Image from "next/image"
+import Link from "next/link"
 
 interface DetailItem {
   fornecedor?: string
@@ -23,7 +23,7 @@ interface DetailResponse {
   total: number
 }
 
-export default function DetailsPage() {
+function DetailsContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const grupo = searchParams.get('grupo')
@@ -79,19 +79,20 @@ export default function DetailsPage() {
 
   if (isLoading) {
     return (
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="mb-12 flex justify-between items-center">
-            <Button variant="ghost" onClick={() => router.push('/')}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar
-            </Button>
-            <ThemeToggle />
+            <Link href="/">
+              <Button variant="ghost" className="gap-2 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                <ArrowLeft className="h-4 w-4" />
+                Voltar
+              </Button>
+            </Link>
           </div>
 
           <div className="text-center">
-            <div className="inline-flex items-center gap-3 rounded-full bg-primary/10 px-6 py-3 text-primary">
-              <div className="h-2 w-2 animate-pulse rounded-full bg-primary"></div>
+            <div className="inline-flex items-center gap-3 rounded-full bg-blue-500/10 px-6 py-3 text-blue-600">
+              <div className="h-2 w-2 animate-pulse rounded-full bg-blue-600"></div>
               <span className="font-medium">Carregando detalhes...</span>
             </div>
           </div>
@@ -102,21 +103,22 @@ export default function DetailsPage() {
 
   if (!details) {
     return (
-      <main className="min-h-screen bg-background">
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
         <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="mb-12 flex justify-between items-center">
-            <Button variant="ghost" onClick={() => router.push('/')}>
-              <ArrowLeft className="mr-2 h-4 w-4" />
-              Voltar
-            </Button>
-            <ThemeToggle />
+            <Link href="/">
+              <Button variant="ghost" className="gap-2 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                <ArrowLeft className="h-4 w-4" />
+                Voltar
+              </Button>
+            </Link>
           </div>
 
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-foreground mb-4">
+            <h1 className="text-2xl font-bold text-slate-900 mb-4">
               Detalhes não encontrados
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-slate-600">
               O grupo solicitado não foi encontrado ou não possui itens.
             </p>
           </div>
@@ -126,27 +128,30 @@ export default function DetailsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-12 flex justify-between items-center">
-          <Button variant="ghost" onClick={() => router.push('/')}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Voltar à Busca
-          </Button>
-          <ThemeToggle />
+          <Link href="/">
+            <Button variant="ghost" className="gap-2 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+              <ArrowLeft className="h-4 w-4" />
+              Voltar à Busca
+            </Button>
+          </Link>
         </div>
 
         {/* Title Section */}
         <div className="mb-8 text-center">
           <div className="flex justify-center mb-6">
-            <Image
-              src="/logo-atlas-horizontal-azul.png"
-              alt="Atlas Inovações"
-              width={240}
-              height={67}
-              className="transition-all duration-500 hover:scale-105"
-            />
+            <Link href="/">
+              <Image
+                src="/logo-performance-horizontal-azul.png"
+                alt="AFM Performance"
+                width={160}
+                height={45}
+                className="h-10 w-auto transition-all duration-500 hover:scale-105"
+              />
+            </Link>
           </div>
 
           <h1 className="text-4xl font-bold tracking-tight mb-4 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
@@ -304,5 +309,23 @@ export default function DetailsPage() {
         )}
       </div>
     </main>
+  )
+}
+
+// Wrapper com Suspense para useSearchParams
+export default function DetailsPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-3 rounded-full bg-blue-500/10 px-6 py-3 text-blue-600">
+            <div className="h-2 w-2 animate-pulse rounded-full bg-blue-600"></div>
+            <span className="font-medium">Carregando...</span>
+          </div>
+        </div>
+      </main>
+    }>
+      <DetailsContent />
+    </Suspense>
   )
 }

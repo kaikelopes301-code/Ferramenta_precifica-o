@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Wrench, DollarSign, Calendar, TrendingUp, CheckCircle2, ShoppingCart, Info, X } from "lucide-react"
-import type { Equipment } from "@/app/page"
+import type { Equipment } from "@/types/equipment"
 import { useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
 import { MetricsTooltip } from "@/components/metrics-tooltip"
@@ -20,23 +20,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
   const [isAdding, setIsAdding] = useState(false)
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
-  // TODO: PARTE B - INSTRUMENTAÇÃO DE CONFIANÇA (DIA 1)
-  // Objetivo: descobrir como o frontend está interpretando o valor de confiança.
-  // ATUALIZAÇÃO V4.0: Backend agora envia confidenceItem como 0..1
-  
-  const rawConfidenceScore = equipment.confianca; // valor recebido do backend (0..1)
-  
-  // Log de debug (somente em dev)
-  if (process.env.NODE_ENV !== "production") {
-    console.log("[CONFIDENCE_UI_DEBUG]", {
-      id: equipment.ranking,
-      nome: equipment.sugeridos?.substring(0, 50) ?? "",
-      rawConfidenceScore,
-      usingV4: rawConfidenceScore !== null && rawConfidenceScore !== undefined,
-      expectedRange: "0-100 (percentual)",
-      confidenceLevel: "calculado abaixo com getConfidenceConfig",
-    });
-  }
+  const rawConfidenceScore = equipment.confianca
 
   const getConfidenceConfig = (confidence: number | null) => {
     // Backend v4.0+ envia valores entre 0..1 (probabilidade)
@@ -157,27 +141,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
   const confidenceConfig = getConfidenceConfig(equipment.confianca)
   const maintenanceConfig = getMaintenanceConfig(getDisplayMaintenance())
 
-  // TODO: PARTE C - INSTRUMENTAÇÃO DE TÍTULO/DESCRIÇÃO (DIA 1)
-  // Objetivo: descobrir como o título está sendo montado e se vem duplicado do backend ou é duplicado no frontend.
-  // Problema observado:
-  //   - "vassoura feiticeira vassoura magica Vassoura Mágica (/)"
-  //   - "radio ht digital radio ht digital RADIO HT DIGITAL (/)"
-  // O campo 'sugeridos' vem do backend, então a duplicação provavelmente é lá.
-  // Mas vamos confirmar com logs.
-  
-  const title = equipment.sugeridos;
-  
-  // Log de debug (somente em dev)
-  if (process.env.NODE_ENV !== "production") {
-    console.log("[TITLE_UI_DEBUG]", {
-      id: equipment.ranking,
-      title,
-      // O backend TypeScript pode enviar outros campos. Vamos verificar se existem:
-      sugeridos: equipment.sugeridos,
-      // Nota: A interface Equipment só tem 'sugeridos' como campo de texto principal.
-      // Se a duplicação acontece, é porque 'sugeridos' já vem duplicado do backend.
-    });
-  }
+  const title = equipment.sugeridos
 
   const handleAdd = async () => {
     setIsAdding(true)
@@ -188,17 +152,20 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
 
   return (
     <Card
-      className={`group relative overflow-hidden border-border/70 bg-gradient-to-br from-card via-card/99 to-card/97 shadow-medium transition-all duration-300 hover:border-primary/60 hover:shadow-xl hover:-translate-y-1.5 focus-within:ring-2 focus-within:ring-primary/30 ${
-        selected ? 'ring-2 ring-primary/50 border-primary/70 shadow-xl' : ''
-      } ${dense ? 'w-full sm:min-w-[220px] md:min-w-[240px]' : 'w-full sm:min-w-[260px] md:min-w-[280px] lg:min-w-[300px]'}`}
+      className={`group relative overflow-hidden card-premium ${
+        selected ? 'ring-2 ring-blue-500 border-blue-500 shadow-xl shadow-blue-500/20' : ''
+      } ${dense ? 'w-[260px] sm:w-[280px] md:min-w-[300px]' : 'w-[280px] sm:w-[300px] md:min-w-[320px] lg:min-w-[340px]'} flex-shrink-0`}
     >
-      {/* Gradiente decorativo no topo - mais proeminente */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary/0 via-primary/70 to-primary/0"></div>
+      {/* Brilho gradiente animado no topo */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
+      
+      {/* Efeito de brilho hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
       
       {/* Badge de seleção animado */}
       {selected && (
         <div className="absolute top-3 left-3 z-10 animate-pop-in">
-          <Badge className="bg-primary/95 text-primary-foreground border-primary shadow-xl backdrop-blur-sm font-semibold">
+          <Badge className="bg-gradient-to-r from-blue-600 to-blue-700 text-white border-0 shadow-lg shadow-blue-500/50 backdrop-blur-sm font-bold">
             <CheckCircle2 className="h-3.5 w-3.5 mr-1.5" />
             Selecionado
           </Badge>
@@ -236,7 +203,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
 
           {/* Checkbox estilizado */}
           <div className="flex flex-col items-center gap-1 pt-1">
-            <label className="relative inline-flex items-center cursor-pointer group/checkbox">
+            <label className="relative inline-flex items-center cursor-pointer group/checkbox p-2 -m-2">
               <input
                 type="checkbox"
                 aria-label="Selecionar sugestão"

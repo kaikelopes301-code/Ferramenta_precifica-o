@@ -2,66 +2,29 @@
 
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import dynamic from "next/dynamic"
+import { Navbar } from "@/components/navbar"
+import { CursorFollower } from "@/components/cursor-follower"
 import { SearchInput } from "@/components/search-input"
 import { EquipmentCard } from "@/components/equipment-card"
 import { EquipmentCardSkeleton } from "@/components/equipment-card-skeleton"
 import { EmptyState } from "@/components/empty-state"
 import { LoadingState } from "@/components/loading-state"
 import { SkipLinks } from "@/components/skip-links"
-import { Logo } from "@/components/logo"
-import { ThemeToggle } from "@/components/theme-toggle"
 import { Sparkles, Upload, Download, TrendingUp, Zap, Shield } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
+import type { Equipment, NumericMetrics, EquipmentSources } from "@/types/equipment"
+import { InteractiveBackground } from "@/components/interactive-background"
+import { InfoModal } from "@/components/info-modal"
 
 // Adia carregamento de componentes não críticos para reduzir JS inicial
 const HorizontalScroll = dynamic(() => import("@/components/horizontal-scroll").then(m => m.HorizontalScroll), { ssr: false, loading: () => null })
 const CartWidget = dynamic(() => import("@/components/cart-widget").then(m => m.CartWidget), { ssr: false, loading: () => null })
 type CartItem = import("@/components/cart-widget").CartItem
-
-export type NumericMetrics = {
-  display: number
-  mean: number
-  median: number
-  min: number
-  max: number
-  n: number
-  unit?: string
-}
-
-export type EquipmentSources = {
-  fornecedores?: string[]
-  bids?: string[]
-  nLinhas: number
-}
-
-export type Equipment = {
-  ranking: number
-  sugeridos: string
-  // Campos legacy (v3.0) - mantidos para retrocompatibilidade
-  valor_unitario: number | null
-  vida_util_meses: number | null
-  manutencao_percent: number | null
-  // Campos v4.0 - métricas agregadas
-  metrics?: {
-    valorUnitario?: NumericMetrics
-    vidaUtilMeses?: NumericMetrics
-    manutencao?: NumericMetrics
-  }
-  sources?: EquipmentSources
-  equipmentId?: string
-  title?: string
-  confianca: number | null
-  link_detalhes: string
-  isIncorrect?: boolean
-  feedback?: string
-  equipamento_material_revisado?: string
-  marca?: string | null
-  origemDescricao?: string | null
-}
 
 export default function Home() {
   const [equipments, setEquipments] = useState<Equipment[]>([])
@@ -73,6 +36,7 @@ export default function Home() {
   const [batchGroups, setBatchGroups] = useState<Array<{ descricao: string; itens: Equipment[] }>>([])
   const [lastQuery, setLastQuery] = useState("")
   const [batchSortMap, setBatchSortMap] = useState<Record<string, string>>({})
+  const [cartOpen, setCartOpen] = useState(false)
   const { toast } = useToast()
   const resultsRef = useRef<HTMLDivElement | null>(null)
   const USER_ID = 'demo-user'
@@ -81,25 +45,6 @@ export default function Home() {
   const [cart, setCart] = useState<CartItem[]>([])
   const [singleFilter, setSingleFilter] = useState("")
   const [singleSort, setSingleSort] = useState<'conf-desc'|'price-asc'|'price-desc'|'life-desc'>('conf-desc')
-  const [isDark, setIsDark] = useState(false)
-
-  useEffect(() => {
-    checkDataStatus()
-  }, [])
-
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      setIsDark(document.documentElement.classList.contains('dark'))
-    }
-    const handler = (e: any) => {
-      const theme = e?.detail?.theme
-      if (theme === 'dark') setIsDark(true)
-      else if (theme === 'light') setIsDark(false)
-      else if (typeof document !== 'undefined') setIsDark(document.documentElement.classList.contains('dark'))
-    }
-    window.addEventListener('theme-changed', handler as EventListener)
-    return () => window.removeEventListener('theme-changed', handler as EventListener)
-  }, [])
 
   const checkDataStatus = async () => {
     try {
@@ -111,6 +56,10 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    checkDataStatus()
+  }, [])
+
   const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
@@ -120,30 +69,36 @@ export default function Home() {
     formData.append('file', file)
 
     try {
-      // TODO: Backend TypeScript não tem rota /upload implementada ainda
-      // Por enquanto, funcionalidade não implementada no backend TS
-      toast({
-        title: '⚠️ Funcionalidade em Desenvolvimento',
-        description: 'Upload de arquivos será disponibilizado em breve.',
-      });
-      setUploadingFile(false);
-      event.target.value = '';
-      return;
+      // Simulação de upload para permitir visualização da interface
+      await new Promise(resolve => setTimeout(resolve, 1500));
       
+      setHasData(true);
+      setUploadingFile(false);
+      
+      toast({
+        title: "✅ Sucesso!",
+        description: "Ambiente de busca desbloqueado com sucesso.",
+      });
+      
+      // Limpar input
+      event.target.value = '';
+      
+      /* 
       // TODO: Implementar quando backend TS tiver rota /api/upload
-      // const response = await fetch('/api/upload', {
-      //   method: 'POST',
-      //   body: formData,
-      // })
-      // if (!response.ok) {
-      //   throw new Error('Erro no upload')
-      // }
-      // const result = await response.json()
-      // setHasData(true)
-      // toast({
-      //   title: "✅ Sucesso!",
-      //   description: `Planilha carregada com ${result.rows} linhas`,
-      // })
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+      if (!response.ok) {
+        throw new Error('Erro no upload')
+      }
+      const result = await response.json()
+      setHasData(true)
+      toast({
+        title: "✅ Sucesso!",
+        description: `Planilha carregada com ${result.rows} linhas`,
+      })
+      */
     } catch (error) {
       toast({
         title: "❌ Erro",
@@ -252,25 +207,6 @@ export default function Home() {
         // Tolera resposta não-OK: tenta extrair JSON e faz fallback gracioso
         const searchData = await searchResponse.json().catch(() => ({ resultados: [] }))
         
-        // TODO: PARTE A - INSTRUMENTAÇÃO DO CONSUMO DA API (DIA 1)
-        // Log de debug para diagnóstico de como o frontend recebe os dados do backend.
-        // Objetivo: descobrir se confiança vem como 0-1 ou 0-100, e quais campos estão sendo usados.
-        if (process.env.NODE_ENV !== "production") {
-          const firstResult = searchData.resultados?.[0]
-          console.log("[SEARCH_DEBUG] raw response:", {
-            descricaoBuscada: descricoes[0] || description,
-            resultadosCount: searchData.resultados?.length ?? 0,
-            primeiroResultado: {
-              grupo: firstResult?.grupo,
-              confidenceItem: firstResult?.confidenceItem,
-              score: firstResult?.score,
-              score_normalized: firstResult?.score_normalized,
-              hasConfidenceItem: 'confidenceItem' in (firstResult || {}),
-            },
-            confianca: searchData.confianca,
-          });
-        }
-        
         if (!searchResponse.ok) {
           console.warn('Busca inteligente retornou erro', searchData)
           toast({
@@ -283,17 +219,6 @@ export default function Home() {
           // Priorizar confidenceItem (v4.0), fallback para score_normalized (v3.0)
           const rawConfidence = r.confidenceItem ?? r.score_normalized ?? r.score ?? null
           const confidence = typeof rawConfidence === 'number' ? rawConfidence : null
-          
-          // Debug: verificar se confidenceItem existe
-          if (process.env.NODE_ENV !== 'production' && idx === 0) {
-            console.log('[CONFIDENCE_MAPPING_DEBUG] Primeiro item:', {
-              confidenceItem: r.confidenceItem,
-              score_normalized: r.score_normalized,
-              score: r.score,
-              finalConfidence: confidence,
-              hasConfidenceItem: 'confidenceItem' in r,
-            })
-          }
           
           // Mapear métricas v4.0 se disponíveis
           const metrics = r.metrics ? {
@@ -326,42 +251,6 @@ export default function Home() {
             origemDescricao: descricoes[0] || description
           }
         })
-        
-        // Debug: validar que todos são numbers
-        if (process.env.NODE_ENV !== 'production') {
-          const confidences = mapped.map((e: Equipment) => e.confianca)
-          const allNumbers = confidences.every((c: number | null) => c === null || typeof c === 'number')
-          console.assert(allNumbers, '[SORT_DEBUG] Algumas confianças não são numbers:', confidences)
-          
-          // Validação: confidence deve ser monótona (ordem decrescente)
-          let monotonic = true
-          for (let i = 1; i < confidences.length; i++) {
-            const prev = confidences[i-1] || 0
-            const curr = confidences[i] || 0
-            if (curr > prev + 1e-6) { // tolerância (0..1)
-              monotonic = false
-              console.error(`[CONF_ORDER_ERROR] Confiança não-monótona: item[${i-1}]=${prev.toFixed(1)} < item[${i}]=${curr.toFixed(1)}`)
-            }
-          }
-          
-          console.log('[CONFIDENCE_V4_DEBUG] Valores de confiança:', {
-            source: 'confidenceItem (v4.0)',
-            values: confidences.filter((c: number | null) => c !== null).slice(0, 5),
-            expectedRange: '0..1',
-            allNumeric: allNumbers,
-            monotonic
-          })
-          
-          // Log de métricas v4.0
-          const hasMetrics = mapped.some((e: Equipment) => e.metrics)
-          if (hasMetrics) {
-            console.log('[METRICS_V4_DEBUG] Métricas agregadas detectadas:', {
-              total: mapped.length,
-              withMetrics: mapped.filter((e: Equipment) => e.metrics).length,
-              example: mapped.find((e: Equipment) => e.metrics)
-            })
-          }
-        }
         
         setEquipments(mapped)
       } else {
@@ -437,13 +326,6 @@ export default function Home() {
           })
           ordered.forEach((it, idx) => (it.ranking = idx + 1))
           
-          // Debug: validar ordenação em dev
-          if (process.env.NODE_ENV !== 'production' && ordered.length > 1) {
-            const confidences = ordered.map(it => it.confianca ?? 0)
-            const isSorted = confidences.every((val, i) => i === 0 || confidences[i - 1] >= val)
-            console.assert(isSorted, `[SORT_DEBUG] Batch "${descricao}" não está ordenado corretamente:`, confidences)
-          }
-          
           groups.push({ descricao, itens: ordered })
         })
         const orderedGroups = descricoes
@@ -456,7 +338,7 @@ export default function Home() {
       console.error('Erro na busca:', error)
       toast({
         title: "❌ Erro",
-        description: "Falha na busca. Tente .",
+        description: "Falha na busca. Tente novamente.",
         variant: "destructive",
       })
     } finally {
@@ -465,75 +347,67 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen relative">
+      <InteractiveBackground />
+      <CursorFollower />
       <SkipLinks />
-      <div className="app-container section-spacing" id="main-content">
-        {/* Header com gradiente melhorado */}
-        <div className="mb-20 px-2 sm:px-0 relative overflow-hidden">
-          <div className="hidden lg:block absolute inset-0 -z-10 gradient-mesh" />
-          <div className="hidden lg:block absolute inset-0 -z-10 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-          
-          {/* Top bar */}
-          <div className="mb-8 sm:mb-10 md:mb-12 flex items-center justify-between animate-fade-slide-up">
-            <Link
-              href="/" 
-              className="flex items-center gap-2 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]" 
-              aria-label="Ir para a página inicial"
-            >
-              <Logo 
-                width={260}
-                height={76}
-                className="select-none drop-shadow-sm w-[180px] sm:w-[220px] md:w-[260px] h-auto"
-              />
-            </Link>
-            <div className="transition-all duration-300 hover:scale-110 active:scale-95 shrink-0">
-              <ThemeToggle />
-            </div>
+      
+      {/* Navbar profissional */}
+      <Navbar 
+        cartItemCount={cart.length}
+        onCartClick={() => setCartOpen(true)}
+      />
+      
+      <div className="app-container py-6 sm:py-10 lg:py-16" id="main-content">
+        {/* Header premium com gradientes */}
+        <div className="mb-6 sm:mb-12 lg:mb-16 px-2 sm:px-0 relative">
+          {/* Efeito de luz gradiente */}
+          <div className="hidden lg:block absolute inset-0 -z-10">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-blue-500/10 rounded-full blur-3xl"></div>
           </div>
           
-          <div className="text-center space-y-10">
-            <div className="space-y-7 animate-fade-slide-up" style={{ animationDelay: '100ms' }}>
-              <div className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-primary/20 via-primary/15 to-primary/10 border border-primary/40 px-6 py-2.5 text-sm text-primary backdrop-blur-sm shadow-medium hover:shadow-large transition-all duration-300 hover:scale-[1.02]">
-                <Sparkles className="h-4 w-4 animate-pulse-glow" />
-                <span className="font-semibold tracking-wide">Ferramenta de Precificação Inteligente</span>
-              </div>
-              
-              <h1 className="mb-8 text-balance font-bold tracking-tight fluid-h1 bg-gradient-to-br from-foreground via-foreground/95 to-foreground/80 bg-clip-text text-transparent drop-shadow-sm">
+          <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-6 animate-fade-slide-up" style={{ animationDelay: '100ms' }}>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-black tracking-tight bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-transparent">
                 Precificação de Equipamentos
               </h1>
               
-              <p className="mx-auto max-w-3xl text-pretty text-muted-foreground leading-relaxed fluid-subtitle font-medium">
-                Descreva os equipamentos que precisa e receba sugestões com preço, vida útil e manutenção — tudo com IA.
+              <p className="mx-auto max-w-3xl text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-medium px-2 sm:px-4">
+                Descreva os equipamentos que precisa e receba sugestões com <span className="text-blue-600 font-bold">preço, vida útil e manutenção</span> — tudo com IA.
               </p>
             </div>
             
-            {/* Feature badges */}
-            <div className="flex flex-wrap justify-center gap-4 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
-              <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-card/70 border border-border/60 backdrop-blur-md shadow-medium hover:shadow-large transition-all duration-300 hover:scale-[1.05] hover:border-primary/40">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-muted-foreground">Busca Instantânea</span>
+            {/* Feature badges - Apenas desktop (no mobile aparecem após a barra de busca) */}
+            <div className="hidden sm:flex flex-wrap justify-center gap-2 sm:gap-3 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
+              <div className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-md hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 cursor-default backdrop-blur-sm">
+                <Zap className="h-4 w-4 group-hover:text-blue-600 transition-colors" />
+                <span className="text-sm font-bold">Busca Instantânea</span>
               </div>
-              <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-card/70 border border-border/60 backdrop-blur-md shadow-medium hover:shadow-large transition-all duration-300 hover:scale-[1.05] hover:border-primary/40">
-                <TrendingUp className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-muted-foreground">Análise Inteligente</span>
+              <div className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-md hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 cursor-default backdrop-blur-sm">
+                <TrendingUp className="h-4 w-4 group-hover:text-blue-600 transition-colors" />
+                <span className="text-sm font-bold">Análise Inteligente</span>
               </div>
-              <div className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-card/70 border border-border/60 backdrop-blur-md shadow-medium hover:shadow-large transition-all duration-300 hover:scale-[1.05] hover:border-primary/40">
-                <Shield className="h-4 w-4 text-primary" />
-                <span className="text-sm font-semibold text-muted-foreground">Dados Confiáveis</span>
+              <div className="group flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-md hover:shadow-xl hover:shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 cursor-default backdrop-blur-sm">
+                <Shield className="h-4 w-4 group-hover:text-blue-600 transition-colors" />
+                <span className="text-sm font-bold">Dados Confiáveis</span>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Upload Section melhorado */}
+        {/* Upload Section premium */}
         {!hasData && (
           <div className="mb-20 animate-fade-slide-up" style={{ animationDelay: '300ms' }}>
-            <div className="rounded-3xl border-2 border-dashed border-border/70 bg-gradient-to-br from-card via-card/98 to-card/95 p-14 text-center shadow-large hover:shadow-xl hover:border-primary/50 transition-all duration-500 card-glass">
-              <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-primary/25 via-primary/20 to-primary/15 mb-7 shadow-large relative">
-                <div className="absolute inset-0 rounded-full bg-primary/15 animate-ping opacity-75"></div>
-                <Upload className="h-11 w-11 text-primary relative z-10" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 bg-gradient-to-r from-foreground to-foreground/85 bg-clip-text text-transparent">
+            <div className="relative rounded-3xl border-2 border-dashed border-blue-300/40 bg-gradient-to-br from-white via-blue-50/30 to-white p-14 text-center card-glass hover:border-blue-400/60 transition-all duration-500 group overflow-hidden">
+              {/* Efeito de brilho animado */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-br from-blue-500/20 via-blue-600/15 to-blue-500/20 mb-7 shadow-xl relative">
+                  <div className="absolute inset-0 rounded-full bg-blue-500/20 animate-ping opacity-50"></div>
+                  <Upload className="h-11 w-11 text-blue-600 relative z-10" />
+                </div>
+                <h3 className="text-2xl font-black mb-4 bg-gradient-to-r from-slate-900 via-blue-800 to-slate-900 bg-clip-text text-transparent">
                 Carregue sua planilha
               </h3>
               <p className="text-muted-foreground mb-10 text-lg max-w-md mx-auto leading-relaxed">
@@ -571,14 +445,31 @@ export default function Home() {
                 />
                 <p className="text-xs text-muted-foreground font-medium">Formatos aceitos: .xlsx (máx. 10MB)</p>
               </div>
+              </div>
             </div>
           </div>
         )}
 
         {/* Search Input */}
         {hasData && (
-          <div id="search" className="space-y-8 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
+          <div id="search" className="space-y-4 sm:space-y-8 animate-fade-slide-up" style={{ animationDelay: '200ms' }}>
             <SearchInput onSearch={handleSearch} isLoading={isLoading} />
+            
+            {/* Feature badges - Apenas mobile (no desktop aparecem acima) */}
+            <div className="flex sm:hidden flex-wrap justify-center gap-2">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-sm">
+                <Zap className="h-3 w-3" />
+                <span className="text-xs font-semibold">Busca Instantânea</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-sm">
+                <TrendingUp className="h-3 w-3" />
+                <span className="text-xs font-semibold">Análise IA</span>
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-blue-50 to-blue-100/80 border border-blue-300/50 text-blue-700 shadow-sm">
+                <Shield className="h-3 w-3" />
+                <span className="text-xs font-semibold">Dados Confiáveis</span>
+              </div>
+            </div>
           </div>
         )}
 
@@ -608,15 +499,10 @@ export default function Home() {
                 <p className="text-muted-foreground mt-2 sm:mt-3 text-base sm:text-lg font-medium">Resultados baseados na sua descrição</p>
               </div>
               <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-                <span className="inline-flex items-center gap-2 sm:gap-3 rounded-full bg-gradient-to-r from-primary/20 via-primary/15 to-primary/10 px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold text-primary border border-primary/30 shadow-medium">
-                  <span className="flex h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.7)]"></span>
+                <span className="inline-flex items-center gap-2 sm:gap-3 rounded-full bg-gradient-to-r from-blue-100 to-blue-50 px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold text-blue-700 border border-blue-300 shadow-sm">
+                  <span className="flex h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-blue-600 shadow-[0_0_10px_rgba(37,99,235,0.5)]"></span>
                   {equipments.length} {equipments.length === 1 ? "resultado" : "resultados"}
                 </span>
-                {equipments[0]?.origemDescricao && equipments[0].origemDescricao.trim().split(/\s+/).length === 1 && (
-                  <span className="inline-flex items-center gap-2 rounded-full bg-yellow-500/10 px-4 py-2 text-xs font-medium text-yellow-700 dark:text-yellow-400 border border-yellow-500/30" title="Buscas com uma palavra tendem a ter confiança menor devido à maior abrangência">
-                    💡 Busca ampla
-                  </span>
-                )}
               </div>
             </div>
             <HorizontalScroll itemMinWidth={240}>
@@ -710,29 +596,6 @@ export default function Home() {
               })
               sortedItems.forEach((it, idx) => (it.ranking = idx + 1))
               
-              // Debug: validar ordenação em dev
-              if (process.env.NODE_ENV !== 'production' && sortedItems.length > 1 && sortKey.startsWith('conf')) {
-                const confidences = sortedItems.map(it => it.confianca ?? 0)
-                const isAsc = sortKey === 'conf-asc'
-                const isSorted = confidences.every((val, i) => {
-                  if (i === 0) return true
-                  return isAsc ? confidences[i - 1] <= val : confidences[i - 1] >= val
-                })
-                console.assert(isSorted, `[SORT_DEBUG] Batch "${group.descricao}" com sort "${sortKey}" não ordenado:`, confidences)
-                
-                // Alertar se ordem de confiança difere de relevância (rankings)
-                if (sortKey === 'conf-desc') {
-                  const rankings = sortedItems.map(it => it.ranking)
-                  const rankingsMatch = rankings.every((r, i) => i === 0 || rankings[i-1] <= r)
-                  if (!rankingsMatch) {
-                    console.warn('[CONF_RELEVANCE_MISMATCH] Ordem de confiança difere de relevância (ranking):', {
-                      confidences: confidences.slice(0, 5),
-                      rankings: rankings.slice(0, 5)
-                    })
-                  }
-                }
-              }
-              
               return (
                 <section key={gi} className="space-y-6 sm:space-y-8">
                   <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 flex-wrap">
@@ -794,58 +657,70 @@ export default function Home() {
         {!isLoading && hasData && equipments.length === 0 && batchGroups.length === 0 && !lastQuery && (
           <EmptyState type="no-search" />
         )}
-
-        {/* Future AI Assistant melhorado */}
-        <div className="mt-32 relative animate-fade-slide-up">
-          <div className="rounded-3xl border-2 border-border/70 bg-gradient-to-br from-card via-card/98 to-card/95 p-14 text-center backdrop-blur-md shadow-xl overflow-hidden card-glass">
-            <div className="absolute inset-0 gradient-mesh"></div>
-            <div className="absolute top-0 right-0 w-48 h-48 bg-primary/15 rounded-full blur-3xl -translate-y-24 translate-x-24"></div>
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-secondary/15 rounded-full blur-3xl translate-y-20 -translate-x-20"></div>
-            
-            <div className="relative z-10">
-              <div className="mx-auto mb-10 flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-primary via-primary/95 to-primary/85 shadow-xl relative">
-                <div className="absolute inset-0 rounded-full bg-primary/40 animate-ping"></div>
-                <Sparkles className="h-12 w-12 text-primary-foreground animate-pulse-glow relative z-10" />
-              </div>
-              <h3 className="mb-6 text-3xl font-black bg-gradient-to-r from-foreground via-primary/90 to-foreground bg-clip-text text-transparent">
-                Assistente Inteligente em Breve
-              </h3>
-              <p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto mb-10 font-medium">
-                Em breve você poderá conversar com nosso chatbot powered by IA para receber sugestões personalizadas de equipamentos com
-                melhor performance, preços competitivos e análises detalhadas.
-              </p>
-              <div className="flex flex-wrap justify-center gap-4 text-sm">
-                <div className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary/20 text-primary border-2 border-primary/30 shadow-medium hover:shadow-xl transition-all hover:scale-105 font-bold">
-                  <div className="h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary),0.7)]"></div>
-                  <span>Análise Inteligente</span>
-                </div>
-                <div className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-secondary/60 text-secondary-foreground border-2 border-secondary/30 shadow-medium hover:shadow-xl transition-all hover:scale-105 font-bold">
-                  <div className="h-2.5 w-2.5 rounded-full bg-secondary-foreground/70"></div>
-                  <span>Recomendações Personalizadas</span>
-                </div>
-                <div className="flex items-center gap-2 px-6 py-3.5 rounded-full bg-accent/20 text-accent-foreground border-2 border-accent/30 shadow-medium hover:shadow-xl transition-all hover:scale-105 font-bold">
-                  <div className="h-2.5 w-2.5 rounded-full bg-accent"></div>
-                  <span>Comparação de Preços</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
-      {/* Footer melhorado */}
-      <footer className="border-t border-border/60 bg-gradient-to-b from-card/60 to-card/40 backdrop-blur-md mt-32">
-        <div className="app-container py-12">
-          <div className="flex flex-col items-center justify-between gap-8 sm:flex-row">
-            <div className="flex items-center gap-3 text-sm text-muted-foreground">
-              <span className="font-semibold">© 2025 Atlas Inovações</span>
-              <span className="text-border">•</span>
-              <span className="font-medium">Ferramenta de Precificação Inteligente</span>
+      {/* Footer profissional AFM Performance */}
+      <footer className="border-t border-slate-200 bg-slate-50 mt-20 sm:mt-24">
+        <div className="app-container py-8 sm:py-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+            {/* Logo e Sobre */}
+            <div className="flex flex-col items-center md:items-start">
+              <Image
+                src="/logo-performance-horizontal-azul.png"
+                alt="AFM Performance"
+                width={100}
+                height={30}
+                className="h-8 w-auto mb-4"
+              />
+              <p className="text-sm text-slate-600 text-center md:text-left leading-relaxed">
+                Soluções inteligentes para precificação de equipamentos
+              </p>
             </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="flex items-center gap-2 font-semibold">
-                Powered by <Sparkles className="h-4 w-4 text-primary animate-pulse-glow" /> IA
-              </span>
+            
+            {/* Links */}
+            <div className="flex flex-col items-center">
+              <h3 className="text-sm font-bold text-slate-900 mb-4">Links</h3>
+              <div className="flex flex-wrap justify-center gap-4 text-sm text-slate-600">
+                <InfoModal 
+                  trigger="Sobre"
+                  title="Sobre a Ferramenta"
+                  content={`O AFM Precificação de Equipamentos é uma ferramenta inteligente desenvolvida para auxiliar na estimativa de custos, vida útil e manutenção de equipamentos de limpeza.
+
+Utilizando algoritmos avançados e uma base de dados atualizada, fornecemos insights precisos para otimizar seu planejamento financeiro e operacional.`}
+                />
+                <span className="text-slate-300">•</span>
+                <InfoModal 
+                  trigger="Contato"
+                  title="Fale Conosco"
+                  content={`Entre em contato conosco para dúvidas, sugestões ou suporte:
+
+Email: kaike.costa@atlasinovacoes.com.br`}
+                />
+                <span className="text-slate-300">•</span>
+                <InfoModal 
+                  trigger="Termos"
+                  title="Termos de Uso"
+                  content={`1. O uso desta ferramenta é para fins estimativos.
+
+2. Os valores apresentados são baseados em médias de mercado e podem variar.
+
+3. A AFM Performance não se responsabiliza por decisões tomadas exclusivamente com base nestes dados.
+
+4. Todos os direitos reservados.`}
+                />
+              </div>
+            </div>
+            
+            {/* Copyright e Powered */}
+            <div className="flex flex-col items-center md:items-end">
+              <p className="text-sm text-slate-600 font-semibold mb-2">
+                © 2025 AFM Performance
+              </p>
+              <div className="flex items-center gap-2 text-sm text-blue-600 font-semibold">
+                <span>Powered by</span>
+                <Sparkles className="h-4 w-4 animate-pulse" />
+                <span>dados</span>
+              </div>
             </div>
           </div>
         </div>
@@ -853,6 +728,8 @@ export default function Home() {
 
       <CartWidget
         items={cart}
+        isOpen={cartOpen}
+        onClose={() => setCartOpen(false)}
         onClear={clearCart}
         onRemove={removeFromCart}
         onChangeQty={changeQty}

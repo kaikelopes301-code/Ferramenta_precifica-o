@@ -1,0 +1,11 @@
+# Robots.txt for AFM Performance - Precificação de Equipamentos
+# https://precificacao.afmperformance.com.br
+
+User-agent: *
+Allow: /
+
+# Disallow API routes from crawling
+Disallow: /api/
+
+# Sitemap
+Sitemap: https://precificacao.afmperformance.com.br/sitemap.xml

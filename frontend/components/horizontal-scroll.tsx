@@ -19,6 +19,9 @@ export function HorizontalScroll({ children, itemMinWidth = 280 }: HorizontalScr
 
   // Suporte para Pointer Events (mouse/touch/pen unificado)
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // Em touch, preferimos o scroll nativo do navegador (mais fluido e natural)
+    if (e.pointerType === 'touch') return
+
     const el = ref.current
     if (!el) return
     // Evita iniciar drag quando clicar em elementos interativos
@@ -28,7 +31,8 @@ export function HorizontalScroll({ children, itemMinWidth = 280 }: HorizontalScr
     }
     if (e.button !== 0 && e.pointerType === 'mouse') return
     
-    const isTouch = e.pointerType === 'touch'
+    // Como retornamos early para touch, aqui isTouch é sempre false
+    const isTouch = false 
     el.setPointerCapture(e.pointerId)
     setDrag({ active: true, x: e.clientX, scroll: el.scrollLeft, isTouch })
     lastScrollRef.current = el.scrollLeft
@@ -219,7 +223,7 @@ export function HorizontalScroll({ children, itemMinWidth = 280 }: HorizontalScr
         onScroll={onScroll}
         style={{ WebkitOverflowScrolling: 'touch' }}
       >
-        <div className="flex gap-3 sm:gap-4 md:gap-6 px-2 sm:px-1">
+        <div className="flex gap-4 sm:gap-5 md:gap-6 px-2 sm:px-1">
           {Array.isArray(children)
             ? children.map((child, i) => (
                 <div

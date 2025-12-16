@@ -1,0 +1,13 @@
+⚠️ AÇÃO NECESSÁRIA: Adicionar Logo AFM Performance
+
+Por favor, salve a imagem da logo AFM Performance que você enviou como:
+📁 frontend/public/logo-afm-performance.png
+
+A logo será usada em:
+- Navbar (100px mobile, 140px desktop)
+- Footer (80px)
+
+Formato recomendado: PNG com fundo transparente
+Dimensões sugeridas: ~600x200px (proporção da logo original)
+
+Após adicionar a logo, delete este arquivo.

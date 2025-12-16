@@ -901,6 +901,8 @@ export default function Home() {
 
       <CartWidget
         items={cart}
+        isOpen={false}
+        onClose={() => {}}
         onClear={clearCart}
         onRemove={removeFromCart}
         onChangeQty={changeQty}

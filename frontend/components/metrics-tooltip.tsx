@@ -2,7 +2,7 @@
 
 import { Info } from "lucide-react"
 import * as Tooltip from "@radix-ui/react-tooltip"
-import type { NumericMetrics } from "@/app/page"
+import type { NumericMetrics } from "@/types/equipment"
 
 interface MetricsTooltipProps {
   label: string

@@ -35,138 +35,110 @@ interface SearchInputProps {
   isLoading: boolean
 }
 
+const PLACEHOLDER_EXAMPLES = [
+  "Descreva um equipamento...",
+  "Ex: vassoura profissional",
+  "Ex: aspirador de pó",
+  "Ex: mop industrial",
+  "Ex: lavadora de piso",
+  "Ex: enceradeira 350mm",
+]
+
 export function SearchInput({ onSearch, isLoading }: SearchInputProps) {
   const [value, setValue] = useState("")
   const [topK, setTopK] = useState(5)
-  // TF-IDF descontinuado na UI; mantemos flag para compatibilidade, fixo em false
   const [useTfidf] = useState(false)
   const [showOptions, setShowOptions] = useState(false)
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
-  const [typedPlaceholder, setTypedPlaceholder] = useState("")
-  const typingIndexRef = useRef(0)
-  const typingTimerRef = useRef<number | null>(null)
-  const placeholderFull =
-    "Descreva os equipamentos que você precisa... (ex.: vassoura profissional, mop industrial, aspirador de pó)"
+  
+  // Estados para o efeito de máquina de escrever
+  const [placeholderText, setPlaceholderText] = useState("")
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [loopNum, setLoopNum] = useState(0)
+  const [typingSpeed, setTypingSpeed] = useState(100)
+
+  // Efeito de digitação (Typewriter)
+  useEffect(() => {
+    if (value.trim().length > 0) return // Pausa animação se usuário digitar
+    
+    const i = loopNum % PLACEHOLDER_EXAMPLES.length
+    const fullText = PLACEHOLDER_EXAMPLES[i]
+    
+    const handleTyping = () => {
+      setPlaceholderText(current => {
+        if (isDeleting) {
+          setTypingSpeed(40) // Mais rápido ao apagar
+          if (current === "") {
+            setIsDeleting(false)
+            setLoopNum(prev => prev + 1)
+            setTypingSpeed(100)
+            return ""
+          }
+          return current.slice(0, -1)
+        } else {
+          setTypingSpeed(100) // Normal ao digitar
+          if (current === fullText) {
+            setTypingSpeed(2000) // Pausa ao terminar
+            setIsDeleting(true)
+            return current
+          }
+          return fullText.slice(0, current.length + 1)
+        }
+      })
+    }
+
+    const timer = setTimeout(handleTyping, typingSpeed)
+    return () => clearTimeout(timer)
+  }, [placeholderText, isDeleting, loopNum, value, typingSpeed])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (value.trim() && !isLoading) {
-      // Envia o texto completo - o page.tsx vai fazer o split
       onSearch(value.trim(), { topK, useTfidf })
     }
   }
 
-  // Auto-ajuste da altura do textarea: cresce até 3 linhas, depois rola
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && e.ctrlKey) {
+      e.preventDefault()
+      if (value.trim() && !isLoading) {
+        onSearch(value.trim(), { topK, useTfidf })
+      }
+    }
+  }
+
+  // Auto-ajuste da altura do textarea
   const autoResize = () => {
     const el = textareaRef.current
     if (!el) return
-    // Reset para medir corretamente
     el.style.height = 'auto'
-    // Calcula altura máxima baseada em 3 linhas + paddings
-    const cs = window.getComputedStyle(el)
-    const lineH = parseFloat(cs.lineHeight || '0') || 24
-    const padTop = parseFloat(cs.paddingTop || '0') || 0
-    const padBottom = parseFloat(cs.paddingBottom || '0') || 0
-    const maxH = Math.ceil(lineH * 3 + padTop + padBottom)
-    const next = Math.min(el.scrollHeight, maxH)
-    el.style.height = `${next}px`
-    el.style.overflowY = el.scrollHeight > maxH ? 'auto' : 'hidden'
+    el.style.height = `${Math.min(el.scrollHeight, 120)}px`
   }
 
   useEffect(() => {
     autoResize()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 
-  // Animação de digitação do placeholder ao carregar
-  useEffect(() => {
-    // Respeita preferência do usuário
-    const reduce = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    if (reduce) {
-      setTypedPlaceholder(placeholderFull)
-      return
-    }
-    // Evita animar se o usuário já começou a digitar
-    if (value.trim().length > 0) {
-      setTypedPlaceholder(placeholderFull)
-      return
-    }
-
-    // Função de digitação incremental
-    const typeNext = () => {
-      // Se usuário começou a digitar, interrompe
-      if (value.trim().length > 0) {
-        setTypedPlaceholder(placeholderFull)
-        typingTimerRef.current && window.clearTimeout(typingTimerRef.current)
-        typingTimerRef.current = null
-        return
-      }
-      const i = typingIndexRef.current
-      if (i >= placeholderFull.length) {
-        typingTimerRef.current && window.clearTimeout(typingTimerRef.current)
-        typingTimerRef.current = null
-        return
-      }
-      setTypedPlaceholder(placeholderFull.slice(0, i + 1))
-      typingIndexRef.current = i + 1
-      // Leve variação para sensação mais natural
-      const delay = 18 + Math.floor(Math.random() * 30) // 18–48ms
-      typingTimerRef.current = window.setTimeout(typeNext, delay)
-    }
-
-    // Inicializa
-    typingIndexRef.current = 0
-    setTypedPlaceholder("")
-    typingTimerRef.current = window.setTimeout(typeNext, 200) // pequeno atraso inicial
-
-    // Cleanup
-    return () => {
-      if (typingTimerRef.current) {
-        window.clearTimeout(typingTimerRef.current)
-        typingTimerRef.current = null
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return (
-  <div className="app-container max-w-5xl">
+    <div className="w-full max-w-3xl mx-auto px-4">
       <form onSubmit={handleSubmit} className="group">
-        <div className="relative rounded-full bg-card/95 backdrop-blur-md border-2 border-border shadow-xl ring-0 transition-all duration-300 hover:shadow-2xl focus-within:shadow-2xl focus-within:border-primary/60 focus-within:ring-4 focus-within:ring-primary/20">
-          <div className="pointer-events-none absolute left-6 top-[calc(50%+1px)] -translate-y-1/2 flex items-center">
-            <Search className="h-5 w-5 text-muted-foreground transition-colors group-focus-within:text-primary" />
+        <div className="relative rounded-3xl bg-white backdrop-blur-md border border-slate-200 shadow-lg ring-0 transition-all duration-300 hover:shadow-xl focus-within:shadow-xl focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100">
+          <div className="pointer-events-none absolute left-3 sm:left-4 top-3.5 sm:top-4 flex items-center">
+            <Search className="h-4 w-4 sm:h-5 sm:w-5 text-slate-400 transition-colors group-focus-within:text-blue-600" />
           </div>
+          
           <textarea
             ref={textareaRef}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            onInput={autoResize}
-            onKeyDown={(e) => {
-              // Ctrl+Enter ou Cmd+Enter para enviar
-              if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
-                e.preventDefault()
-                if (value.trim() && !isLoading) {
-                  onSearch(value.trim(), { topK, useTfidf })
-                }
-              }
-              // Enter simples = quebra de linha (comportamento padrão do textarea)
-            }}
-            onFocus={() => {
-              // Se focou e ainda está animando, finalize imediatamente
-              if (typingTimerRef.current) {
-                window.clearTimeout(typingTimerRef.current)
-                typingTimerRef.current = null
-                setTypedPlaceholder(placeholderFull)
-              }
-            }}
-            placeholder={typedPlaceholder}
-            aria-label="Campo de busca de equipamentos. Pressione Ctrl+Enter para buscar"
-            title="Enter = quebra de linha | Ctrl+Enter = buscar"
-            className="w-full resize-none rounded-full bg-transparent px-6 pt-6 pb-4 pl-16 pr-24 text-foreground placeholder:text-muted-foreground/70 focus:outline-none transition-[height,box-shadow] text-lg sm:text-xl leading-relaxed overflow-y-auto font-medium"
+            onKeyDown={handleKeyDown}
+            placeholder={placeholderText}
             rows={1}
+            className="w-full rounded-3xl bg-transparent min-h-[3rem] sm:min-h-[3.5rem] px-4 pl-10 sm:pl-12 pr-24 sm:pr-32 py-3.5 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 focus:outline-none font-medium transition-all resize-none overflow-hidden"
             disabled={isLoading}
           />
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+          
+          <div className="absolute right-1.5 sm:right-2 top-1.5 sm:top-2 flex items-center gap-1 sm:gap-1.5">
             <TooltipProvider>
               <Tooltip>
                 <TooltipTrigger asChild>
@@ -174,12 +146,12 @@ export function SearchInput({ onSearch, isLoading }: SearchInputProps) {
                     type="button"
                     variant="outline"
                     size="icon"
-                    className="h-11 w-11 rounded-full shadow-medium hover:shadow-large transition-all duration-300 hover:scale-105"
+                    className="h-7 w-7 sm:h-10 sm:w-10 rounded-full shadow-sm hover:shadow-md transition-all duration-300 hover:scale-105 border-slate-200 bg-white hover:bg-slate-50 hover:border-blue-300"
                     aria-label="Configurar quantidade de sugestões"
                     title="Configurações"
                     onClick={() => setShowOptions((v) => !v)}
                   >
-                    <Settings className="h-5 w-5" />
+                    <Settings className="h-3.5 w-3.5 sm:h-5 sm:w-5 text-slate-600" />
                   </Button>
                 </TooltipTrigger>
                 <TooltipContent>
@@ -191,31 +163,37 @@ export function SearchInput({ onSearch, isLoading }: SearchInputProps) {
               type="submit"
               disabled={!value.trim() || isLoading}
               size="icon"
-              className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-primary/90 text-primary-foreground shadow-large hover:shadow-xl transition-all duration-300 focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-primary hover:scale-105 active:scale-95"
+              className="h-8 w-8 sm:h-11 sm:w-11 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-300 focus-visible:ring-4 focus-visible:ring-offset-2 focus-visible:ring-blue-500 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Enviar busca"
-              title="Enviar"
+              title="Enviar (Ctrl + Enter)"
             >
               {isLoading ? (
-                <Loader2 className="h-6 w-6 animate-spin" />
+                <Loader2 className="h-3.5 w-3.5 sm:h-5 sm:w-5 animate-spin" />
               ) : (
-                <Send className="h-6 w-6" />
+                <Send className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
               )}
             </Button>
           </div>
+        </div>
+        
+        <div className="mt-2 flex justify-end px-4 opacity-0 group-focus-within:opacity-100 transition-opacity duration-300">
+           <span className="text-[10px] sm:text-xs text-slate-400 font-medium hidden sm:inline-block">
+             Pressione <kbd className="font-sans px-1 py-0.5 bg-slate-100 rounded border border-slate-200 text-slate-500">Ctrl</kbd> + <kbd className="font-sans px-1 py-0.5 bg-slate-100 rounded border border-slate-200 text-slate-500">Enter</kbd> para enviar
+           </span>
         </div>
       </form>
       
       {/* Search Options */}
       {showOptions && (
-        <div className="mt-5 rounded-2xl bg-card/95 border-2 border-border/70 p-6 shadow-xl backdrop-blur-md">
+        <div className="mt-5 rounded-2xl bg-white border-2 border-slate-200 p-6 shadow-xl backdrop-blur-md">
           <div className="flex items-center justify-between">
             <div className="space-y-5 flex-1">
-              <div className="text-sm text-muted-foreground font-medium">
-                Usando tecnologia de busca semântica (Embeddings + Re‑ranking por IA)
+              <div className="text-sm text-slate-600 font-medium leading-relaxed">
+                Busca Semântica com IA • Vetorização de Embeddings • Re-ranking Inteligente
               </div>
               
               <div className="space-y-3">
-                <Label htmlFor="topk" className="text-sm font-semibold">
+                <Label htmlFor="topk" className="text-sm font-semibold text-slate-900">
                   Quantidade de sugestões: {topK}
                 </Label>
                 <input
@@ -225,9 +203,9 @@ export function SearchInput({ onSearch, isLoading }: SearchInputProps) {
                   max="10"
                   value={topK}
                   onChange={(e) => setTopK(parseInt(e.target.value))}
-                  className="w-full h-2.5 rounded-lg appearance-none cursor-pointer bg-muted/60 hover:bg-muted/80 transition-colors accent-primary"
+                  className="w-full h-2.5 rounded-lg appearance-none cursor-pointer bg-slate-100 hover:bg-slate-200 transition-colors accent-blue-600"
                 />
-                <div className="flex justify-between text-xs text-muted-foreground font-medium">
+                <div className="flex justify-between text-xs text-slate-500 font-medium">
                   <span>1</span>
                   <span>10</span>
                 </div>
@@ -237,11 +215,11 @@ export function SearchInput({ onSearch, isLoading }: SearchInputProps) {
         </div>
       )}
       
-      <div className="mt-7 text-center space-y-3">
-        <p className="text-sm text-muted-foreground font-medium">
-          💡 <strong className="font-semibold">Dica:</strong> Pressione <kbd className="px-2.5 py-1.5 bg-muted/70 rounded-md text-xs font-mono font-semibold border border-border/60 shadow-sm">Enter</kbd> para quebrar linha, <kbd className="px-2.5 py-1.5 bg-muted/70 rounded-md text-xs font-mono font-semibold border border-border/60 shadow-sm">Ctrl+Enter</kbd> para buscar
+      <div className="mt-5 sm:mt-7 text-center space-y-2 sm:space-y-3 hidden sm:block">
+        <p className="text-sm text-slate-600 font-medium">
+          💡 <strong className="font-semibold">Dica:</strong> Pressione <kbd className="px-2.5 py-1.5 bg-slate-100 rounded-md text-xs font-mono font-semibold border border-slate-200 shadow-sm">Enter</kbd> para quebrar linha, <kbd className="px-2.5 py-1.5 bg-slate-100 rounded-md text-xs font-mono font-semibold border border-slate-200 shadow-sm">Ctrl+Enter</kbd> para buscar
         </p>
-        <p className="text-xs text-muted-foreground/90 font-medium">
+        <p className="text-xs text-slate-500 font-medium">
           Separe múltiplos equipamentos por: vírgula (,), ponto-e-vírgula (;) ou quebra de linha
         </p>
       </div>

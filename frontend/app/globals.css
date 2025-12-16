@@ -185,18 +185,63 @@
     @apply py-10 sm:py-12 lg:py-16;
   }
 
-  /* Tipografia fluida para títulos e subtítulos */
+  /* Tipografia fluida para títulos e subtítulos - Mobile-First */
   .fluid-h1 {
-    font-size: clamp(2.25rem, 5vw + 1rem, 5rem);
+    font-size: clamp(2rem, 6vw + 0.75rem, 5rem);
     line-height: 1.1;
     letter-spacing: -0.025em;
     font-weight: 800;
   }
   
+  .fluid-h2 {
+    font-size: clamp(1.75rem, 4vw + 0.5rem, 3.5rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+  }
+  
+  .fluid-h3 {
+    font-size: clamp(1.5rem, 3vw + 0.5rem, 2.5rem);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    font-weight: 700;
+  }
+  
   .fluid-subtitle {
-    font-size: clamp(1.0625rem, 1.5vw + 0.5rem, 1.375rem);
+    font-size: clamp(0.9375rem, 1.5vw + 0.5rem, 1.375rem);
     line-height: 1.65;
     letter-spacing: -0.01em;
+  }
+  
+  .fluid-body {
+    font-size: clamp(0.875rem, 1vw + 0.5rem, 1.125rem);
+    line-height: 1.7;
+  }
+  
+  /* Headings com tamanhos responsivos claros */
+  .heading-responsive {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  .heading-secondary {
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  .heading-tertiary {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  /* Body text responsivo */
+  .body-large {
+    @apply text-base sm:text-lg md:text-xl;
+  }
+  
+  .body-medium {
+    @apply text-sm sm:text-base md:text-lg;
+  }
+  
+  .body-small {
+    @apply text-xs sm:text-sm md:text-base;
   }
   
   /* Sistema de sombras consistente e profissional */
@@ -459,5 +504,77 @@
       oklch(0.18 0.01 240 / 0.4) 60%, 
       transparent 100%);
     background-size: 1200px 100%;
+  }
+  
+  /* Acessibilidade: Redução de movimento */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    
+    .animate-fade-slide-up,
+    .animate-pop-in,
+    .animate-carousel-in,
+    .animate-spin,
+    .animate-pulse,
+    .animate-pulse-glow,
+    .animate-shimmer,
+    .animate-ping {
+      animation: none !important;
+    }
+  }
+  
+  /* Melhorias de contraste para acessibilidade */
+  @media (prefers-contrast: high) {
+    :root {
+      --border: oklch(0.3 0 0);
+      --ring: oklch(0.2 0 0);
+    }
+    
+    .dark {
+      --border: oklch(0.7 0 0);
+      --ring: oklch(0.8 0 0);
+    }
+  }
+  
+  /* Otimizações para telas pequenas */
+  @media (max-width: 640px) {
+    .app-container {
+      @apply px-3;
+    }
+    
+    .section-spacing {
+      @apply py-8;
+    }
+    
+    /* Reduzir animações em mobile para melhor performance */
+    .card-hover:hover {
+      transform: translateY(-2px) !important;
+    }
+  }
+  
+  /* Otimizações para touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    /* Aumentar áreas de toque */
+    button, a, [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Remover estados hover em touch */
+    .card-hover:hover {
+      transform: none !important;
+      box-shadow: var(--shadow-soft) !important;
+    }
+    
+    /* Melhorar feedback de toque */
+    button:active, [role="button"]:active {
+      @apply scale-95 opacity-80;
+    }
   }
 }

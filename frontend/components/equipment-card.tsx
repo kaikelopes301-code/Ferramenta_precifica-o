@@ -190,7 +190,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
     <Card
       className={`group relative overflow-hidden border-border/70 bg-gradient-to-br from-card via-card/99 to-card/97 shadow-medium transition-all duration-300 hover:border-primary/60 hover:shadow-xl hover:-translate-y-1.5 focus-within:ring-2 focus-within:ring-primary/30 ${
         selected ? 'ring-2 ring-primary/50 border-primary/70 shadow-xl' : ''
-      } ${dense ? 'min-w-[240px]' : 'min-w-[280px]'}`}
+      } ${dense ? 'w-full sm:min-w-[220px] md:min-w-[240px]' : 'w-full sm:min-w-[260px] md:min-w-[280px] lg:min-w-[300px]'}`}
     >
       {/* Gradiente decorativo no topo - mais proeminente */}
       <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-primary/0 via-primary/70 to-primary/0"></div>
@@ -222,13 +222,13 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
             </div>
 
             {/* Nome do equipamento */}
-            <h3 className={`${dense ? 'text-base' : 'text-lg'} font-black leading-tight break-words text-foreground group-hover:text-primary transition-colors`}>
+            <h3 className={`${dense ? 'text-sm sm:text-base' : 'text-base sm:text-lg md:text-xl'} font-black leading-tight break-words text-foreground group-hover:text-primary transition-colors`}>
               {title}
             </h3>
 
             {/* Marca */}
             {equipment.marca && (
-              <Badge variant="outline" className="rounded-full text-[11px] px-3 py-1 bg-secondary/60 border-border/60 font-semibold">
+              <Badge variant="outline" className="rounded-full text-[10px] sm:text-[11px] px-2.5 sm:px-3 py-0.5 sm:py-1 bg-secondary/60 border-border/60 font-semibold">
                 {equipment.marca}
               </Badge>
             )}
@@ -270,7 +270,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                   </span>
                 )}
               </div>
-              <p className={`${dense ? 'text-xl' : 'text-2xl'} font-black text-primary leading-none`}>
+              <p className={`${dense ? 'text-lg sm:text-xl' : 'text-xl sm:text-2xl lg:text-3xl'} font-black text-primary leading-none`}>
                 {formatPrice(getDisplayPrice())}
               </p>
               {equipment.metrics?.valorUnitario && equipment.metrics.valorUnitario.n > 1 && (
@@ -299,7 +299,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
                 </span>
               )}
             </div>
-            <p className={`${dense ? 'text-lg' : 'text-xl'} font-bold text-foreground leading-tight`}>
+            <p className={`${dense ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'} font-bold text-foreground leading-tight`}>
               {getDisplayLifespan() ? `${getDisplayLifespan()}m` : "N/A"}
             </p>
             <p className="text-[10px] text-muted-foreground mt-1.5 leading-snug">
@@ -325,10 +325,10 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
               <Info className="h-3 w-3 text-muted-foreground/50 ml-auto" />
             </div>
             <div className="flex items-baseline gap-1.5">
-              <p className={`${dense ? 'text-lg' : 'text-xl'} font-bold ${confidenceConfig.color} leading-tight`}>
+              <p className={`${dense ? 'text-base sm:text-lg' : 'text-lg sm:text-xl'} font-bold ${confidenceConfig.color} leading-tight`}>
                 {equipment.confianca ? `${Math.round(confidenceConfig.percent)}%` : "N/A"}
               </p>
-              <span className="text-xs">{confidenceConfig.icon}</span>
+              <span className="text-xs sm:text-sm">{confidenceConfig.icon}</span>
             </div>
             <p className="text-[10px] text-muted-foreground mt-1.5 leading-snug">
               {confidenceConfig.label}
@@ -343,8 +343,8 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
               <Wrench className="h-4 w-4" />
             </div>
             <div>
-              <span className="text-sm font-bold block leading-none mb-1">Manutenção</span>
-              <span className="text-[10px] text-muted-foreground">{maintenanceConfig.description}</span>
+              <span className="text-xs sm:text-sm font-bold block leading-none mb-1">Manutenção</span>
+              <span className="text-[9px] sm:text-[10px] text-muted-foreground">{maintenanceConfig.description}</span>
             </div>
           </div>
           <Badge variant="outline" className={`${maintenanceConfig.bg} font-bold ${dense ? 'px-3 py-1 text-xs' : 'px-4 py-1.5 text-sm'} shadow-soft`}>
@@ -353,25 +353,28 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
         </div>
       </CardContent>
 
-      <CardFooter className={`${dense ? 'pt-0 pb-4 px-4' : 'pt-0 pb-5 px-5'} flex gap-2.5`}>
+      <CardFooter className={`${dense ? 'pt-0 pb-3 sm:pb-4 px-3 sm:px-4' : 'pt-0 pb-4 sm:pb-5 px-4 sm:px-5'} flex gap-2 sm:gap-2.5`}>
         {/* Botão de adicionar melhorado */}
         <Button
           type="button"
           onClick={handleAdd}
           disabled={isAdding}
-          className={`flex-1 btn-interactive shadow-medium hover:shadow-xl bg-gradient-to-r from-primary via-primary/95 to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground font-bold transition-all duration-300 ${
+          size="sm"
+          className={`flex-1 btn-interactive shadow-medium hover:shadow-xl bg-gradient-to-r from-primary via-primary/95 to-primary/90 hover:from-primary/95 hover:to-primary text-primary-foreground font-bold transition-all duration-300 text-xs sm:text-sm ${
             isAdding ? 'scale-95 opacity-80' : ''
           }`}
         >
           {isAdding ? (
             <>
-              <CheckCircle2 className="mr-2 h-4 w-4 animate-pulse-glow" />
-              Adicionado!
+              <CheckCircle2 className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4 animate-pulse-glow" />
+              <span className="hidden xs:inline">Adicionado!</span>
+              <span className="xs:hidden">✓</span>
             </>
           ) : (
             <>
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              Adicionar ao carrinho
+              <ShoppingCart className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span className="hidden xs:inline">Adicionar</span>
+              <span className="xs:hidden">+</span>
             </>
           )}
         </Button>

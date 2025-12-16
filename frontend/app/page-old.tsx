@@ -595,7 +595,7 @@ export default function Home() {
                 <span className="font-bold text-lg tracking-wide">Analisando equipamentos...</span>
               </div>
             </div>
-            <div className="grid gap-4 sm:gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(260px,1fr))] xl:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] 2xl:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+            <div className="grid gap-8 grid-cols-[repeat(auto-fit,minmax(280px,1fr))] 2xl:grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="group">
                   <div className="h-96 rounded-3xl bg-gradient-to-br from-card to-card/60 border border-border/60 shadow-large relative overflow-hidden">
@@ -613,17 +613,17 @@ export default function Home() {
 
         {/* Results - Single */}
         {!isLoading && equipments.length > 0 && batchGroups.length === 0 && (
-          <div className="mt-12 sm:mt-16 md:mt-20 animate-fade-slide-up">
-            <div className="mb-8 sm:mb-10 md:mb-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
+          <div className="mt-20 animate-fade-slide-up">
+            <div className="mb-12 flex items-center justify-between flex-wrap gap-6">
               <div>
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight bg-gradient-to-r from-foreground to-foreground/85 bg-clip-text text-transparent">
+                <h2 className="text-4xl font-black tracking-tight bg-gradient-to-r from-foreground to-foreground/85 bg-clip-text text-transparent">
                   Sugestões de Equipamentos
                 </h2>
-                <p className="text-muted-foreground mt-2 sm:mt-3 text-base sm:text-lg font-medium">Resultados baseados na sua descrição</p>
+                <p className="text-muted-foreground mt-3 text-lg font-medium">Resultados baseados na sua descrição</p>
               </div>
-              <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-                <span className="inline-flex items-center gap-2 sm:gap-3 rounded-full bg-gradient-to-r from-primary/20 via-primary/15 to-primary/10 px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold text-primary border border-primary/30 shadow-medium">
-                  <span className="flex h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.7)]"></span>
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-primary/20 via-primary/15 to-primary/10 px-6 py-3 text-sm font-bold text-primary border border-primary/30 shadow-medium">
+                  <span className="flex h-3 w-3 rounded-full bg-primary shadow-[0_0_10px_rgba(var(--primary),0.7)]"></span>
                   {equipments.length} {equipments.length === 1 ? "resultado" : "resultados"}
                 </span>
                 {equipments[0]?.origemDescricao && equipments[0].origemDescricao.trim().split(/\s+/).length === 1 && (
@@ -653,12 +653,12 @@ export default function Home() {
 
         {/* Results - Batch */}
         {!isLoading && batchGroups.length > 0 && (
-          <div className="mt-12 sm:mt-16 md:mt-20 space-y-12 sm:space-y-14 md:space-y-16 animate-fade-slide-up">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between sm:justify-end gap-3">
+          <div className="mt-20 space-y-16 animate-fade-slide-up">
+            <div className="flex items-center justify-end gap-3">
               <Button 
                 size="sm" 
                 variant="outline" 
-                className="btn-interactive shadow-soft hover:shadow-medium text-xs sm:text-sm"
+                className="btn-interactive shadow-soft hover:shadow-medium"
                 onClick={() => {
                   try {
                     const headers = [
@@ -748,25 +748,25 @@ export default function Home() {
               }
               
               return (
-                <section key={gi} className="space-y-6 sm:space-y-8">
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 flex-wrap">
+                <section key={gi} className="space-y-8">
+                  <div className="flex items-center justify-between gap-4 flex-wrap">
                     <div>
-                      <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent break-words">
+                      <h2 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
                         Resultados para: "{group.descricao}"
                       </h2>
-                      <p className="text-muted-foreground mt-1.5 sm:mt-2 text-base sm:text-lg">
+                      <p className="text-muted-foreground mt-2 text-lg">
                         {group.itens.length} {group.itens.length === 1 ? 'sugestão' : 'sugestões'}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
-                      <label htmlFor={`sort-${gi}`} className="text-xs sm:text-sm font-medium text-muted-foreground whitespace-nowrap">
+                    <div className="flex items-center gap-3">
+                      <label htmlFor={`sort-${gi}`} className="text-sm font-medium text-muted-foreground">
                         Ordenar por
                       </label>
                       <select
                         id={`sort-${gi}`}
                         value={sortKey}
                         onChange={(e) => setBatchSortMap((m) => ({ ...m, [group.descricao]: e.target.value }))}
-                        className="flex-1 sm:flex-initial px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg border border-border bg-card/50 text-xs sm:text-sm font-medium shadow-soft hover:shadow-medium focus-ring transition-all backdrop-blur-sm"
+                        className="px-4 py-2 rounded-lg border border-border bg-card/50 text-sm font-medium shadow-soft hover:shadow-medium focus-ring transition-all backdrop-blur-sm"
                       >
                         <option value="conf-desc">Maior confiança</option>
                         <option value="conf-asc">Menor confiança</option>
@@ -799,15 +799,15 @@ export default function Home() {
 
         {/* Empty State melhorado */}
         {!isLoading && hasData && equipments.length === 0 && batchGroups.length === 0 && (
-          <div className="mt-20 sm:mt-24 md:mt-32 text-center animate-fade-slide-up">
-            <div className="mx-auto mb-8 sm:mb-10 flex h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 items-center justify-center rounded-full bg-gradient-to-br from-primary/25 via-primary/20 to-primary/15 border-2 border-primary/30 shadow-xl relative">
+          <div className="mt-32 text-center animate-fade-slide-up">
+            <div className="mx-auto mb-10 flex h-28 w-28 items-center justify-center rounded-full bg-gradient-to-br from-primary/25 via-primary/20 to-primary/15 border-2 border-primary/30 shadow-xl relative">
               <div className="absolute inset-0 rounded-full bg-primary/20 animate-ping"></div>
-              <Sparkles className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 text-primary animate-pulse-glow relative z-10" />
+              <Sparkles className="h-14 w-14 text-primary animate-pulse-glow relative z-10" />
             </div>
-            <h3 className="mb-4 sm:mb-5 text-2xl sm:text-3xl font-black bg-gradient-to-r from-foreground to-foreground/85 bg-clip-text text-transparent px-4">
+            <h3 className="mb-5 text-3xl font-black bg-gradient-to-r from-foreground to-foreground/85 bg-clip-text text-transparent">
               Comece sua busca
             </h3>
-            <p className="text-muted-foreground text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed font-medium px-4">
+            <p className="text-muted-foreground text-xl mb-10 max-w-2xl mx-auto leading-relaxed font-medium">
               Digite a descrição dos equipamentos que você precisa precificar e receba sugestões inteligentes
             </p>
             {lastQuery && (

@@ -9,36 +9,49 @@ interface HorizontalScrollProps {
 
 export function HorizontalScroll({ children, itemMinWidth = 280 }: HorizontalScrollProps) {
   const ref = useRef<HTMLDivElement | null>(null)
-  const [drag, setDrag] = useState<{active:boolean; x:number; scroll:number}>({active:false, x:0, scroll:0})
+  const [drag, setDrag] = useState<{active:boolean; x:number; scroll:number; isTouch:boolean}>({active:false, x:0, scroll:0, isTouch:false})
   const rafRef = useRef<number | null>(null)
   const momentumRef = useRef<number | null>(null)
   const lastScrollRef = useRef(0)
   const lastTimeRef = useRef(0)
   const velocityRef = useRef(0)
+  const touchStartRef = useRef<number>(0)
 
+  // Suporte para Pointer Events (mouse/touch/pen unificado)
   const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = ref.current
     if (!el) return
-    // Evita iniciar drag quando clicar em elementos interativos (botões, links, inputs)
+    // Evita iniciar drag quando clicar em elementos interativos
     const targetEl = e.target as HTMLElement
     if (targetEl && targetEl.closest('button, a, input, textarea, select, [data-interactive]')) {
       return
     }
-    if (e.button !== 0) return
+    if (e.button !== 0 && e.pointerType === 'mouse') return
+    
+    const isTouch = e.pointerType === 'touch'
     el.setPointerCapture(e.pointerId)
-    setDrag({ active: true, x: e.clientX, scroll: el.scrollLeft })
+    setDrag({ active: true, x: e.clientX, scroll: el.scrollLeft, isTouch })
     lastScrollRef.current = el.scrollLeft
     lastTimeRef.current = performance.now()
     velocityRef.current = 0
+    touchStartRef.current = e.clientX
+    
     if (momentumRef.current) {
       cancelAnimationFrame(momentumRef.current)
       momentumRef.current = null
     }
   }
+
   const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!drag.active) return
     const el = ref.current
     if (!el) return
+    
+    // Prevenir scroll vertical acidental em touch
+    if (drag.isTouch) {
+      e.preventDefault()
+    }
+    
     const now = performance.now()
     const dx = e.clientX - drag.x
     const nextScroll = drag.scroll - dx
@@ -50,34 +63,113 @@ export function HorizontalScroll({ children, itemMinWidth = 280 }: HorizontalScr
     lastScrollRef.current = el.scrollLeft
     lastTimeRef.current = now
   }
+
   const onPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = ref.current
     if (!el) return
     try { el.releasePointerCapture(e.pointerId) } catch {}
-    setDrag(prev => ({ ...prev, active: false }))
-    // Momentum: continua rolando baseado na velocidade atual
+    setDrag(prev => ({ ...prev, active: false, isTouch: false }))
+    
+    // Momentum melhorado para touch
     const startV = velocityRef.current
-    const friction = 0.94 // 0-1 (menor = mais atrito)
-    const minV = 0.02 // px/ms
+    const friction = drag.isTouch ? 0.92 : 0.94 // Mais atrito em touch
+    const minV = drag.isTouch ? 0.05 : 0.02 // Threshold maior em touch
     let v = startV
     let prevTs = performance.now()
+    
     const step = () => {
       const el2 = ref.current
       if (!el2) return
       const ts = performance.now()
-      const dt = Math.min(32, ts - prevTs) // limita para estabilidade
+      const dt = Math.min(32, ts - prevTs)
       prevTs = ts
       v *= Math.pow(friction, dt / 16)
-      if (Math.abs(v) < minV) { momentumRef.current = null; return }
+      if (Math.abs(v) < minV) { 
+        momentumRef.current = null
+        return 
+      }
       const maxScroll = el2.scrollWidth - el2.clientWidth
       el2.scrollLeft = Math.max(0, Math.min(maxScroll, el2.scrollLeft + v * dt))
       scheduleUpdate()
       momentumRef.current = requestAnimationFrame(step)
     }
+    
     if (Math.abs(startV) > minV) {
       momentumRef.current = requestAnimationFrame(step)
     }
   }
+
+  // Adicionar suporte nativo para touch swipe em dispositivos móveis
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    let touchX = 0
+    let scrollX = 0
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return
+      const targetEl = e.target as HTMLElement
+      if (targetEl && targetEl.closest('button, a, input, textarea, select, [data-interactive]')) {
+        return
+      }
+      touchX = e.touches[0].clientX
+      scrollX = el.scrollLeft
+      velocityRef.current = 0
+      lastTimeRef.current = performance.now()
+      lastScrollRef.current = scrollX
+    }
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length !== 1) return
+      const dx = touchX - e.touches[0].clientX
+      el.scrollLeft = scrollX + dx
+      
+      // Calcular velocidade
+      const now = performance.now()
+      const dt = Math.max(1, now - lastTimeRef.current)
+      const v = (el.scrollLeft - lastScrollRef.current) / dt
+      velocityRef.current = v
+      lastScrollRef.current = el.scrollLeft
+      lastTimeRef.current = now
+    }
+
+    const onTouchEnd = () => {
+      // Implementar momentum similar ao pointer
+      const startV = velocityRef.current
+      const friction = 0.92
+      const minV = 0.05
+      let v = startV
+      let prevTs = performance.now()
+      
+      const step = () => {
+        if (!el) return
+        const ts = performance.now()
+        const dt = Math.min(32, ts - prevTs)
+        prevTs = ts
+        v *= Math.pow(friction, dt / 16)
+        if (Math.abs(v) < minV) return
+        const maxScroll = el.scrollWidth - el.clientWidth
+        el.scrollLeft = Math.max(0, Math.min(maxScroll, el.scrollLeft + v * dt))
+        scheduleUpdate()
+        requestAnimationFrame(step)
+      }
+      
+      if (Math.abs(startV) > minV) {
+        requestAnimationFrame(step)
+      }
+    }
+
+    el.addEventListener('touchstart', onTouchStart, { passive: true })
+    el.addEventListener('touchmove', onTouchMove, { passive: true })
+    el.addEventListener('touchend', onTouchEnd, { passive: true })
+
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart)
+      el.removeEventListener('touchmove', onTouchMove)
+      el.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [])
 
   const scheduleUpdate = () => {
     if (rafRef.current) return
@@ -115,18 +207,19 @@ export function HorizontalScroll({ children, itemMinWidth = 280 }: HorizontalScr
   }, [])
 
   return (
-    <div className="relative">
+    <div className="relative -mx-2 sm:mx-0">
       <div
         ref={ref}
-        className="hide-scrollbar overflow-x-auto overflow-y-visible snap-x snap-mandatory scroll-p-4 drag-no-select cursor-grab active:cursor-grabbing"
+        className="hide-scrollbar overflow-x-auto overflow-y-visible snap-x snap-mandatory scroll-p-2 sm:scroll-p-4 drag-no-select cursor-grab active:cursor-grabbing touch-pan-x"
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={onPointerUp}
         onPointerCancel={onPointerUp}
         onWheel={onScroll}
         onScroll={onScroll}
+        style={{ WebkitOverflowScrolling: 'touch' }}
       >
-        <div className="flex gap-6 px-1">
+        <div className="flex gap-3 sm:gap-4 md:gap-6 px-2 sm:px-1">
           {Array.isArray(children)
             ? children.map((child, i) => (
                 <div

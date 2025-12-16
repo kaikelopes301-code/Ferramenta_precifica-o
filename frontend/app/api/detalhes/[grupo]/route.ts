@@ -1,11 +1,18 @@
 import { NextResponse } from 'next/server'
 
-const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4000'
+const BACKEND_URL = process.env.BACKEND_URL
 
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ grupo: string }> },
 ) {
+  if (!BACKEND_URL) {
+    return NextResponse.json(
+      { error: 'missing_env', detail: 'BACKEND_URL não configurado no ambiente do frontend (Vercel).' },
+      { status: 500 },
+    )
+  }
+
   try {
     const { grupo } = await params
 

@@ -28,6 +28,8 @@ const FavoritesWidget = dynamic(() => import("@/components/favorites-widget").th
 type CartItem = import("@/components/cart-widget").CartItem
 type FavoriteItem = import("@/components/favorites-widget").FavoriteItem
 
+const FAVORITES_STORAGE_KEY = 'afm-favorites'
+
 export default function Home() {
   const [equipments, setEquipments] = useState<Equipment[]>([])
   const [isLoading, setIsLoading] = useState(false)
@@ -41,6 +43,7 @@ export default function Home() {
   const [cartOpen, setCartOpen] = useState(false)
   const [favoritesOpen, setFavoritesOpen] = useState(false)
   const [favorites, setFavorites] = useState<FavoriteItem[]>([])
+  const [favoritesLoaded, setFavoritesLoaded] = useState(false)
   const { toast } = useToast()
   const resultsRef = useRef<HTMLDivElement | null>(null)
   const USER_ID = 'demo-user'
@@ -119,6 +122,33 @@ export default function Home() {
     }
   }, [isLoading, equipments.length, batchGroups.length])
 
+  // Carregar favoritos do localStorage na montagem
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(FAVORITES_STORAGE_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored) as FavoriteItem[]
+        // Restaurar datas como Date objects
+        const restored = parsed.map(f => ({ ...f, addedAt: new Date(f.addedAt) }))
+        setFavorites(restored)
+      }
+    } catch (e) {
+      console.error('Erro ao carregar favoritos:', e)
+    }
+    setFavoritesLoaded(true)
+  }, [])
+
+  // Salvar favoritos no localStorage quando mudar
+  useEffect(() => {
+    if (favoritesLoaded) {
+      try {
+        localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites))
+      } catch (e) {
+        console.error('Erro ao salvar favoritos:', e)
+      }
+    }
+  }, [favorites, favoritesLoaded])
+
   const splitDescriptions = (text: string): string[] => {
     // Divide por: quebras de linha, ponto-e-vírgula, ou vírgula
     // O lookahead (?!\d) evita quebrar números decimais (1,5) e (?!\s*\d) evita quebrar "volume 1, 2 litros"
@@ -161,15 +191,19 @@ export default function Home() {
   const changeName = (id: string, name: string) => setCart(prev => prev.map(it => it.id === id ? { ...it, name } : it))
 
   // Funções de favoritos
-  const addToFavorites = (equipment: Equipment) => {
+  const toggleFavorite = (equipment: Equipment) => {
     const id = itemId(equipment)
-    // Verifica se já existe
-    if (favorites.some(f => f.id === id)) {
-      toast({ title: '💙 Já está nos favoritos', description: equipment.sugeridos })
-      return
+    const exists = favorites.some(f => f.id === id)
+    
+    if (exists) {
+      // Remove dos favoritos
+      setFavorites(prev => prev.filter(f => f.id !== id))
+      toast({ title: '💔 Removido dos favoritos', description: equipment.sugeridos })
+    } else {
+      // Adiciona aos favoritos
+      setFavorites(prev => [...prev, { id, equipment, addedAt: new Date() }])
+      toast({ title: '❤️ Adicionado aos favoritos', description: equipment.sugeridos })
     }
-    setFavorites(prev => [...prev, { id, equipment, addedAt: new Date() }])
-    toast({ title: '❤️ Adicionado aos favoritos', description: equipment.sugeridos })
   }
 
   const removeFromFavorites = (id: string) => {
@@ -539,7 +573,7 @@ export default function Home() {
                   dense
                   isFavorite={favorites.some(f => f.id === itemId(equipment))}
                   onAdd={() => addToCart(equipment)}
-                  onFavorite={() => addToFavorites(equipment)}
+                  onFavorite={() => toggleFavorite(equipment)}
                 />
               ))}
             </HorizontalScroll>
@@ -665,7 +699,7 @@ export default function Home() {
                         dense
                         isFavorite={favorites.some(f => f.id === itemId(equipment))}
                         onAdd={() => addToCart(equipment)}
-                        onFavorite={() => addToFavorites(equipment)}
+                        onFavorite={() => toggleFavorite(equipment)}
                       />
                     ))}
                   </HorizontalScroll>

@@ -3,15 +3,17 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ShoppingCart } from "lucide-react"
+import { ShoppingCart, Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface NavbarProps {
   cartItemCount: number
   onCartClick: () => void
+  favoritesCount?: number
+  onFavoritesClick?: () => void
 }
 
-export function Navbar({ cartItemCount, onCartClick }: NavbarProps) {
+export function Navbar({ cartItemCount, onCartClick, favoritesCount = 0, onFavoritesClick }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -48,26 +50,50 @@ export function Navbar({ cartItemCount, onCartClick }: NavbarProps) {
             />
           </Link>
 
-          {/* Cart Button */}
-          <Button
-            onClick={onCartClick}
-            variant="ghost"
-            size="icon"
-            className="relative h-10 w-10 rounded-full hover:bg-slate-100 text-slate-700 hover:text-blue-600 transition-colors"
-            aria-label={`Carrinho com ${cartItemCount} ${cartItemCount === 1 ? 'item' : 'itens'}`}
-          >
-            <ShoppingCart className="h-5 w-5" strokeWidth={1.5} />
-            
-            {/* Badge */}
-            {cartItemCount > 0 && (
-              <span 
-                className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white"
-                aria-hidden="true"
-              >
-                {cartItemCount > 9 ? '9+' : cartItemCount}
-              </span>
-            )}
-          </Button>
+          {/* Action Buttons */}
+          <div className="flex items-center gap-1 sm:gap-2">
+            {/* Favorites Button */}
+            <Button
+              onClick={onFavoritesClick}
+              variant="ghost"
+              size="icon"
+              className="relative h-10 w-10 rounded-full hover:bg-pink-50 text-slate-700 hover:text-pink-600 transition-colors"
+              aria-label={`Favoritos com ${favoritesCount} ${favoritesCount === 1 ? 'item' : 'itens'}`}
+            >
+              <Heart className="h-5 w-5" strokeWidth={1.5} />
+              
+              {/* Badge */}
+              {favoritesCount > 0 && (
+                <span 
+                  className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-pink-500 text-[10px] font-bold text-white"
+                  aria-hidden="true"
+                >
+                  {favoritesCount > 9 ? '9+' : favoritesCount}
+                </span>
+              )}
+            </Button>
+
+            {/* Cart Button */}
+            <Button
+              onClick={onCartClick}
+              variant="ghost"
+              size="icon"
+              className="relative h-10 w-10 rounded-full hover:bg-slate-100 text-slate-700 hover:text-blue-600 transition-colors"
+              aria-label={`Carrinho com ${cartItemCount} ${cartItemCount === 1 ? 'item' : 'itens'}`}
+            >
+              <ShoppingCart className="h-5 w-5" strokeWidth={1.5} />
+              
+              {/* Badge */}
+              {cartItemCount > 0 && (
+                <span 
+                  className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-[10px] font-bold text-white"
+                  aria-hidden="true"
+                >
+                  {cartItemCount > 9 ? '9+' : cartItemCount}
+                </span>
+              )}
+            </Button>
+          </div>
         </div>
       </div>
     </nav>

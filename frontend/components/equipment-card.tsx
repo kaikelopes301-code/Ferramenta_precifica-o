@@ -2,7 +2,7 @@
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Wrench, DollarSign, Calendar, TrendingUp, CheckCircle2, ShoppingCart, Info, X } from "lucide-react"
+import { Wrench, DollarSign, Calendar, TrendingUp, CheckCircle2, ShoppingCart, Info, X, Heart } from "lucide-react"
 import type { Equipment } from "@/types/equipment"
 import { useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
@@ -12,12 +12,15 @@ interface EquipmentCardProps {
   equipment: Equipment
   dense?: boolean
   selected?: boolean
+  isFavorite?: boolean
   onToggleSelect?: (equipment: Equipment) => void
   onAdd?: (equipment: Equipment) => void
+  onFavorite?: (equipment: Equipment) => void
 }
 
-export function EquipmentCard({ equipment, dense, selected = false, onToggleSelect, onAdd }: EquipmentCardProps) {
+export function EquipmentCard({ equipment, dense, selected = false, isFavorite = false, onToggleSelect, onAdd, onFavorite }: EquipmentCardProps) {
   const [isAdding, setIsAdding] = useState(false)
+  const [isFavoriting, setIsFavoriting] = useState(false)
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
 
   const rawConfidenceScore = equipment.confianca
@@ -148,6 +151,12 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
     onAdd?.(equipment)
     // Animação visual de feedback
     setTimeout(() => setIsAdding(false), 600)
+  }
+
+  const handleFavorite = () => {
+    setIsFavoriting(true)
+    onFavorite?.(equipment)
+    setTimeout(() => setIsFavoriting(false), 600)
   }
 
   return (
@@ -331,7 +340,7 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
       </CardContent>
 
       <CardFooter className={`${dense ? 'pt-0 pb-3 sm:pb-4 px-3 sm:px-4' : 'pt-0 pb-4 sm:pb-5 px-4 sm:px-5'} flex gap-2 sm:gap-2.5`}>
-        {/* Botão de adicionar melhorado */}
+        {/* Botão de adicionar ao carrinho */}
         <Button
           type="button"
           onClick={handleAdd}
@@ -349,10 +358,26 @@ export function EquipmentCard({ equipment, dense, selected = false, onToggleSele
           ) : (
             <>
               <ShoppingCart className="mr-1.5 sm:mr-2 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              <span className="hidden xs:inline">Adicionar</span>
+              <span className="hidden xs:inline">Carrinho</span>
               <span className="xs:hidden">+</span>
             </>
           )}
+        </Button>
+
+        {/* Botão de favoritar com coração */}
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          onClick={handleFavorite}
+          className={`transition-all duration-300 shadow-medium hover:shadow-xl hover:scale-105 ${
+            isFavorite 
+              ? 'bg-pink-50 border-pink-300 text-pink-500 hover:bg-pink-100' 
+              : 'hover:bg-pink-50 hover:border-pink-300 hover:text-pink-500'
+          } ${isFavoriting ? 'scale-110' : ''}`}
+          aria-label={isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"}
+        >
+          <Heart className={`h-4 w-4 transition-all ${isFavorite || isFavoriting ? 'fill-pink-500 text-pink-500' : ''}`} />
         </Button>
 
         {/* Botão de detalhes sem redirecionar */}

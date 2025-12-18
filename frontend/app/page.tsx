@@ -24,7 +24,9 @@ import { InfoModal } from "@/components/info-modal"
 // Adia carregamento de componentes não críticos para reduzir JS inicial
 const HorizontalScroll = dynamic(() => import("@/components/horizontal-scroll").then(m => m.HorizontalScroll), { ssr: false, loading: () => null })
 const CartWidget = dynamic(() => import("@/components/cart-widget").then(m => m.CartWidget), { ssr: false, loading: () => null })
+const FavoritesWidget = dynamic(() => import("@/components/favorites-widget").then(m => m.FavoritesWidget), { ssr: false, loading: () => null })
 type CartItem = import("@/components/cart-widget").CartItem
+type FavoriteItem = import("@/components/favorites-widget").FavoriteItem
 
 export default function Home() {
   const [equipments, setEquipments] = useState<Equipment[]>([])
@@ -37,6 +39,8 @@ export default function Home() {
   const [lastQuery, setLastQuery] = useState("")
   const [batchSortMap, setBatchSortMap] = useState<Record<string, string>>({})
   const [cartOpen, setCartOpen] = useState(false)
+  const [favoritesOpen, setFavoritesOpen] = useState(false)
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([])
   const { toast } = useToast()
   const resultsRef = useRef<HTMLDivElement | null>(null)
   const USER_ID = 'demo-user'
@@ -177,6 +181,49 @@ export default function Home() {
   const changeQty = (id: string, qty: number) => setCart(prev => prev.map(it => it.id === id ? { ...it, qty: Math.max(1, qty) } : it))
   const changeNotes = (id: string, notes: string) => setCart(prev => prev.map(it => it.id === id ? { ...it, notes } : it))
   const changeName = (id: string, name: string) => setCart(prev => prev.map(it => it.id === id ? { ...it, name } : it))
+
+  // Funções de favoritos
+  const addToFavorites = (equipment: Equipment) => {
+    const id = itemId(equipment)
+    // Verifica se já existe
+    if (favorites.some(f => f.id === id)) {
+      toast({ title: '💙 Já está nos favoritos', description: equipment.sugeridos })
+      return
+    }
+    setFavorites(prev => [...prev, { id, equipment, addedAt: new Date() }])
+    toast({ title: '❤️ Adicionado aos favoritos', description: equipment.sugeridos })
+  }
+
+  const removeFromFavorites = (id: string) => {
+    setFavorites(prev => prev.filter(f => f.id !== id))
+  }
+
+  const clearFavorites = () => {
+    setFavorites([])
+    toast({ title: '🗑️ Favoritos limpos', description: 'Todos os favoritos foram removidos' })
+  }
+
+  // Adicionar selecionados aos favoritos
+  const addSelectedToFavorites = (list: Equipment[]) => {
+    if (selected.size === 0) return
+    let addedCount = 0
+    setFavorites(prev => {
+      const next = [...prev]
+      for (const e of list) {
+        const id = itemId(e)
+        if (!selected.has(id)) continue
+        if (next.some(f => f.id === id)) continue // já existe
+        next.push({ id, equipment: e, addedAt: new Date() })
+        addedCount++
+      }
+      return next
+    })
+    if (addedCount > 0) {
+      toast({ title: '❤️ Favoritos atualizados', description: `${addedCount} item(s) adicionado(s)` })
+    }
+    setSelected(new Set())
+    setLastSelectedIdx(null)
+  }
 
   // Limpar sugestões para nova busca (não limpa o carrinho)
   const clearResults = () => {
@@ -368,6 +415,8 @@ export default function Home() {
       <Navbar
         cartItemCount={cart.length}
         onCartClick={() => setCartOpen(true)}
+        favoritesCount={favorites.length}
+        onFavoritesClick={() => setFavoritesOpen(true)}
       />
 
       <div className="app-container py-6 sm:py-10 lg:py-16" id="main-content">
@@ -535,11 +584,13 @@ export default function Home() {
                   equipment={equipment}
                   dense
                   selected={selected.has(itemId(equipment))}
+                  isFavorite={favorites.some(f => f.id === itemId(equipment))}
                   onToggleSelect={() => {
                     const id = itemId(equipment)
                     setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next })
                   }}
                   onAdd={() => addToCart(equipment)}
+                  onFavorite={() => addToFavorites(equipment)}
                 />
               ))}
             </HorizontalScroll>
@@ -664,11 +715,13 @@ export default function Home() {
                         equipment={equipment}
                         dense
                         selected={selected.has(itemId(equipment))}
+                        isFavorite={favorites.some(f => f.id === itemId(equipment))}
                         onToggleSelect={() => {
                           const id = itemId(equipment)
                           setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next })
                         }}
                         onAdd={() => addToCart(equipment)}
+                        onFavorite={() => addToFavorites(equipment)}
                       />
                     ))}
                   </HorizontalScroll>
@@ -767,6 +820,14 @@ Email: kaike.costa@atlasinovacoes.com.br`}
         onChangeQty={changeQty}
         onChangeNotes={changeNotes}
         onChangeName={changeName}
+      />
+
+      <FavoritesWidget
+        items={favorites}
+        isOpen={favoritesOpen}
+        onClose={() => setFavoritesOpen(false)}
+        onRemove={removeFromFavorites}
+        onClear={clearFavorites}
       />
     </main >
   )

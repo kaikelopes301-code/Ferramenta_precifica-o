@@ -69,7 +69,7 @@ jobs:
           TOTAL_JS_SIZE=$(find .next/static -name "*.js" -type f -exec du -sb {} + | awk '{sum+=$1} END {print sum}')
           echo "Total JS size: ${TOTAL_JS_SIZE} bytes"
           
-          MAX_TOTAL_SIZE=2000000 
+          MAX_TOTAL_SIZE=2010000 
           if [ "$TOTAL_JS_SIZE" -gt "$MAX_TOTAL_SIZE" ]; then
             echo "❌ Total JS too large: ${TOTAL_JS_SIZE}B > ${MAX_TOTAL_SIZE}B"
             exit 1

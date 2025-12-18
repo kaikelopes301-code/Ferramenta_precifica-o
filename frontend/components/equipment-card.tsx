@@ -11,14 +11,12 @@ import { MetricsTooltip } from "@/components/metrics-tooltip"
 interface EquipmentCardProps {
   equipment: Equipment
   dense?: boolean
-  selected?: boolean
   isFavorite?: boolean
-  onToggleSelect?: (equipment: Equipment) => void
   onAdd?: (equipment: Equipment) => void
   onFavorite?: (equipment: Equipment) => void
 }
 
-export function EquipmentCard({ equipment, dense, selected = false, isFavorite = false, onToggleSelect, onAdd, onFavorite }: EquipmentCardProps) {
+export function EquipmentCard({ equipment, dense, isFavorite = false, onAdd, onFavorite }: EquipmentCardProps) {
   const [isAdding, setIsAdding] = useState(false)
   const [isFavoriting, setIsFavoriting] = useState(false)
   const [isDetailsOpen, setIsDetailsOpen] = useState(false)
@@ -161,8 +159,7 @@ export function EquipmentCard({ equipment, dense, selected = false, isFavorite =
 
   return (
     <Card
-      className={`group relative overflow-hidden card-premium ${selected ? 'ring-2 ring-blue-500 border-blue-500 shadow-xl shadow-blue-500/20' : ''
-        } ${dense ? 'w-[260px] sm:w-[280px] md:min-w-[300px]' : 'w-[280px] sm:w-[300px] md:min-w-[320px] lg:min-w-[340px]'} flex-shrink-0`}
+      className={`group relative overflow-hidden card-premium ${isFavorite ? 'ring-2 ring-pink-400 border-pink-400 shadow-lg shadow-pink-500/10' : ''} ${dense ? 'w-[260px] sm:w-[280px] md:min-w-[300px]' : 'w-[280px] sm:w-[300px] md:min-w-[320px] lg:min-w-[340px]'} flex-shrink-0`}
     >
       {/* Brilho gradiente animado no topo */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-60 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -170,12 +167,12 @@ export function EquipmentCard({ equipment, dense, selected = false, isFavorite =
       {/* Efeito de brilho hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-transparent to-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-      {/* Badge de seleção animado */}
-      {selected && (
+      {/* Badge de favorito */}
+      {isFavorite && (
         <div className="absolute top-3 left-3 z-10 animate-pop-in">
-          <Badge className="bg-gradient-to-r from-blue-600 to-blue-700 text-white border-0 shadow-lg shadow-blue-500/50 backdrop-blur-sm font-bold">
-            <CheckCircle2 className="h-3.5 w-3.5 mr-1.5" />
-            Selecionado
+          <Badge className="bg-gradient-to-r from-pink-500 to-red-500 text-white border-0 shadow-lg shadow-pink-500/50 backdrop-blur-sm font-bold">
+            <Heart className="h-3 w-3 mr-1 fill-white" />
+            Favorito
           </Badge>
         </div>
       )}
@@ -207,24 +204,6 @@ export function EquipmentCard({ equipment, dense, selected = false, isFavorite =
                 {equipment.marca}
               </Badge>
             )}
-          </div>
-
-          {/* Checkbox estilizado */}
-          <div className="flex flex-col items-center gap-1 pt-1">
-            <label className="relative inline-flex items-center cursor-pointer group/checkbox p-2 -m-2">
-              <input
-                type="checkbox"
-                aria-label="Selecionar sugestão"
-                className="sr-only peer"
-                checked={selected}
-                onChange={() => onToggleSelect?.(equipment)}
-              />
-              <div className="w-6 h-6 rounded-md border-2 border-border peer-checked:border-primary peer-checked:bg-primary transition-all duration-200 flex items-center justify-center group-hover/checkbox:border-primary/60 group-hover/checkbox:scale-110">
-                {selected && (
-                  <CheckCircle2 className="h-4 w-4 text-primary-foreground animate-pop-in" />
-                )}
-              </div>
-            </label>
           </div>
         </div>
       </CardHeader>

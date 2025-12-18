@@ -44,8 +44,6 @@ export default function Home() {
   const { toast } = useToast()
   const resultsRef = useRef<HTMLDivElement | null>(null)
   const USER_ID = 'demo-user'
-  const [selected, setSelected] = useState<Set<string>>(new Set())
-  const [lastSelectedIdx, setLastSelectedIdx] = useState<number | null>(null)
   const [cart, setCart] = useState<CartItem[]>([])
   const [singleFilter, setSingleFilter] = useState("")
   const [singleSort, setSingleSort] = useState<'conf-desc' | 'price-asc' | 'price-desc' | 'life-desc'>('conf-desc')
@@ -156,26 +154,6 @@ export default function Home() {
     }
   }
 
-  const addSelectedToCart = (list: Equipment[]) => {
-    if (selected.size === 0) return
-    setCart(prev => {
-      const next = [...prev]
-      for (const e of list) {
-        const baseId = itemId(e)
-        if (!selected.has(baseId)) continue
-        const descKey = (e.origemDescricao ?? lastQuery ?? '').trim()
-        const cartId = `${baseId}__d:${descKey}`
-        const idx = next.findIndex(it => it.id === cartId)
-        if (idx >= 0) next[idx] = { ...next[idx], qty: next[idx].qty + 1 }
-        else next.push({ id: cartId, name: e.sugeridos, price: e.valor_unitario ?? null, qty: 1, vidaUtilMeses: e.vida_util_meses ?? null, manutencaoPercent: e.manutencao_percent ?? null, fornecedor: null, marca: e.marca ?? null, descricao: e.origemDescricao ?? lastQuery })
-      }
-      return next
-    })
-    toast({ title: '✅ Itens adicionados', description: `${selected.size} selecionados` })
-    setSelected(new Set())
-    setLastSelectedIdx(null)
-  }
-
   const clearCart = () => setCart([])
   const removeFromCart = (id: string) => setCart(prev => prev.filter(it => it.id !== id))
   const changeQty = (id: string, qty: number) => setCart(prev => prev.map(it => it.id === id ? { ...it, qty: Math.max(1, qty) } : it))
@@ -203,36 +181,12 @@ export default function Home() {
     toast({ title: '🗑️ Favoritos limpos', description: 'Todos os favoritos foram removidos' })
   }
 
-  // Adicionar selecionados aos favoritos
-  const addSelectedToFavorites = (list: Equipment[]) => {
-    if (selected.size === 0) return
-    let addedCount = 0
-    setFavorites(prev => {
-      const next = [...prev]
-      for (const e of list) {
-        const id = itemId(e)
-        if (!selected.has(id)) continue
-        if (next.some(f => f.id === id)) continue // já existe
-        next.push({ id, equipment: e, addedAt: new Date() })
-        addedCount++
-      }
-      return next
-    })
-    if (addedCount > 0) {
-      toast({ title: '❤️ Favoritos atualizados', description: `${addedCount} item(s) adicionado(s)` })
-    }
-    setSelected(new Set())
-    setLastSelectedIdx(null)
-  }
-
   // Limpar sugestões para nova busca (não limpa o carrinho)
   const clearResults = () => {
     setEquipments([])
     setBatchResults([])
     setBatchGroups([])
     setLastQuery("")
-    setSelected(new Set())
-    setLastSelectedIdx(null)
     // Scroll suave para o topo da busca
     document.getElementById('search')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
   }
@@ -583,12 +537,7 @@ export default function Home() {
                   key={equipment.ranking}
                   equipment={equipment}
                   dense
-                  selected={selected.has(itemId(equipment))}
                   isFavorite={favorites.some(f => f.id === itemId(equipment))}
-                  onToggleSelect={() => {
-                    const id = itemId(equipment)
-                    setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next })
-                  }}
                   onAdd={() => addToCart(equipment)}
                   onFavorite={() => addToFavorites(equipment)}
                 />
@@ -714,12 +663,7 @@ export default function Home() {
                         key={`${group.descricao}-${equipment.sugeridos}-${index}`}
                         equipment={equipment}
                         dense
-                        selected={selected.has(itemId(equipment))}
                         isFavorite={favorites.some(f => f.id === itemId(equipment))}
-                        onToggleSelect={() => {
-                          const id = itemId(equipment)
-                          setSelected(prev => { const next = new Set(prev); if (next.has(id)) next.delete(id); else next.add(id); return next })
-                        }}
                         onAdd={() => addToCart(equipment)}
                         onFavorite={() => addToFavorites(equipment)}
                       />
